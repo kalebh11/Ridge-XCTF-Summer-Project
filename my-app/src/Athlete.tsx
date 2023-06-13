@@ -16,3 +16,4 @@ class Athlete{
 
    
 }
+export default Athlete;
