@@ -3,10 +3,10 @@ import "./App.scss";
 import InputField from "./components/InputField";
 const App: React.FC = () => {
   return (
-    <div className = "top-bar App" >
-   <span className = "heading">Ridge XCTF</span>
-   <InputField />
-    </div>
+    <form className = "top-bar" >
+   <h1>Ridge XCTF</h1> 
+   <InputField/>
+    </form>
    
   )
 }
