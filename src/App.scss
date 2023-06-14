@@ -8,8 +8,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #2f7d3a;
+  background-color: #ffffff;
   font-family: "Raleway", sans-serif;
+  z-index: 2;
+}
+.top-bar{
+  background-color: #2f7d3a;
+  height: 140px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
 }
 //Button Properties
 .button{
@@ -178,12 +188,18 @@
      right: 0;
    }
  }
-
+.picture {
+  width: 75px;
+  height: 75px;
+  position: absolute;
+  top: 15%;
+  right:50%;
+}
 .heading {
   text-transform: uppercase;
   font-size: 100px;
-  margin: 80px 0;
-  color: white;
+  margin: 150px 0;
+  color: rgb(0, 0, 0);
   z-index: 1;
   text-align: center;
 }
