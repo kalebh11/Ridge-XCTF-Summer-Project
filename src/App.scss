@@ -2,16 +2,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald&family=Raleway:wght@300;900&display=swap');
 .App {
+ height: 100vh;
+ width: 100vw;
+ background-color: white;
+
+}
+.todo{
+  height: 100%;
+  width: 33%;
+  margin-left:auto;
  
 }
+
+
 .top-bar{
   background-color: #2f7d3a;
-  height: 140px;
-  position: fixed;
-  top: 0;
-  left: 0;
-    right: 0;
-  z-index: 1;
+  height:70px;
+  display:flex;
+ 
+
+
+
+}
+.side-bar{
+ background-color: rgb(160, 160, 160);
+ width: 100%;
+ height: 100%;
+ display:flex;
+ justify-content: center;
+ margin-left: auto;
+ 
+ 
 }
 //Button Properties
 .button{
@@ -180,24 +201,50 @@
      right: 0;
    }
  }
-.picture {
-  width: 75px;
-  height: 75px;
-  position: absolute;
-  top: 15%;
-  right:50%;
+ .input{
+  display:flex;
+  width: 90%;
+  position:relative;
+  align-items: center;
+ }
+.inputBox{
+width: 100%;
+border-radius: 50px;
+padding: 20px 30px;
+font-size: 25px;
+border: none;
+transition: 0.2s;
+box-shadow: inset 0 0 5px black;
+
+}
+
+.header{
+  display:flex;
+  align-items: flex-start;
 }
 h1 {
   text-transform: uppercase;
-  font-size: 100px;
-  margin: 0px 0;
-  color: rgb(0, 0, 0);
+  font-size: 50px;
+  margin: 5px;
+  color: rgb(255, 255, 255);
   z-index: 1;
   text-align: center;
-  font-family: "Raleway", sans-serif;
-  position:absolute;
-  top:3%;
-  left:1%;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  
  
 }
+h2 {
+  text-transform: uppercase;
+  font-size: 40px;
+  margin: 5px;
+  color: rgb(255, 255, 255);
+  z-index: 1;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  
+ 
+}
+
 
