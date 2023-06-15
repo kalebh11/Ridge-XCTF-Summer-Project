@@ -269,7 +269,22 @@ font-family: 'Red Hat Display', sans-serif;
   font-size: 25px;
   cursor: pointer;
 }
-
+@media (max-width: 700px){
+  .input{
+    width:95%;
+  }
+  .todos{
+    width: 95%;
+  }
+  .todoSingle{
+    width:100%;
+  }
+}
+@media (max-width: 1200px){
+  .todoSingle{
+    width: 40%;
+  }
+}
 .header{
   display:flex;
   align-items: flex-start;
