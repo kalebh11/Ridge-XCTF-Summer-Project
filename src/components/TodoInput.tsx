@@ -1,13 +1,23 @@
 import React from "react";
 
-
-const TodoInput = () =>{
+interface Props{
+    todo:string;
+    setTodo:React.Dispatch<React.SetStateAction<string>>;
+    handleAdd: (e: React.FormEvent)=> void;
+}
+const TodoInput = ({todo, setTodo, handleAdd}: Props) =>
+{
+   
  return(
-    <div className = "todo">
-        <input type = "input" placeholder = "Enter a task"
+    <form className = "input" onSubmit = {handleAdd}>
+        <input 
+        type = "input" 
+        value = {todo} 
+        onChange = {(e) => setTodo(e.target.value)} 
+        placeholder = "Enter a task"
         className = 'inputBox'/>
         <button className = "input_submit" type = "submit"> Go</button>
-    </div>
+    </form>
  )
 
 }
