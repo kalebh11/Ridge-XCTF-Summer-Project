@@ -16,7 +16,9 @@ const TodoInput = ({todo, setTodo, handleAdd}: Props) =>
         onChange = {(e) => setTodo(e.target.value)} 
         placeholder = "Enter a task"
         className = 'inputBox'/>
-        <button className = "input_submit" type = "submit"> Go</button>
+        <div className="relative-container">
+            <button className = "todo-button" type = "submit"> Go</button>
+        </div>
     </form>
  )
 

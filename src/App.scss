@@ -106,28 +106,26 @@
  }
  .input{
   display:flex;
-  width: 90%;
+  width: 100%;
   align-items: center;
  }
 .inputBox{
-width: 70%;
-border-radius: 40px;
-padding: 15px 22px;
-font-size: 25px;
-border: none;
-transition: 0.2s;
-box-shadow: inset 0 0 5px black;
-margin-left: 18%;
-font-family: 'Red Hat Display', sans-serif;
-
+  width: 100%;
+  border-radius: 40px;
+  padding: 15px 22px;
+  font-size: 25px;
+  border: none;
+  transition: 0.2s;
+  box-shadow: inset 0 0 5px black;
+  margin: 20px;
+  font-family: 'Red Hat Display', sans-serif;
 }
-.input_submit{
-  position: absolute;
-  width: 44px;
-  height: 44px;
-  margin: 12px;
+.todo-button {
+  position:absolute;
+  left: -75px;
+  top: -20px;
+  padding: 10px;
   border-radius: 50px;
-  right: 3.8%;
   border: none;
   font-size: 15px;
   background-color: #2f7d3a;
@@ -142,50 +140,47 @@ font-family: 'Red Hat Display', sans-serif;
     box-shadow: 0 0 5px black;
   }
 }
-.todos{
-  display:flex;
-  justify-content: space-evenly;
-  width: 90%;
-  flex-wrap: wrap;
+.relative-container {
+  position: relative;
 }
-.todoSingle{
-  display: flex;
-  width:68%;
-  border-radius: 25px;
-  padding: 3%;
-  margin-top: 3%;
-  background-color: rgb(135, 172, 135);
-  margin-left: 14%; 
-}
-.todoSingleText{
-  flex: 1;
-  padding: 5px;
-  border: none;
-  font-size: 20px;
-  &:focus{
-    outline:none;
+.todo {
+  &.container {
+    display:flex;
+    flex-direction: column;
+    width: 100%;
+    padding-right:35px;
+    padding-left:35px;
+  }
+  & .task {
+    display: flex;
+    width:100%;
+    border-radius: 25px;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: rgb(135, 172, 135);
+    height: 60px;
+    & .text {
+      flex: 1;
+      padding: 5px;
+      border: none;
+      font-size: 20px;
+      &:focus{
+        outline:none;
+      }
+      &.edit {
+        border-radius: 25px;
+        background-color: rgb(135, 172, 135);
+        &:focus{
+          box-shadow: 0 0 5px black;
+        }
+      }
+    }
   }
 }
 .icon{
   margin-left: 10px;
   font-size: 25px;
   cursor: pointer;
-}
-@media (max-width: 700px){
-  .input{
-    width:95%;
-  }
-  .todos{
-    width: 95%;
-  }
-  .todoSingle{
-    width:100%;
-  }
-}
-@media (max-width: 1200px){
-  .todoSingle{
-    width: 40%;
-  }
 }
 .header{
   display:flex;
