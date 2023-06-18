@@ -2,7 +2,7 @@ import React from "react";
 
 const Header = () => {
   return (
-    <div className="top-bar">
+    <div className="outer">
       <div className="header">
         <span>Ridge XCTF</span>
       </div>
