@@ -17,7 +17,7 @@ const App: React.FC = () => {
         <div className="mid-section">
           <h2>test</h2>
         </div>
-        <div>
+        <div className="right-section">
           <TodoComponent />
         </div>
       </div>

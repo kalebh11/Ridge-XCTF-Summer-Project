@@ -31,8 +31,11 @@
 
 .mid-section {
   // height: 100%;
-  width: 55%;
+  width: 60%;
   overflow:hidden;
+}
+.right-section {
+  width: 20%;
 }
 
 .top-bar {
@@ -47,7 +50,7 @@
 }
 
 .leftSpacing {
-  height: 25%;
+  height: 15%;
   width: 100%;
   font-weight: 100;
   background-color: #b8c8b7;
@@ -150,7 +153,7 @@
 }
 
 .todo {
-  width: 25%;
+  width: 100%;
   height:100%;
   overflow:hidden;
   display:flex;
