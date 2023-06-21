@@ -7,6 +7,7 @@ import { Todo } from "./model";
 import Header from "./components/Header";
 import SideList from "./components/SideList";
 
+
 const App: React.FC = () => {
   const [todo, setTodo] = useState<string>("");
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -18,6 +19,7 @@ const App: React.FC = () => {
       setTodo("");
     }
   };
+  
 
   console.log(todos);
 
@@ -35,7 +37,7 @@ const App: React.FC = () => {
         </div>
         <div className="todo">
           <div className="side-bar">
-            <h2> Todo</h2>
+            <h2> Todo</h2> 
             <TodoInput todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
             <TodoList todos={todos} setTodos={setTodos} />
           </div>
