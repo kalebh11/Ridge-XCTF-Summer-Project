@@ -3,26 +3,33 @@ import "./App.scss";
 import Header from "./components/Header";
 import SideList from "./components/SideList";
 import TodoComponent from "./components/TodoComponent/TodoComponent";
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./Pages/HomePage";
+import MeetsPage from "./Pages/MeetsPage";
+import RosterPage from "./Pages/RosterPage";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <div className="top-bar">
-        <Header />
+    <BrowserRouter>
+      <div className="App">
+        <div className="top-bar">
+          <Header />
+        </div>
+        <div className="main">
+          <div className="side-List">
+            <SideList />
+          </div>
+
+          <div className="router-section">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="meets" element={<MeetsPage />} />
+              <Route path="roster" element={<RosterPage />} />
+            </Routes>
+          </div>
+        </div>
       </div>
-      <div className="main">
-        <div className="side-List">
-          <SideList />
-        </div>
-        <div className="mid-section">
-          <h2>test</h2>
-        </div>
-        <div className="right-section">
-          <TodoComponent />
-        </div>
-      </div>
-    </div>
+    </BrowserRouter>
   );
 };
 

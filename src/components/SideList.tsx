@@ -1,47 +1,80 @@
 import React from "react";
-import { useSpring, animated } from 'react-spring';
+import { Link, useNavigate } from "react-router-dom";
+import { useSpring, animated } from "react-spring";
 
 const SideList: React.FC = () => {
-  const redirectToCalender= ()=>{
-    window.open("https://docs.google.com/document/d/1cnm8DjjD1yZzN8KyD9BxkKGu9SG58L5qmNRECV_O78Q/edit?usp=sharing");
+  const navigate = useNavigate();
+  const redirectToCalender = () => {
+    window.open(
+      "https://docs.google.com/document/d/1cnm8DjjD1yZzN8KyD9BxkKGu9SG58L5qmNRECV_O78Q/edit?usp=sharing"
+    );
     //change link later!!!
-  }
-  const redirectToPlans=()=>{
-    window.open("https://docs.google.com/document/d/1cnm8DjjD1yZzN8KyD9BxkKGu9SG58L5qmNRECV_O78Q/edit?usp=sharing");
-  }
-  
+  };
+  const redirectToPlans = () => {
+    window.open(
+      "https://docs.google.com/document/d/1cnm8DjjD1yZzN8KyD9BxkKGu9SG58L5qmNRECV_O78Q/edit?usp=sharing"
+    );
+  };
+  const redirectToHome = () => {
+    navigate("/");
+  };
+
+  const redirecToMeets = () => {
+    navigate("/meets");
+  };
+
+  const redirectToRoster = () => {
+    navigate("/roster");
+  };
+
   const slide = useSpring({
-    from: {x:-200},
-    to: {x: 0},
- 
-});
+    from: { x: -200 },
+    to: { x: 0 },
+  });
   return (
- 
- 
- <div className="outer">
+    <div className="outer">
       <div className="leftSpacing">
-        <animated.button style = {slide} className="button3">
+        <animated.button
+          style={slide}
+          className="button3"
+          onClick={redirectToHome}
+        >
           <span>Home </span>
         </animated.button>
       </div>
       <div className="leftSpacing">
-        <animated.button style = {slide} className="button3" onClick = {redirectToCalender}>
-          
+        <animated.button
+          style={slide}
+          className="button3"
+          onClick={redirectToCalender}
+        >
           <span>Calender </span>
         </animated.button>
       </div>
       <div className="leftSpacing">
-        <animated.button style = {slide} className="button3">
+        <animated.button
+          style={slide}
+          className="button3"
+          onClick={redirecToMeets}
+        >
           <span>Meets </span>
         </animated.button>
       </div>
       <div className="leftSpacing">
-        <animated.button style = {slide} className="button3">
+        <animated.button
+          style={slide}
+          className="button3"
+          onClick={redirectToRoster}
+        >
           <span>Roster </span>
         </animated.button>
       </div>
-      <div className="leftSpacing" onClick = {redirectToPlans}>
-        <animated.button style = {slide} className="button3">
+      <div className="leftSpacing">
+        <animated.button
+          style={slide}
+          className="button3"
+          onClick={redirectToPlans}
+        >
           <span>Plans </span>
         </animated.button>
       </div>
