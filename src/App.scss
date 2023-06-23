@@ -2,73 +2,63 @@
 @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald&family=Raleway:wght@300;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald&family=Raleway:wght@300&family=Shadows+Into+Light&display=swap');
+
 .App {
   display: flex;
- height: 100vh;
- width: 100vw;
- background-color: white;
- flex-direction: column;
-
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  flex-direction: column;
+  overflow: hidden;
 }
-.main{
-  display:flex;
+
+.main {
+  display: flex;
   height: 100%;
   width: 100%;
+  overflow:hidden;
   flex-direction: row;
 }
-.todo{
-  height: 100%;
-  width: 25%;
-}
-.side-List{
-  height: 100%;
+
+.side-List {
+  // height: 100%;
   width: 20%;
   background-color: #b8c8b7;
   display:flex;
   flex-direction: column;
+  overflow:hidden;
 }
-.mid-section{
-  height:100%;
+
+.mid-section {
+  // height: 100%;
   width: 55%;
+  overflow:hidden;
+}
+.right-section {
+  width: 25%;
 }
 
-.top-bar{
+.top-bar {
   background-color: rgb(70,114,70);
-  height:70px;
+  height: 70px;
   width: 100%;
-  display:flex;
- 
-
-
-
+  display: flex;
 }
-.side-bar{
- background-color: #b8c8b7;
- width: 100%;
- height: 100%;
- display:flex;
- flex-direction: column;
- margin-left: auto;
- 
- 
-}
-.outer{
+.outer {
   height: 100%;
   width: 100%;
 }
-.leftSpacing{
 
- height: 15%;
- width: 100%;
- font-weight: 100;
- background-color: #b8c8b7;
-
-
+.leftSpacing {
+  height: 15%;
+  width: 100%;
+  font-weight: 100;
+  background-color: #b8c8b7;
 }
 
 //Button Properties
 
- .button3{
+.button3 {
   text-align: center;
 
   width: 80%;
@@ -81,37 +71,42 @@
   border: 2px solid rgb(255, 255, 255);
   font-size: 30px;
   font-family: 'Red Hat Display', sans-serif;
- 
-  &:hover{
-   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
+  &:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
   }
- 
- }
- .button3 span{
-   cursor: pointer;
-   transition: 0.5s;
-   &:after{
-     content: '\00bb';
-     opacity: 0;
-     top: 0;
-     right: -20px;
-     transition: 0.5s;
-   }
- }
- 
- .button3:hover span {
-   padding-right: 25px;
-   &:after {
-     opacity: 1;
-     right: 0;
-   }
- }
- .input{
-  display:flex;
+
+}
+
+.button3 span {
+  cursor: pointer;
+  transition: 0.5s;
+
+  &:after {
+    content: '\00bb';
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+}
+
+.button3:hover span {
+  padding-right: 25px;
+
+  &:after {
+    opacity: 1;
+    right: 0;
+  }
+}
+
+.input {
+  display: flex;
   width: 100%;
   align-items: center;
- }
-.inputBox{
+}
+
+.inputBox {
   width: 100%;
   border-radius: 40px;
   padding: 15px 22px;
@@ -122,8 +117,9 @@
   margin: 20px;
   font-family: 'Red Hat Display', sans-serif;
 }
+
 .todo-button {
-  position:absolute;
+  position: absolute;
   left: -75px;
   top: -20px;
   padding: 10px;
@@ -134,25 +130,52 @@
   color: white;
   transition: 0.2s all;
   box-shadow: 0 0 10px black;
-  &:hover{
-    background-color:#42a850;
+
+  &:hover {
+    background-color: #42a850;
   }
-  &:active{
+
+  &:active {
     transform: scale(0.8);
     box-shadow: 0 0 5px black;
   }
 }
+
 .relative-container {
   position: relative;
 }
+.flex-fixed {
+  flex: none;
+}
+.flex-item {
+  flex: 1 1 auto;
+  // display: flex;
+}
+
 .todo {
-  &.container {
+  width: 100%;
+  height:100%;
+  overflow:hidden;
+  display:flex;
+  background-color: #b8c8b7;
+  flex-direction: column;
+  font-family: 'Red Hat Display', sans-serif;
+  & .container {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    padding-right: 35px;
+    padding-left: 35px;
+  }
+
+  & .scroll {
     display:flex;
     flex-direction: column;
-    width: 100%;
-    padding-right:35x;
-    padding-left:35px;
+    overflow-y: auto;
   }
+
   & .task {
     display: flex;
     width:80%;
@@ -161,31 +184,38 @@
     margin-top: 10px;
     background-color: rgb(135, 172, 135);
     height: 60px;
+
     & .text {
       flex: 1;
       padding: 5px;
       border: none;
-      font-size: 20px;
-      &:focus{
-        outline:none;
+      font-size: 16px;
+      font-family: 'Red Hat Display', sans-serif;
+
+      &:focus {
+        outline: none;
       }
+
       &.edit {
         border-radius: 25px;
         background-color: rgb(135, 172, 135);
-        &:focus{
+
+        &:focus {
           box-shadow: 0 0 5px black;
         }
       }
     }
   }
 }
-.icon{
+
+.icon {
   margin-left: 10px;
   font-size: 25px;
   cursor: pointer;
 }
-.header{
-  display:flex;
+
+.header {
+  display: flex;
   text-transform: uppercase;
   font-size: 60px;
   // margin-top: -10px;
@@ -196,6 +226,7 @@
   font-family: 'Raleway', sans-serif;
   font-weight: 300;
 }
+
 h2 {
   text-transform: uppercase;
   font-size: 40px;
@@ -205,8 +236,6 @@ h2 {
   text-align: center;
   font-family: 'Shadows Into Light', cursive;
   font-weight: 300;
-  
- 
+
+
 }
-
-
