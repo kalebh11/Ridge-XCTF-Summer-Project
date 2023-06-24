@@ -65,6 +65,22 @@
   background-color: #b8c8b7;
 }
 
+.meet-top-bar{
+  height: 8%;
+  width:100%;
+  display: flex;
+  border-bottom:2px solid#b8c8b7;
+  background-color: #ffffff;
+}
+
+.new-meet-button-area{
+  height: 100%;
+  width: 10%;
+  display:flex;
+  margin-left: auto;
+  align-items: center;
+}
+
 //Button Properties
 
 .button3 {
@@ -107,6 +123,19 @@
     opacity: 1;
     right: 0;
   }
+}
+.new-button{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  // flex-direction: column;
+  text-align: center;
+  width: 80%;
+  height: 80%;
+  border-radius: 25px;
+  padding: 1% 1%;
+  background-color:#acbcac;
+  border: 1px solid #768176;
 }
 
 .input {
@@ -223,6 +252,15 @@
   cursor: pointer;
 }
 
+.meets-add-icon-container{
+  margin-right: 10px;
+  font-size: 25px;
+  cursor: pointer;
+}
+.meets-add-icon{
+  display:block;
+}
+
 .header {
   display: flex;
   text-transform: uppercase;
@@ -234,6 +272,12 @@
   text-align: center;
   font-family: 'Raleway', sans-serif;
   font-weight: 300;
+}
+.new-button-text{
+  font-size: 18px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 100;
+  text-transform:  uppercase;
 }
 
 h2 {
