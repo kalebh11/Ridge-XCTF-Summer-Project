@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
+import { GrClose } from "react-icons/gr";
 const MeetsPopup: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
   isOpen,
   onClose,
@@ -24,12 +25,28 @@ const MeetsPopup: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
       onRequestClose={onClose}
       className="meets-popup-modal"
     >
-      <form onSubmit={handleSubmit}>
-        <label>
-          Input:
-          <input type="text" value={inputValue} onChange={handleInputChange} />
-        </label>
-        <button type="submit">Submit</button>
+      <form onSubmit={handleSubmit} className="meets-popup-form">
+        <div className="meets-popup-top">
+          <div className="meets-popup-x-area">
+            <GrClose />
+          </div>
+        </div>
+        <div className="meets-popup-mid">
+          <label>
+            Meet Name
+            <input
+              type="text"
+              value={inputValue}
+              onChange={handleInputChange}
+            />
+          </label>
+        </div>
+
+        <div className="meets-popup-submit-area">
+          <button type="submit" className="meets-popup-submit-button">
+            Submit
+          </button>
+        </div>
       </form>
     </Modal>
   );
