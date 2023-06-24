@@ -260,6 +260,13 @@
 .meets-add-icon{
   display:block;
 }
+.meets-popup-modal {
+  width: 75vw; /* Adjust the width as desired */
+  height: 75vh; /* Adjust the height as desired */
+  background-color: #768176;
+  
+  /* Add any additional styles for the modal */
+}
 
 .header {
   display: flex;
@@ -279,7 +286,14 @@
   font-weight: 100;
   text-transform:  uppercase;
 }
-
+.meets-header{
+  display:flex;
+  text-transform: uppercase;
+  font-size: 55px;
+  margin-left: 0.8%;
+  color:#8aab88;
+  font-family: 'Raleway', sans-serif;
+}
 h2 {
   text-transform: uppercase;
   font-size: 40px;
