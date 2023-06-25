@@ -9,15 +9,17 @@ export interface MeetObject {
   date: Date;
   id: string;
 }
-const MeetsPopup: React.FC<{
+interface PopupProps {
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (data: MeetObject) => void;
-}> = ({ isOpen, onClose, onSubmit }) => {
+}
+const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [isStateMeet, setIsStateMeet] = useState(false);
   const [date, setDate] = useState(new Date());
+  const id = "";
 
   const generateRandomID = (): string => {
     const array = new Uint32Array(1);
@@ -41,7 +43,7 @@ const MeetsPopup: React.FC<{
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Process the user input value here
-    console.log("User input:", name, location, isStateMeet, date);
+
     const data: MeetObject = {
       name,
       location,
@@ -49,7 +51,8 @@ const MeetsPopup: React.FC<{
       date,
       id: generateRandomID(),
     };
-    onClose(); // Close the popup after submission
+    onSubmit(data);
+    onClose();
   };
 
   const handleClose = () => {

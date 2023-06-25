@@ -12,12 +12,12 @@ const MeetsPage = () => {
     setIsPopupOpen(false);
   };
 
-  const handleFormSubmit = (data: MeetObject) => {
-    setMeetObject(data);
+  const handleFormSubmit = (meetObject: MeetObject) => {
+    setMeetObject(meetObject);
   };
 
   return (
-    <div className="outer2">
+    <div className="meets-outer">
       <div className="meet-top-bar">
         <div className="meets-header">Meets</div>
         <div className="new-meet-button-area">
@@ -35,6 +35,7 @@ const MeetsPage = () => {
           </button>
         </div>
       </div>
+      <div className="meets-mid-section"></div>
     </div>
   );
 };

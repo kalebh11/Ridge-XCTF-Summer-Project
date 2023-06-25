@@ -57,6 +57,12 @@
   width: 100%;
   display: flex;
 }
+.meets-outer{
+  height:100%;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+}
 
 .leftSpacing {
   height: 15%;
@@ -71,6 +77,12 @@
   display: flex;
   border-bottom:2px solid#b8c8b7;
   background-color: #ffffff;
+}
+.meets-mid-section{
+  height:92%;
+  width:100%;
+  display:flex;
+  background-color: #dfebdf;
 }
 
 .new-meet-button-area{
