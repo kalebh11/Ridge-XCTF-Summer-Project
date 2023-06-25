@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { VscAdd } from "react-icons/vsc";
-import MeetsPopup from "./MeetsPopup";
+import MeetsPopup, { MeetObject } from "./MeetsPopup";
 const MeetsPage = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [meetObject, setMeetObject] = useState<MeetObject | null>(null);
   const openPopup = () => {
     setIsPopupOpen(true);
   };
 
   const closePopup = () => {
     setIsPopupOpen(false);
+  };
+
+  const handleFormSubmit = (data: MeetObject) => {
+    setMeetObject(data);
   };
 
   return (
@@ -22,7 +27,11 @@ const MeetsPage = () => {
             </div>
 
             <div className="new-button-text">New</div>
-            <MeetsPopup isOpen={isPopupOpen} onClose={closePopup} />
+            <MeetsPopup
+              isOpen={isPopupOpen}
+              onClose={closePopup}
+              onSubmit={handleFormSubmit}
+            />
           </button>
         </div>
       </div>
