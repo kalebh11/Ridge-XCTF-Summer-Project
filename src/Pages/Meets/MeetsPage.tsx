@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { VscAdd } from "react-icons/vsc";
 import MeetsPopup, { MeetObject } from "./MeetsPopup";
+import MeetCard from "./MeetComponents/MeetCard";
 const MeetsPage = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [meetObject, setMeetObject] = useState<MeetObject | null>(null);
+  const [meetList, setMeetList] = useState<MeetObject[]>([]);
+ 
   const openPopup = () => {
     setIsPopupOpen(true);
   };
@@ -14,6 +17,7 @@ const MeetsPage = () => {
 
   const handleFormSubmit = (meetObject: MeetObject) => {
     setMeetObject(meetObject);
+    setMeetList(prevList => [...prevList, meetObject])
   };
 
   return (
@@ -31,11 +35,17 @@ const MeetsPage = () => {
               isOpen={isPopupOpen}
               onClose={closePopup}
               onSubmit={handleFormSubmit}
+            
             />
           </button>
         </div>
       </div>
-      <div className="meets-mid-section"></div>
+      <div className = "meet-mid-section">
+      {meetList.map((object, index) => (
+        <MeetCard key={object.id} object={meetObject} />
+      ))}
+
+      </div>
     </div>
   );
 };

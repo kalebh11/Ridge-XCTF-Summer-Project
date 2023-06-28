@@ -67,7 +67,7 @@ const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
     >
       <form onSubmit={handleSubmit} className="meets-popup-form">
         <div className="meets-popup-top">
-          <span>Enter Meet Information</span>
+          <span className = "meets-popup-header">Enter Meet Information</span>
           <div className="meets-popup-x-area">
             <span className="meets-popup-x">
               <button onClick={handleClose}>
