@@ -6,7 +6,7 @@ const MeetsPage = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [meetObject, setMeetObject] = useState<MeetObject | null>(null);
   const [meetList, setMeetList] = useState<MeetObject[]>([]);
- 
+
   const openPopup = () => {
     setIsPopupOpen(true);
   };
@@ -17,12 +17,12 @@ const MeetsPage = () => {
 
   const handleFormSubmit = (meetObject: MeetObject) => {
     setMeetObject(meetObject);
-    setMeetList(prevList => [...prevList, meetObject])
+    setMeetList((prevList) => [...prevList, meetObject]);
   };
 
   return (
     <div className="meets-outer">
-      <div className="meet-top-bar">
+      <div className="meets-top-bar">
         <div className="meets-header">Meets</div>
         <div className="new-meet-button-area">
           <button className="new-button" onClick={openPopup}>
@@ -35,16 +35,14 @@ const MeetsPage = () => {
               isOpen={isPopupOpen}
               onClose={closePopup}
               onSubmit={handleFormSubmit}
-            
             />
           </button>
         </div>
       </div>
-      <div className = "meet-mid-section">
-      {meetList.map((object, index) => (
-        <MeetCard key={object.id} object={meetObject} />
-      ))}
-
+      <div className="meet-mid-section">
+        {meetList.map((item) => (
+          <MeetCard key={item.id} item={meetObject} />
+        ))}
       </div>
     </div>
   );

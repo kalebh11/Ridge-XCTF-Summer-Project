@@ -67,7 +67,7 @@ const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
     >
       <form onSubmit={handleSubmit} className="meets-popup-form">
         <div className="meets-popup-top">
-          <span className = "meets-popup-header">Enter Meet Information</span>
+          <span className="meets-popup-header">Enter Meet Information</span>
           <div className="meets-popup-x-area">
             <span className="meets-popup-x">
               <button onClick={handleClose}>
@@ -77,34 +77,41 @@ const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
           </div>
         </div>
         <div className="meets-popup-mid">
-          <label>
-            Meet Name
-            <input type="text" value={name} onChange={handleNameChange} />
-          </label>
-          <label>
-            Meet Location
+          <div className="meets-popup-divider">
             <input
               type="text"
+              className="meets-popup-input-boxes"
+              placeholder="Enter the meet name"
+              value={name}
+              onChange={handleNameChange}
+            />
+          </div>
+          <div className="meets-popup-divider">
+            <input
+              type="text"
+              className="meets-popup-input-boxes"
+              placeholder="Enter the meet location"
               value={location}
               onChange={handleLocationChange}
             />
-          </label>
-          <label>
-            Meet Date
+          </div>
+          <div className="meets-popup-divider">
             <input
               type="text"
+              className="meets-popup-input-boxes"
+              placeholder="Enter the meet date"
               value={date.toISOString().split("T")[0]}
               onChange={handleDateChange}
             />
-          </label>
-          <label>
-            State Meet
+          </div>
+          <div className="meets-popup-divider">
             <input
               type="checkbox"
               checked={isStateMeet}
               onChange={handleStateChange}
             />
-          </label>
+            <span>State Meet?</span>
+          </div>
         </div>
 
         <div className="meets-popup-submit-area">
