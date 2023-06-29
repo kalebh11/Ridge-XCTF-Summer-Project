@@ -83,7 +83,11 @@
   height:92%;
   width:100%;
   display:flex;
-  background-color: #dfebdf;
+  background-color: #ffffff;
+  margin-top:2.5%;
+  margin-bottom: 2.5%;
+  margin-left: 2.5%;
+  margin-right:2.5%;
 }
 
 .new-meet-button-area{
@@ -92,6 +96,37 @@
   display:flex;
   margin-left: auto;
   align-items: center;
+}
+.meets-card-grid-container{
+  display:flex;
+  height: 95%;
+  width: 95%;
+  align-items: center;
+  justify-content: center;
+}
+.meets-card-grid{
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-template-rows: repeat(2,1fr);
+  grid-gap: 5%;
+}
+
+.meet-card-top{
+  display:flex;
+  height: 15%;
+  width:100%;
+}
+.meet-card-mid{
+  display:flex;
+  height:65%;
+  width:100%;
+}
+.meet-card-bottom{
+  display:flex;
+  height:20%;
+  width:100%;
 }
 
 //Button Properties
@@ -259,6 +294,21 @@
   }
 }
 
+.meet-card{
+  display:flex;
+  width: 100%;
+  height: 100%;
+  background-color: #dfebdf;
+  box-shadow: 0 0 10px rgb(153, 153, 153);
+  flex-direction: column;
+ 
+
+}
+.meet-card-divider{
+  width:100%;
+  height:1px;
+  background-color: #8aab88;
+}
 .icon {
   margin-left: 10px;
   font-size: 25px;

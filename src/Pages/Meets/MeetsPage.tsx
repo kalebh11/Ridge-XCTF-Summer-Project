@@ -39,10 +39,14 @@ const MeetsPage = () => {
           </button>
         </div>
       </div>
-      <div className="meet-mid-section">
-        {meetList.map((item) => (
-          <MeetCard key={item.id} object={item} />
-        ))}
+      <div className="meets-mid-section">
+        <div className="meets-card-grid-container">
+          <div className="meets-card-grid">
+            {meetList.map((item) => (
+              <MeetCard key={item.id} object={item} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
