@@ -41,7 +41,7 @@ const MeetsPage = () => {
       </div>
       <div className="meet-mid-section">
         {meetList.map((item) => (
-          <MeetCard key={item.id} item={meetObject} />
+          <MeetCard key={item.id} object={item} />
         ))}
       </div>
     </div>
