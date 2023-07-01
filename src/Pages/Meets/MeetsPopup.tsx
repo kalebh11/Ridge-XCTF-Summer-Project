@@ -6,7 +6,7 @@ export interface MeetObject {
   name: string;
   location: string;
   isStateMeet: boolean;
-  date: Date;
+  date: String;
   id: string;
 }
 interface PopupProps {
@@ -18,7 +18,7 @@ const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [isStateMeet, setIsStateMeet] = useState(false);
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState("");
   const id = "";
 
   const generateRandomID = (): string => {
@@ -36,8 +36,7 @@ const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
     setIsStateMeet((prevState) => !prevState);
   };
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedDate = new Date(e.target.value);
-    setDate(selectedDate);
+    setDate(e.target.value);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -97,10 +96,10 @@ const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
           </div>
           <div className="meets-popup-divider">
             <input
-              type="text"
+              type="date"
               className="meets-popup-input-boxes"
               placeholder="Enter the meet date"
-              value={date.toISOString().split("T")[0]}
+              value={date}
               onChange={handleDateChange}
             />
           </div>
