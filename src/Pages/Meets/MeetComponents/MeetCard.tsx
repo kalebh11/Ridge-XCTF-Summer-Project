@@ -7,9 +7,11 @@ interface Props {
 const MeetCard: React.FC<Props> = ({ object }) => {
   return (
     <div className="meet-card">
-      <div className="meet-card-top"></div>
+      <div className="meet-card-top">{object.name}</div>
       <div className="meet-card-divider" />
-      <div className="meet-card-mid">test</div>
+      <div className="meet-card-mid">
+        <span>{object.location}</span>
+      </div>
       <div className="meet-card-divider" />
       <div className="meet-card-bottom">test</div>
     </div>
