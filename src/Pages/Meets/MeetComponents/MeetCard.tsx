@@ -1,38 +1,31 @@
 import React from "react";
 import { MeetObject } from "../MeetsPopup";
+import { useNavigate } from "react-router-dom";
+import "./Meetcard.scss";
 interface Props {
   object: MeetObject;
 }
 const MeetCard: React.FC<Props> = ({ object }) => {
+  const navigate = useNavigate();
+
+  const handleResult = () => {};
+
   return (
-    <div className="meet-card">
-      <div className="meet-card-top">
-        <span className="meet-card-header">{object.name}</span>
-      </div>
-      <div className="meet-card-divider" />
-      <div className="meet-card-mid">
-        <span>{object.date}</span>
-        <span>{object.location}</span>
-      </div>
-      <div className="meet-card-divider" />
-      <div className="meet-card-bottom">
-        <div className="meet-card-left-button-container">
-          <a href="#" className="button">
-            <div className="button__line"></div>
-            <div className="button__line"></div>
-            <span className="button__text">LINEUP</span>
-            <div className="button__drow1"></div>
-            <div className="button__drow2"></div>
-          </a>
-        </div>
-        <div className="meet-card-right-button-container">
-          <a href="#" className="button">
-            <div className="button__line"></div>
-            <div className="button__line"></div>
-            <span className="button__text">RESULTS</span>
-            {/* <div className="button__drow1"></div>
-            <div className="button__drow2"></div> */}
-          </a>
+    <div className="meet-card-container">
+      <div className="card-meet">
+        <div className="contentBx">
+          <h2>{object.name}</h2>
+          <div className="size">
+            <h3>Date:</h3>
+
+            <span>&nbsp;{object.date}</span>
+          </div>
+          <div className="color">
+            <h3>Location:</h3>
+            <span>{object.location}</span>
+          </div>
+          <a className="mr-1">Lineup</a>
+          <a href="#">Results</a>
         </div>
       </div>
     </div>

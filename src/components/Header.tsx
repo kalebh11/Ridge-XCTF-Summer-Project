@@ -1,17 +1,10 @@
 import React from "react";
 
-
 const Header = () => {
-
-  
-    
-
   return (
-    <div className="outer">
-      <div className="header">
-        <span>Ridge XCTF</span>
-      </div>
-    </div>
+    // <div className="outer">
+    <div className="homepage-header">Ridge XCTF</div>
+    // </div>
   );
 };
 
