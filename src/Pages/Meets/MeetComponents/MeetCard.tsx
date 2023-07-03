@@ -14,18 +14,19 @@ const MeetCard: React.FC<Props> = ({ object }) => {
     <div className="meet-card-container">
       <div className="card-meet">
         <div className="contentBx">
-          <h2>{object.name}</h2>
-          <div className="size">
-            <h3>Date:</h3>
-
-            <span>&nbsp;{object.date}</span>
+          <div className="meet-card-title">{object.name}</div>
+          <div className="details-container detail-1 my-2">
+            <div className="meet-card-detail-title">Date:</div>
+            <div className="meet-card-detail">&nbsp;{object.date}</div>
           </div>
-          <div className="color">
-            <h3>Location:</h3>
-            <span>{object.location}</span>
+          <div className="details-container detail-2 my-2">
+            <div className="meet-card-detail-title">Location:</div>
+            <div className="meet-card-detail">&nbsp;{object.location}</div>
           </div>
-          <a className="mr-1">Lineup</a>
-          <a href="#">Results</a>
+          <div className="my-4">
+            <button className="meet-card-button">Lineup</button>
+            <button className="meet-card-button">Results</button>
+          </div>
         </div>
       </div>
     </div>

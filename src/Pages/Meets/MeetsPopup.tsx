@@ -40,7 +40,7 @@ const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
   };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+    // e.preventDefault();
     // Process the user input value here
 
     const data: MeetObject = {
@@ -53,22 +53,20 @@ const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
     setName("");
     setDate("");
     setLocation("");
+    console.log('why the fuck did this run');
     setIsStateMeet(false);
     onSubmit(data);
     onClose();
   };
 
   const handleClose = () => {
+    console.log('test');
     onClose();
   };
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onClose}
-      className="meets-popup-modal"
-    >
-      <form onSubmit={handleSubmit} className="meets-popup-form">
+    <Modal isOpen={isOpen} onRequestClose={onClose} className="meets-popup-modal">
+      <div className="meets-popup-form">
         <div className="meets-popup-top">
           <span className="meets-popup-header">Enter Meet Information</span>
           <div className="meets-popup-x-area">
@@ -118,11 +116,11 @@ const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
         </div>
 
         <div className="meets-popup-submit-area">
-          <button type="submit" className="meets-popup-submit-button">
+          <button type="button" className="meets-popup-submit-button" onClick={handleSubmit}>
             Submit
           </button>
         </div>
-      </form>
+      </div>
     </Modal>
   );
 };

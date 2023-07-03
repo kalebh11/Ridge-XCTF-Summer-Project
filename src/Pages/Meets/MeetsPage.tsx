@@ -3,9 +3,9 @@ import { VscAdd } from "react-icons/vsc";
 import MeetsPopup, { MeetObject } from "./MeetsPopup";
 import MeetCard from "./MeetComponents/MeetCard";
 const MeetsPage = () => {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [meetObject, setMeetObject] = useState<MeetObject | null>(null);
-  const [meetList, setMeetList] = useState<MeetObject[]>([]);
+  let [isPopupOpen, setIsPopupOpen] = useState(false);
+  let [meetObject, setMeetObject] = useState<MeetObject | null>(null);
+  let [meetList, setMeetList] = useState<MeetObject[]>([]);
 
   const openPopup = () => {
     setIsPopupOpen(true);
@@ -29,23 +29,16 @@ const MeetsPage = () => {
             <div className="meets-add-icon-container">
               <VscAdd className="meets-add-icon" />
             </div>
-
             <div className="new-button-text">New</div>
-            <MeetsPopup
-              isOpen={isPopupOpen}
-              onClose={closePopup}
-              onSubmit={handleFormSubmit}
-            />
           </button>
+          <MeetsPopup isOpen={isPopupOpen} onClose={closePopup} onSubmit={handleFormSubmit} />
         </div>
       </div>
       <div className="meets-mid-section">
-        <div className="meets-card-grid-container">
-          <div className="meets-card-grid">
+        <div className="meet-cards-container">
             {meetList.map((item) => (
               <MeetCard key={item.id} object={item} />
             ))}
-          </div>
         </div>
       </div>
     </div>
