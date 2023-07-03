@@ -50,6 +50,10 @@ const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
       date,
       id: generateRandomID(),
     };
+    setName("");
+    setDate("");
+    setLocation("");
+    setIsStateMeet(false);
     onSubmit(data);
     onClose();
   };
