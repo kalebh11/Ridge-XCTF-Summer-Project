@@ -53,72 +53,85 @@ const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
     setName("");
     setDate("");
     setLocation("");
-    console.log('why the fuck did this run');
+    console.log("why the fuck did this run");
     setIsStateMeet(false);
     onSubmit(data);
     onClose();
   };
 
   const handleClose = () => {
-    console.log('test');
+    console.log("test");
     onClose();
   };
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={onClose} className="meets-popup-modal">
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={onClose}
+      className="meets-popup-modal"
+    >
       <div className="meets-popup-form">
-        <div className="meets-popup-top">
-          <span className="meets-popup-header">Enter Meet Information</span>
-          <div className="meets-popup-x-area">
-            <span className="meets-popup-x">
-              <button onClick={handleClose}>
+        <div className="meets-popup-left">
+          <div className="meets-popup-top">
+            <div className="meets-popup-header">Meet Information</div>
+          </div>
+
+          <div className="meets-popup-mid">
+            <div className="meets-popup-divider">
+              <input
+                type="text"
+                className="meets-popup-input-boxes"
+                placeholder="Enter the meet name"
+                value={name}
+                onChange={handleNameChange}
+              />
+            </div>
+            <div className="meets-popup-divider">
+              <input
+                type="text"
+                className="meets-popup-input-boxes"
+                placeholder="Enter the meet location"
+                value={location}
+                onChange={handleLocationChange}
+              />
+            </div>
+            <div className="meets-popup-divider">
+              <input
+                type="date"
+                className="meets-popup-input-boxes"
+                placeholder="Enter the meet date"
+                value={date}
+                onChange={handleDateChange}
+              />
+            </div>
+            <div className="meets-popup-divider">
+              <input
+                type="checkbox"
+                checked={isStateMeet}
+                onChange={handleStateChange}
+              />
+              <span>State Meet?</span>
+            </div>
+          </div>
+
+          <div className="meets-popup-submit-area">
+            <button
+              type="button"
+              className="meets-popup-submit-button"
+              onClick={handleSubmit}
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+        <div className="meets-popup-right">
+          <div className="meets-popup-right-top">
+            <div className="meets-popup-x-area">
+              <button onClick={handleClose} className="meets-popup-x-button">
                 <GrClose className="meets-add-icon" />
               </button>
-            </span>
+            </div>
           </div>
-        </div>
-        <div className="meets-popup-mid">
-          <div className="meets-popup-divider">
-            <input
-              type="text"
-              className="meets-popup-input-boxes"
-              placeholder="Enter the meet name"
-              value={name}
-              onChange={handleNameChange}
-            />
-          </div>
-          <div className="meets-popup-divider">
-            <input
-              type="text"
-              className="meets-popup-input-boxes"
-              placeholder="Enter the meet location"
-              value={location}
-              onChange={handleLocationChange}
-            />
-          </div>
-          <div className="meets-popup-divider">
-            <input
-              type="date"
-              className="meets-popup-input-boxes"
-              placeholder="Enter the meet date"
-              value={date}
-              onChange={handleDateChange}
-            />
-          </div>
-          <div className="meets-popup-divider">
-            <input
-              type="checkbox"
-              checked={isStateMeet}
-              onChange={handleStateChange}
-            />
-            <span>State Meet?</span>
-          </div>
-        </div>
-
-        <div className="meets-popup-submit-area">
-          <button type="button" className="meets-popup-submit-button" onClick={handleSubmit}>
-            Submit
-          </button>
         </div>
       </div>
     </Modal>
