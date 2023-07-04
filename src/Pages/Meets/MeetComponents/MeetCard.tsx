@@ -14,7 +14,9 @@ const MeetCard: React.FC<Props> = ({ object }) => {
     <div className="meet-card-container">
       <div className="card-meet">
         <div className="contentBx">
-          <div className="meet-card-title">{object.name}</div>
+          <a href="#" className="meet-card-title">
+            {object.name}
+          </a>
           <div className="details-container detail-1 my-2">
             <div className="meet-card-detail-title">Date:</div>
             <div className="meet-card-detail">&nbsp;{object.date}</div>

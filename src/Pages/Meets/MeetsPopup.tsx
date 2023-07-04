@@ -8,6 +8,7 @@ export interface MeetObject {
   isStateMeet: boolean;
   date: String;
   id: string;
+  note: string;
 }
 interface PopupProps {
   isOpen: boolean;
@@ -19,6 +20,7 @@ const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
   const [location, setLocation] = useState("");
   const [isStateMeet, setIsStateMeet] = useState(false);
   const [date, setDate] = useState("");
+  const [note, setNote] = useState("");
   const id = "";
 
   const generateRandomID = (): string => {
@@ -38,6 +40,9 @@ const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDate(e.target.value);
   };
+  const handleNoteChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNote(e.target.value);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     // e.preventDefault();
@@ -49,6 +54,7 @@ const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
       isStateMeet,
       date,
       id: generateRandomID(),
+      note,
     };
     setName("");
     setDate("");
@@ -131,6 +137,15 @@ const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
                 <GrClose className="meets-add-icon" />
               </button>
             </div>
+          </div>
+          <div className="meets-popup-right-mid">
+            <input
+              type="input"
+              className="meets-popup-notes-box"
+              placeholder="Enter additional notes"
+              value={note}
+              onChange={handleNoteChange}
+            />
           </div>
         </div>
       </div>
