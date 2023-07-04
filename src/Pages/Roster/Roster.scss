@@ -1,0 +1,44 @@
+.roster-header-container{
+ height: 70px;
+ width:100%;
+ display:flex;
+ border-bottom:2px solid#b8c8b7;
+  background-color: #ffffff;
+}
+
+.roster-main-container{
+    height:100%;
+    // width:100%;
+    display:flex;
+    overflow-y:auto;
+    overflow-x: hidden;
+    background-color: #ffffff;
+    margin: 5px;
+    flex-direction: column;
+}
+
+.roster-nav-main-container{
+  display:flex;
+  height:100%;
+  width: 100%;
+  flex-direction: row!important;
+}
+
+.tab-pane{
+  height: 100%;
+  width: 100%;
+}
+.roster-table-container{
+  display: flex;
+  height:100%;
+  width:65%;
+  border: 2px solid green;
+}
+
+.roster-form-container{
+ display: flex;
+ height: 100%;
+ width: 35%;
+ border:2px solid#000000;
+
+}

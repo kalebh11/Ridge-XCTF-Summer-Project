@@ -5,7 +5,7 @@ import SideList from "./components/SideList";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import MeetsPage from "./Pages/Meets/MeetsPage";
-import RosterPage from "./Pages/RosterPage";
+import RosterPage from "./Pages/Roster/RosterPage";
 
 const App: React.FC = () => {
   return (
