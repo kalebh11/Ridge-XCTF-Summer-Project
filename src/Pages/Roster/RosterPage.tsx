@@ -2,7 +2,22 @@ import React from "react";
 import "./Roster.scss";
 import "bootstrap/dist/js/bootstrap";
 
+interface Athlete {
+  name: string;
+  grade: number;
+  group: string;
+  id: string;
+}
+
+interface DistanceAthlete extends Athlete {
+  vdot: number;
+}
+
 const RosterPage = () => {
+  const handleSubmitAthlete = () => {
+    console.log("sent");
+  };
+
   return (
     <div className="meets-outer">
       <div className="roster-header-container">
@@ -58,8 +73,27 @@ const RosterPage = () => {
             aria-labelledby="nav-home-tab"
           >
             <div className="roster-nav-main-container">
-              <div className="roster-table-container"></div>
-              <div className="roster-form-container"></div>
+              <div className="roster-table-container">distance</div>
+              <div className="roster-form-container">
+                <div className="roster-form-main-container">
+                  <input type="number"></input>
+                </div>
+                <div className="roster-form-submit-container">
+                  <button
+                    className="button"
+                    id="button-7"
+                    onClick={handleSubmitAthlete}
+                  >
+                    <div id="dub-arrow">
+                      <img
+                        src="https://github.com/atloomer/atloomer.github.io/blob/master/img/iconmonstr-arrow-48-240.png?raw=true"
+                        alt=""
+                      />
+                    </div>
+                    Enter Athlete
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
           <div
@@ -68,8 +102,10 @@ const RosterPage = () => {
             role="tabpanel"
             aria-labelledby="nav-profile-tab"
           >
-            <div className="roster-form-container"></div>
-            <p>sprints</p>
+            <div className="roster-nav-main-container">
+              <div className="roster-table-container">sprints</div>
+              <div className="roster-form-container"></div>
+            </div>
           </div>
           <div
             className="tab-pane fade"
@@ -77,8 +113,10 @@ const RosterPage = () => {
             role="tabpanel"
             aria-labelledby="nav-contact-tab"
           >
-            <div className="roster-form-container"></div>
-            <p>throws</p>
+            <div className="roster-nav-main-container">
+              <div className="roster-table-container">throws</div>
+              <div className="roster-form-container"></div>
+            </div>
           </div>
         </div>
       </div>
