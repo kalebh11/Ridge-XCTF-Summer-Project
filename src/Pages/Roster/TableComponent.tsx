@@ -1,8 +1,8 @@
 import React from "react";
-import { DistanceAthlete } from "./RosterPage";
+import { Athlete, DistanceAthlete } from "./RosterPage";
 
 interface Props {
-  athleteList: DistanceAthlete;
+  athleteList: Athlete[];
 }
 const TableComponent: React.FC<Props> = ({ athleteList }) => {
   return (
