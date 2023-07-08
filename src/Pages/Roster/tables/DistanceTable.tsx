@@ -1,10 +1,10 @@
 import React from "react";
-import { Athlete, DistanceAthlete } from "./RosterPage";
+import { Athlete, DistanceAthlete } from "../RosterPage";
 
 interface Props {
   athleteList: Athlete[];
 }
-const TableComponent: React.FC<Props> = ({ athleteList }) => {
+const DistanceTable: React.FC<Props> = ({ athleteList }) => {
   return (
     <table>
       <thead>
@@ -13,6 +13,11 @@ const TableComponent: React.FC<Props> = ({ athleteList }) => {
           <th>Group</th>
           <th>Grade</th>
           <th>VDOT</th>
+          <th>400</th>
+          <th>800</th>
+          <th>1200</th>
+          <th>1600</th>
+          <th>3200</th>
         </tr>
       </thead>
       <tbody>
@@ -21,7 +26,7 @@ const TableComponent: React.FC<Props> = ({ athleteList }) => {
             <td>{item.name}</td>
             <td>{item.group}</td>
             <td>{item.grade}</td>
-            <td>{item.vdot}</td>
+            <td>{(item as DistanceAthlete).vdot}</td>
           </tr>
         ))}
       </tbody>
@@ -29,4 +34,4 @@ const TableComponent: React.FC<Props> = ({ athleteList }) => {
   );
 };
 
-export default TableComponent;
+export default DistanceTable;

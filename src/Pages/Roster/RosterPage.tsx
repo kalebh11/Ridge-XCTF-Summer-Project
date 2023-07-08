@@ -1,7 +1,10 @@
 import React, { ChangeEventHandler, useState } from "react";
 import "./Roster.scss";
 import "bootstrap/dist/js/bootstrap";
-import TableComponent from "./TableComponent";
+import SprintInput from "./inputstuff/SprintInput";
+import DistanceInput from "./inputstuff/DistanceInput";
+import ThrowsInput from "./inputstuff/ThrowsInput";
+import DistanceTable from "./tables/DistanceTable";
 
 export interface Athlete {
   name: string;
@@ -11,12 +14,6 @@ export interface Athlete {
 }
 
 export interface DistanceAthlete extends Athlete {
-  map(
-    arg0: (
-      athlete: DistanceAthlete,
-      index: React.Key | null | undefined
-    ) => import("react/jsx-runtime").JSX.Element
-  ): React.ReactNode;
   vdot: number;
 }
 
@@ -26,7 +23,6 @@ const RosterPage = () => {
   const [grade, setGrade] = useState(0);
   const [group, setGroup] = useState("");
   const [vdot, setVdot] = useState(0);
-  const id = "";
 
   const handleNameChange = (e: {
     target: { value: React.SetStateAction<string> };
@@ -43,6 +39,7 @@ const RosterPage = () => {
   };
   const handleVdotChange = (e: { target: { value: any } }) => {
     setVdot(Number(e.target.value));
+    console.log("andrew is fat", e);
   };
   const generateRandomID = (): string => {
     const array = new Uint32Array(1);
@@ -50,24 +47,16 @@ const RosterPage = () => {
     return array[0].toString(36);
   };
 
-  const handleSubmitAthlete = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleFormSubmitSprints = (athlete: Athlete) => {
+    setAthletesList((prevList) => [...prevList, athlete]);
+  };
 
-    const newAthlete: DistanceAthlete = {
-      name,
-      group,
-      grade,
-      vdot,
-      id: generateRandomID(),
-    };
+  const handleFormSubmitDistance = (athlete: DistanceAthlete) => {
+    setAthletesList((prevList) => [...prevList, athlete]);
+  };
 
-    setAthletesList([...athleteList, newAthlete]);
-
-    // Reset the input values
-    setName("");
-    setGroup("");
-    setGrade(0);
-    setVdot(0);
+  const handleFormSubmitThrows = (athlete: Athlete) => {
+    setAthletesList((prevList) => [...prevList, athlete]);
   };
 
   return (
@@ -126,90 +115,10 @@ const RosterPage = () => {
           >
             <div className="roster-nav-main-container">
               <div className="roster-table-container">
-                <TableComponent athleteList={athleteList} />
+                <DistanceTable athleteList={athleteList} />
               </div>
               <div className="roster-form-container">
-                <div className="roster-form-main-container">
-                  <div className="roster-form-input-container">
-                    <div className="form__group field">
-                      <input
-                        type="input"
-                        className="form__field"
-                        placeholder="Name"
-                        name="name"
-                        id="name"
-                        required
-                        onChange={handleNameChange}
-                      />
-                      <label htmlFor="name" className="form__label">
-                        Athlete Name
-                      </label>
-                    </div>
-                  </div>
-                  <div className="roster-form-input-container">
-                    <div className="form__group field">
-                      <input
-                        type="number"
-                        className="form__field"
-                        placeholder="Grade"
-                        name="grade"
-                        id="grade"
-                        required
-                        onChange={handleGradeChange}
-                      />
-                      <label htmlFor="grade" className="form__label">
-                        Athlete Grade
-                      </label>
-                    </div>
-                  </div>
-                  <div className="roster-form-input-container">
-                    <div className="form__group field">
-                      <input
-                        type="input"
-                        className="form__field"
-                        placeholder="Group"
-                        name="group"
-                        id="group"
-                        required
-                        onChange={handleGroupChange}
-                      />
-                      <label htmlFor="group" className="form__label">
-                        Athlete Group
-                      </label>
-                    </div>
-                  </div>
-                  <div className="roster-form-input-container">
-                    <div className="form__group field">
-                      <input
-                        type="number"
-                        className="form__field"
-                        placeholder="Vdot"
-                        name="vdot"
-                        id="vdot"
-                        required
-                        onChange={handleVdotChange}
-                      />
-                      <label htmlFor="vdot" className="form__label">
-                        Athlete VDOT
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div className="roster-form-submit-container">
-                  <button
-                    className="button"
-                    id="button-7"
-                    onClick={handleSubmitAthlete}
-                  >
-                    <div id="dub-arrow">
-                      <img
-                        src="https://github.com/atloomer/atloomer.github.io/blob/master/img/iconmonstr-arrow-48-240.png?raw=true"
-                        alt=""
-                      />
-                    </div>
-                    Enter Athlete
-                  </button>
-                </div>
+                <DistanceInput onSubmit={handleFormSubmitDistance} />
               </div>
             </div>
           </div>
@@ -221,7 +130,9 @@ const RosterPage = () => {
           >
             <div className="roster-nav-main-container">
               <div className="roster-table-container">sprints</div>
-              <div className="roster-form-container"></div>
+              <div className="roster-form-container">
+                <SprintInput onSubmit={handleFormSubmitSprints} />
+              </div>
             </div>
           </div>
           <div
@@ -232,7 +143,9 @@ const RosterPage = () => {
           >
             <div className="roster-nav-main-container">
               <div className="roster-table-container">throws</div>
-              <div className="roster-form-container"></div>
+              <div className="roster-form-container">
+                <ThrowsInput onSubmit={handleFormSubmitThrows} />
+              </div>
             </div>
           </div>
         </div>
