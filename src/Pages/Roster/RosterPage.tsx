@@ -15,39 +15,16 @@ export interface Athlete {
   id: string;
 }
 
+export interface SprintsAthlete extends Athlete {
+  doesHurdles: boolean;
+  doesJumps: boolean;
+}
 export interface DistanceAthlete extends Athlete {
   vdot: number;
 }
 
 const RosterPage = () => {
   const [athleteList, setAthletesList] = useState<Athlete[]>([]);
-  const [name, setName] = useState("");
-  const [grade, setGrade] = useState(0);
-  const [group, setGroup] = useState("");
-  const [vdot, setVdot] = useState(0);
-
-  const handleNameChange = (e: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setName(e.target.value);
-  };
-  const handleGradeChange = (e: { target: { value: any } }) => {
-    setGrade(Number(e.target.value));
-  };
-  const handleGroupChange = (e: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setGroup(e.target.value);
-  };
-  const handleVdotChange = (e: { target: { value: any } }) => {
-    setVdot(Number(e.target.value));
-    console.log("andrew is fat", e);
-  };
-  const generateRandomID = (): string => {
-    const array = new Uint32Array(1);
-    crypto.getRandomValues(array);
-    return array[0].toString(36);
-  };
 
   const handleFormSubmitSprints = (athlete: Athlete) => {
     setAthletesList((prevList) => [...prevList, athlete]);

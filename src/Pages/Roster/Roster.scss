@@ -29,17 +29,16 @@
   width: 100%;
 }
 .roster-table-container{
- 
+  border-right: 2px solid black;
   height:100%;
   width:65%;
-  border: 2px solid green;
 }
 
 .roster-form-container{
  display: flex;
  height: 100%;
  width: 35%;
-//  background-color: 
+ background-color: #ebebeb;
  flex-direction: column;
 }
 
@@ -64,12 +63,46 @@
   align-items: center;
   justify-content: center;
 }
+.roster-form-checkbox-container{
+  display: flex;
+  height: 100%;
+  width: 50%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
 
 .input-component-container{
   display: flex;
   width: 100%;
   height:100%;
   flex-direction: column;
+}
+.table-cell{
+  border: 1px solid #000000;
+  text-align: left;
+  padding: 8px;
+}
+ .group{
+  width: 5%;
+}
+ .name{
+  width:20%;
+}
+ .grade{
+  width:5%;
+}
+ .vdot{
+  width: 5%;
+}
+ .distance-events{
+  width:13%;
+}
+.sprint-events{
+  width: 16%;
+}
+.sprint-options{
+  width: 3%;
 }
 .button {
   display: inline-flex;
@@ -211,4 +244,9 @@ body {
   min-height: 100vh;
   font-size: 1.5rem;
   background-color:#222222;
+}
+
+.checkbox-text{
+  font-family: 'Poppins', sans-serif; 
+  color: #9b9b9b;
 }

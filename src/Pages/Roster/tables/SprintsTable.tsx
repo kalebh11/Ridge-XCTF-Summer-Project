@@ -9,23 +9,23 @@ const SprintsTable: React.FC<Props> = ({ athleteList }) => {
     <table>
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Group</th>
-          <th>Grade</th>
-          <th>100</th>
-          <th>200</th>
-          <th>400</th>
-          <th>800</th>
-          <th>110mH</th>
-          <th>400mH</th>
+          <th className="table-cell group">Group</th>
+          <th className="table-cell name">Name</th>
+          <th className="table-cell grade">Grade</th>
+          <th className="table-cell sprint-events">100</th>
+          <th className="table-cell sprint-events">200</th>
+          <th className="table-cell sprint-events">400</th>
+          <th className="table-cell sprint-events">800</th>
+          <th className="table-cell sprint-options">Jumps</th>
+          <th className="table-cell sprint-options">Hurdles</th>
         </tr>
       </thead>
       <tbody>
         {athleteList.map((item) => (
           <tr key={item.id}>
-            <td>{item.name}</td>
-            <td>{item.group}</td>
-            <td>{item.grade}</td>
+            <td className="table-cell group">{item.group}</td>
+            <td className="table-cell name">{item.name}</td>
+            <td className="table-cell grade">{item.grade}</td>
           </tr>
         ))}
       </tbody>

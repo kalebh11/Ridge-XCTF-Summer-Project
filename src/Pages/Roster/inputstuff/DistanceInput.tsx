@@ -43,7 +43,7 @@ const DistanceInput: React.FC<PopupProps> = ({ onSubmit }) => {
       vdot,
       id: generateRandomID(),
     };
-
+    onSubmit(newAthlete);
     setName("");
     setGroup("");
     setGrade(0);
