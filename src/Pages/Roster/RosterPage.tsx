@@ -5,6 +5,8 @@ import SprintInput from "./inputstuff/SprintInput";
 import DistanceInput from "./inputstuff/DistanceInput";
 import ThrowsInput from "./inputstuff/ThrowsInput";
 import DistanceTable from "./tables/DistanceTable";
+import SprintsTable from "./tables/SprintsTable";
+import ThrowsTable from "./tables/ThrowsTable";
 
 export interface Athlete {
   name: string;
@@ -129,7 +131,9 @@ const RosterPage = () => {
             aria-labelledby="nav-profile-tab"
           >
             <div className="roster-nav-main-container">
-              <div className="roster-table-container">sprints</div>
+              <div className="roster-table-container">
+                <SprintsTable athleteList={athleteList} />
+              </div>
               <div className="roster-form-container">
                 <SprintInput onSubmit={handleFormSubmitSprints} />
               </div>
@@ -142,7 +146,9 @@ const RosterPage = () => {
             aria-labelledby="nav-contact-tab"
           >
             <div className="roster-nav-main-container">
-              <div className="roster-table-container">throws</div>
+              <div className="roster-table-container">
+                <ThrowsTable athleteList={athleteList} />
+              </div>
               <div className="roster-form-container">
                 <ThrowsInput onSubmit={handleFormSubmitThrows} />
               </div>
