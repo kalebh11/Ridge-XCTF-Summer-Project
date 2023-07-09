@@ -110,22 +110,33 @@ const SprintInput: React.FC<PopupProps> = ({ onSubmit }) => {
             </label>
           </div>
         </div>
-        <div className="roster-form-input-container">
+        <div
+          className="roster-form-input-container"
+          style={{ flexDirection: "column" }}
+        >
           <div className="roster-form-checkbox-container">
-            <label className="checkbox-text"> Hurdles </label>
-            <input
-              type="checkbox"
-              checked={doesHurdles}
-              onChange={handleHurdlesChange}
-            />
+            <div className="box">
+              <input
+                id="one"
+                type="checkbox"
+                checked={doesHurdles}
+                onChange={handleHurdlesChange}
+              />
+              <span className="check"></span>
+              <label htmlFor="one">Hurdles</label>
+            </div>
           </div>
           <div className="roster-form-checkbox-container">
-            <label className="checkbox-text"> Jumps </label>
-            <input
-              type="checkbox"
-              checked={doesJumps}
-              onChange={handleJumpsChange}
-            />
+            <div className="box">
+              <input
+                id="one"
+                type="checkbox"
+                checked={doesJumps}
+                onChange={handleJumpsChange}
+              />
+              <span className="check"></span>
+              <label htmlFor="one">Jumps</label>
+            </div>
           </div>
         </div>
       </div>
