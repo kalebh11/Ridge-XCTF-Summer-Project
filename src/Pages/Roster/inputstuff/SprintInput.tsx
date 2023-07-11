@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../Roster.scss";
-import { Athlete, SprintsAthlete } from "../RosterPage";
+import { Athlete } from "../RosterPage";
 
 interface PopupProps {
   onSubmit: (data: Athlete) => void;
@@ -9,8 +9,6 @@ const SprintInput: React.FC<PopupProps> = ({ onSubmit }) => {
   const [name, setName] = useState("");
   const [grade, setGrade] = useState(0);
   const [group, setGroup] = useState("");
-  const [doesJumps, setDoesJumps] = useState(false);
-  const [doesHurdles, setDoesHurdles] = useState(false);
 
   const handleNameChange = (e: {
     target: { value: React.SetStateAction<string> };
@@ -25,12 +23,7 @@ const SprintInput: React.FC<PopupProps> = ({ onSubmit }) => {
   }) => {
     setGroup(e.target.value);
   };
-  const handleHurdlesChange = () => {
-    setDoesHurdles((prevState) => !prevState);
-  };
-  const handleJumpsChange = () => {
-    setDoesJumps((prevState) => !prevState);
-  };
+
   const generateRandomID = (): string => {
     const array = new Uint32Array(1);
     crypto.getRandomValues(array);
@@ -39,18 +32,16 @@ const SprintInput: React.FC<PopupProps> = ({ onSubmit }) => {
 
   const handleSubmitAthlete = (e: React.FormEvent) => {
     e.preventDefault();
-    const newAthlete: SprintsAthlete = {
+    const newAthlete: Athlete = {
       name,
       group,
       grade,
-      doesHurdles,
-      doesJumps,
+
       id: generateRandomID(),
     };
     onSubmit(newAthlete);
     // Reset the input values
-    setDoesHurdles(false);
-    setDoesJumps(false);
+
     setName("");
     setGroup("");
     setGrade(0);
@@ -108,35 +99,6 @@ const SprintInput: React.FC<PopupProps> = ({ onSubmit }) => {
             <label htmlFor="group" className="form__label">
               Athlete Group
             </label>
-          </div>
-        </div>
-        <div
-          className="roster-form-input-container"
-          style={{ flexDirection: "column" }}
-        >
-          <div className="roster-form-checkbox-container">
-            <div className="box">
-              <input
-                id="one"
-                type="checkbox"
-                checked={doesHurdles}
-                onChange={handleHurdlesChange}
-              />
-              <span className="check"></span>
-              <label htmlFor="one">Hurdles</label>
-            </div>
-          </div>
-          <div className="roster-form-checkbox-container">
-            <div className="box">
-              <input
-                id="one"
-                type="checkbox"
-                checked={doesJumps}
-                onChange={handleJumpsChange}
-              />
-              <span className="check"></span>
-              <label htmlFor="one">Jumps</label>
-            </div>
           </div>
         </div>
       </div>

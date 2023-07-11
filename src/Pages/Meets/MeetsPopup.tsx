@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import { GrClose } from "react-icons/gr";
-
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../App";
 export interface MeetObject {
   name: string;
   location: string;
@@ -15,6 +16,20 @@ interface PopupProps {
   onClose: () => void;
   onSubmit: (data: MeetObject) => void;
 }
+
+const addMeet = async (e: any, meet: MeetObject) => {
+  e.preventDefault();
+
+  try {
+    const docRef = await addDoc(collection(db, "meets"), {
+      meet: meet,
+    });
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+};
+
 const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
@@ -62,6 +77,7 @@ const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
     console.log("why the fuck did this run");
     setIsStateMeet(false);
     onSubmit(data);
+    addMeet(e, data);
     onClose();
   };
 

@@ -15,10 +15,6 @@ export interface Athlete {
   id: string;
 }
 
-export interface SprintsAthlete extends Athlete {
-  doesHurdles: boolean;
-  doesJumps: boolean;
-}
 export interface DistanceAthlete extends Athlete {
   vdot: number;
 }

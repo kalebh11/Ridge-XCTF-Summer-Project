@@ -1,28 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { VscAdd } from "react-icons/vsc";
 import MeetsPopup, { MeetObject } from "./MeetsPopup";
 import MeetCard from "./MeetComponents/MeetCard";
-import firebase, { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../App";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyA0ao2imRtQ-hi2kc6XsugIGfc1aXTA7g0",
-  authDomain: "track-app-49793.firebaseapp.com",
-  projectId: "track-app-49793",
-  storageBucket: "track-app-49793.appspot.com",
-  messagingSenderId: "713239875011",
-  appId: "1:713239875011:web:04f51cf11b3b2eafff4176",
-  measurementId: "G-YT820FDWF5",
-};
-
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const db = getFirestore(app);
 const MeetsPage = () => {
   let [isPopupOpen, setIsPopupOpen] = useState(false);
   let [meetList, setMeetList] = useState<MeetObject[]>([]);
+  const fetchPost = async () => {
+    await getDocs(collection(db, "meets")).then((querySnapshot) => {
+      const newData: any[] = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
 
+      newData.map((item) => {
+        setMeetList((prevArray) => [...prevArray, item.meet]);
+      });
+
+      console.log(meetList, newData);
+    });
+  };
+
+  useEffect(() => {
+    fetchPost();
+    console.log("sdf");
+  }, []);
   const openPopup = () => {
     setIsPopupOpen(true);
   };
