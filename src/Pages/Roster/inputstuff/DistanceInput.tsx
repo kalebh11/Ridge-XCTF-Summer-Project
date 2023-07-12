@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import "../Roster.scss";
-import { DistanceAthlete } from "../RosterPage";
+import { Athlete } from "../RosterPage";
 
 interface PopupProps {
-  onSubmit: (data: DistanceAthlete) => void;
+  onSubmit: (data: Athlete) => void;
 }
+
 const DistanceInput: React.FC<PopupProps> = ({ onSubmit }) => {
   const [name, setName] = useState("");
   const [grade, setGrade] = useState(0);
-  const [group, setGroup] = useState("");
+  const [group, setGroup] = useState(0);
   const [vdot, setVdot] = useState(0);
 
   const handleNameChange = (e: {
@@ -19,14 +20,11 @@ const DistanceInput: React.FC<PopupProps> = ({ onSubmit }) => {
   const handleGradeChange = (e: { target: { value: any } }) => {
     setGrade(Number(e.target.value));
   };
-  const handleGroupChange = (e: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setGroup(e.target.value);
+  const handleGroupChange = (e: { target: { value: any } }) => {
+    setGroup(Number(e.target.value));
   };
   const handleVdotChange = (e: { target: { value: any } }) => {
     setVdot(Number(e.target.value));
-    console.log("andrew is fat", e);
   };
   const generateRandomID = (): string => {
     const array = new Uint32Array(1);
@@ -36,16 +34,17 @@ const DistanceInput: React.FC<PopupProps> = ({ onSubmit }) => {
 
   const handleSubmitAthlete = (e: React.FormEvent) => {
     e.preventDefault();
-    const newAthlete: DistanceAthlete = {
+    const newAthlete: Athlete = {
       name,
-      group,
+      group: "D" + group,
       grade,
       vdot,
+      meets: [],
       id: generateRandomID(),
     };
     onSubmit(newAthlete);
     setName("");
-    setGroup("");
+    setGroup(0);
     setGrade(0);
     setVdot(0);
   };
@@ -89,7 +88,7 @@ const DistanceInput: React.FC<PopupProps> = ({ onSubmit }) => {
         <div className="roster-form-input-container">
           <div className="form__group field">
             <input
-              type="input"
+              type="number"
               className="form__field"
               placeholder="Group"
               name="group"

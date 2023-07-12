@@ -8,7 +8,7 @@ interface PopupProps {
 const SprintInput: React.FC<PopupProps> = ({ onSubmit }) => {
   const [name, setName] = useState("");
   const [grade, setGrade] = useState(0);
-  const [group, setGroup] = useState("");
+  const [group, setGroup] = useState(0);
 
   const handleNameChange = (e: {
     target: { value: React.SetStateAction<string> };
@@ -18,10 +18,8 @@ const SprintInput: React.FC<PopupProps> = ({ onSubmit }) => {
   const handleGradeChange = (e: { target: { value: any } }) => {
     setGrade(Number(e.target.value));
   };
-  const handleGroupChange = (e: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setGroup(e.target.value);
+  const handleGroupChange = (e: { target: { value: any } }) => {
+    setGroup(Number(e.target.value));
   };
   const generateRandomID = (): string => {
     const array = new Uint32Array(1);
@@ -33,14 +31,16 @@ const SprintInput: React.FC<PopupProps> = ({ onSubmit }) => {
     e.preventDefault();
     const newAthlete: Athlete = {
       name,
-      group,
+      group: "T" + group,
       grade,
+      vdot: 0,
+      meets: [],
       id: generateRandomID(),
     };
     onSubmit(newAthlete);
     // Reset the input values
     setName("");
-    setGroup("");
+    setGroup(0);
     setGrade(0);
   };
 
@@ -84,7 +84,7 @@ const SprintInput: React.FC<PopupProps> = ({ onSubmit }) => {
         <div className="roster-form-input-container">
           <div className="form__group field">
             <input
-              type="input"
+              type="number"
               className="form__field"
               placeholder="Group"
               name="group"

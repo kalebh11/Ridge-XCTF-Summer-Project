@@ -10,6 +10,7 @@ import RosterPage from "./Pages/Roster/RosterPage";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
+import Meetpage from "./Pages/Meets/Meetpage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA0ao2imRtQ-hi2kc6XsugIGfc1aXTA7g0",
@@ -22,7 +23,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 export const db = getFirestore(app);
 
 const App: React.FC = () => {
@@ -42,6 +42,7 @@ const App: React.FC = () => {
               <Route path="/" element={<HomePage />} />
               <Route path="meets" element={<MeetsPage />} />
               <Route path="roster" element={<RosterPage />} />
+              <Route path="meet" element={<Meetpage />} />
             </Routes>
           </div>
         </div>

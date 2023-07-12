@@ -1,5 +1,5 @@
 import React from "react";
-import { Athlete, DistanceAthlete } from "../RosterPage";
+import { Athlete } from "../RosterPage";
 import "../Roster.scss";
 
 interface Props {
@@ -25,11 +25,11 @@ const DistanceTable: React.FC<Props> = ({ athleteList }) => {
         {athleteList.map((item) => (
           <tr key={item.id}>
             <td className="table-cell group">{item.group}</td>
-            <td className="table-cell name">{item.name}</td>
-            <td className="table-cell grade">{item.grade}</td>
-            <td className="table-cell vdot">
-              {(item as DistanceAthlete).vdot}
+            <td className="table-cell name">
+              <a href="#">{item.name}</a>
             </td>
+            <td className="table-cell grade">{item.grade}</td>
+            <td className="table-cell vdot">{item.vdot}</td>
           </tr>
         ))}
       </tbody>

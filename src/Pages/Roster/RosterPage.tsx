@@ -8,7 +8,7 @@ import DistanceTable from "./tables/DistanceTable";
 import SprintsTable from "./tables/SprintsTable";
 import ThrowsTable from "./tables/ThrowsTable";
 import { db } from "../../App";
-import { collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { eventTypeEnum } from "../Meets/MeetsPage";
 
 export interface Athlete {
@@ -16,21 +16,25 @@ export interface Athlete {
   grade: number;
   group: string;
   id: string;
-  // meets: AthleteMeet[];
-}
-
-export interface DistanceAthlete extends Athlete {
   vdot: number;
+  meets: AthleteMeet[];
 }
 
-// export interface AthleteMeet {
-//   events: AthleteEvent[];
-// }
-// export interface AthleteEvent {
-//   eventType: eventTypeEnum;
-//   results: any[];
-// }
-
+export interface AthleteMeet {
+  events: AthleteEvent[];
+}
+export interface AthleteEvent {
+  eventType: eventTypeEnum;
+  results: any[];
+}
+const addAthlete = async (athlete: Athlete) => {
+  try {
+    const docRef = await addDoc(collection(db, "athletes"), athlete);
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+};
 const RosterPage = () => {
   const fetchPost = async () => {
     await getDocs(collection(db, "athletes")).then((querySnapshot) => {
@@ -40,10 +44,10 @@ const RosterPage = () => {
       }));
 
       newData.map((item) => {
-        setAthletesList((prevArray) => [...prevArray, item.meet]);
+        setAthletesList((prevArray) => [...prevArray, item]);
       });
 
-      console.log(setAthletesList, newData);
+      console.log(athleteList, newData);
     });
   };
 
@@ -55,14 +59,17 @@ const RosterPage = () => {
 
   const handleFormSubmitSprints = (athlete: Athlete) => {
     setAthletesList((prevList) => [...prevList, athlete]);
+    addAthlete(athlete);
   };
 
-  const handleFormSubmitDistance = (athlete: DistanceAthlete) => {
+  const handleFormSubmitDistance = (athlete: Athlete) => {
     setAthletesList((prevList) => [...prevList, athlete]);
+    addAthlete(athlete);
   };
 
   const handleFormSubmitThrows = (athlete: Athlete) => {
     setAthletesList((prevList) => [...prevList, athlete]);
+    addAthlete(athlete);
   };
 
   return (

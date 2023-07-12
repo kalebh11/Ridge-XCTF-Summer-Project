@@ -6,15 +6,12 @@ interface Props {
   object: MeetObject;
 }
 const MeetCard: React.FC<Props> = ({ object }) => {
-  const navigate = useNavigate();
-
-  const handleResult = () => {};
-
+  let something = "/meet?meetid=" + object.id;
   return (
     <div className="meet-card-container">
       <div className="card-meet">
         <div className="contentBx">
-          <a href="#" className="meet-card-title">
+          <a href={something} className="meet-card-title">
             {object.name}
           </a>
           <div className="details-container detail-1 my-2">

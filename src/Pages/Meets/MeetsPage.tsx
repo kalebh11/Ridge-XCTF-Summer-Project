@@ -50,13 +50,13 @@ export enum eventTypeEnum {
 const MeetsPage = () => {
   let [isPopupOpen, setIsPopupOpen] = useState(false);
   let [meetList, setMeetList] = useState<MeetObject[]>([]);
-  // const [params, setParams] = useState(null);
-  // const location = useLocation();
-  // useEffect(() => {
-  //   const queryParams = new URLSearchParams(location.search);
-  //   const singleValue = queryParams.get("key");
-  //   if (!singleValue) setParams(singleValue);
-  // }, []);
+  const [params, setParams] = useState<any>();
+  const location = useLocation();
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const singleValue = queryParams.get("key");
+    setParams(singleValue);
+  }, []);
   const fetchPost = async () => {
     await getDocs(collection(db, "meets")).then((querySnapshot) => {
       const newData: any[] = querySnapshot.docs.map((doc) => ({
