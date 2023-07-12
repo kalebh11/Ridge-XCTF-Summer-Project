@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, useState } from "react";
+import React, { ChangeEventHandler, useEffect, useState } from "react";
 import "./Roster.scss";
 import "bootstrap/dist/js/bootstrap";
 import SprintInput from "./inputstuff/SprintInput";
@@ -7,19 +7,50 @@ import ThrowsInput from "./inputstuff/ThrowsInput";
 import DistanceTable from "./tables/DistanceTable";
 import SprintsTable from "./tables/SprintsTable";
 import ThrowsTable from "./tables/ThrowsTable";
+import { db } from "../../App";
+import { collection, getDocs } from "firebase/firestore";
+import { eventTypeEnum } from "../Meets/MeetsPage";
 
 export interface Athlete {
   name: string;
   grade: number;
   group: string;
   id: string;
+  // meets: AthleteMeet[];
 }
 
 export interface DistanceAthlete extends Athlete {
   vdot: number;
 }
 
+// export interface AthleteMeet {
+//   events: AthleteEvent[];
+// }
+// export interface AthleteEvent {
+//   eventType: eventTypeEnum;
+//   results: any[];
+// }
+
 const RosterPage = () => {
+  const fetchPost = async () => {
+    await getDocs(collection(db, "athletes")).then((querySnapshot) => {
+      const newData: any[] = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+
+      newData.map((item) => {
+        setAthletesList((prevArray) => [...prevArray, item.meet]);
+      });
+
+      console.log(setAthletesList, newData);
+    });
+  };
+
+  useEffect(() => {
+    fetchPost();
+    console.log("sdf");
+  }, []);
   const [athleteList, setAthletesList] = useState<Athlete[]>([]);
 
   const handleFormSubmitSprints = (athlete: Athlete) => {
