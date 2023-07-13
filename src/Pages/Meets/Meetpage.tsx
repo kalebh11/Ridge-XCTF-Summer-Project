@@ -1,7 +1,35 @@
-import React from "react";
+import { collection, getDocs } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { db } from "../../App";
+import { useLocation } from "react-router-dom";
+import { MeetObject } from "./MeetsPopup";
 
 const Meetpage = () => {
-  return <div>Meetpage</div>;
+  const [meet, setMeet] = useState<MeetObject>();
+  const [params, setParams] = useState<any>();
+  const location = useLocation();
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const singleValue = queryParams.get("meetid");
+    setParams(singleValue);
+    findMeetData();
+  });
+  const findMeetData = async () => {
+    await getDocs(collection(db, "meets")).then((querySnapshot) => {
+      const newData: any[] = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      for (let i = 0; i < newData.length; i++) {
+        console.log(newData[i].meet.id);
+        if (newData[i].meet.id === params) {
+          setMeet(newData[i].meet);
+        }
+      }
+    });
+  };
+
+  return <div>{meet?.name}</div>;
 };
 
 export default Meetpage;

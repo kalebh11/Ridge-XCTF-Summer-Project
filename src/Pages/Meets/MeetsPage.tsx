@@ -54,7 +54,7 @@ const MeetsPage = () => {
   const location = useLocation();
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
-    const singleValue = queryParams.get("key");
+    const singleValue = queryParams.get("meetid");
     setParams(singleValue);
   }, []);
   const fetchPost = async () => {
