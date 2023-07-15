@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { db } from "../../App";
 import { useLocation } from "react-router-dom";
 import { MeetObject } from "./MeetsPopup";
+import "./meetpage.scss";
 
 const Meetpage = () => {
   const [meet, setMeet] = useState<MeetObject>();
@@ -29,7 +30,20 @@ const Meetpage = () => {
     });
   };
 
-  return <div>{meet?.name}</div>;
+  return (
+    <div className="meetpage-container">
+      <div className="meetpage-main-container">
+        <div className="meetpage-basic-info-container">
+          <div className="meetpage-header">{meet?.name}</div>
+          <div className="meetpage-subinfo-container">
+            <div className="meetpage-subinfo">{meet?.date}</div>
+            <div className="meetpage-subinfo">{meet?.location}</div>
+          </div>
+        </div>
+      </div>
+      <div className="meetpage-order-of-events-container">Order Of Events</div>
+    </div>
+  );
 };
 
 export default Meetpage;
