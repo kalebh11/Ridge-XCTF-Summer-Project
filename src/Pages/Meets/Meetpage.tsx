@@ -40,6 +40,27 @@ const Meetpage = () => {
             <div className="meetpage-subinfo">{meet?.location}</div>
           </div>
         </div>
+        <div className="meetpage-buttons-container">
+          <div className="button-container">
+            <a href="#" className="button-meet">
+              <div className="button-meet__line"></div>
+              <div className="button-meet__line"></div>
+              <span className="button-meet__text">LINEUP</span>
+              <div className="button-meet__drow1"></div>
+              <div className="button-meet__drow2"></div>
+            </a>
+          </div>
+          <div className="button-container">
+            <a href="#" className="button-meet">
+              <div className="button-meet__line"></div>
+              <div className="button-meet__line"></div>
+              <span className="button-meet__text">RESULTS</span>
+              <div className="button-meet__drow1"></div>
+              <div className="button-meet__drow2"></div>
+            </a>
+          </div>
+        </div>
+        <div className="meetpage-main-info-container">test 2</div>
       </div>
       <div className="meetpage-order-of-events-container">
         <div className="order-of-events-header-container">
