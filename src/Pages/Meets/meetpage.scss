@@ -11,12 +11,26 @@
     height:100%;
     width: 60%;
     flex-direction: column;
+    background-color: #d8d8d8;
 }
 .meetpage-order-of-events-container{
     display:flex;
     height:100%;
     width:40%;
     border-left: solid 2px black;
+}
+.order-of-events-header-container{
+    display: flex;
+    height:80px;
+    width:100%;
+    align-items: center;
+    justify-content: center;
+}
+.order-of-events-header{
+    font-family: 'Vesper Libre', serif;
+    font-size: 35px;
+    text-align:center;
+   
 }
 .meetpage-basic-info-container{
     display:flex;

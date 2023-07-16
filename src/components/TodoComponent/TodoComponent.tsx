@@ -1,16 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Todo } from "../../model";
 import SingleTodo from "./SingleTodo";
-
+import { addDoc, collection, getDocs } from "firebase/firestore";
+import { db } from "../../App";
+const addTodo = async (todo: Todo) => {
+  try {
+    const docRef = await addDoc(collection(db, "todos"), {
+      todo,
+    });
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+};
 const TodoList: React.FC = () => {
   const [todo, setTodo] = useState<string>("");
   const [todos, setTodos] = useState<Todo[]>([]);
+  const fetchPost = async () => {
+    await getDocs(collection(db, "todos")).then((querySnapshot) => {
+      const newData: any[] = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+
+      newData.map((item) => {
+        setTodos((prevArray) => [...prevArray, item.todo]);
+      });
+
+      console.log(todos, newData);
+    });
+  };
+
+  useEffect(() => {
+    fetchPost();
+  }, []);
 
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
     if (todo) {
       setTodos([...todos, { id: Date.now(), todo, isDone: false }]);
       setTodo("");
+      addTodo({ id: Date.now(), todo, isDone: false });
     }
   };
 

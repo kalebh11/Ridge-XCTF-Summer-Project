@@ -41,7 +41,11 @@ const Meetpage = () => {
           </div>
         </div>
       </div>
-      <div className="meetpage-order-of-events-container">Order Of Events</div>
+      <div className="meetpage-order-of-events-container">
+        <div className="order-of-events-header-container">
+          <div className="order-of-events-header">Order Of Events</div>
+        </div>
+      </div>
     </div>
   );
 };
