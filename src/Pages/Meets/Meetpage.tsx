@@ -29,7 +29,8 @@ const Meetpage = () => {
       }
     });
   };
-
+  let lineupParam = "/lineup?meetid=" + meet?.id;
+  let resultParam = "/results?meetid=" + meet?.id;
   return (
     <div className="meetpage-container">
       <div className="meetpage-main-container">
@@ -42,7 +43,7 @@ const Meetpage = () => {
         </div>
         <div className="meetpage-buttons-container">
           <div className="button-container">
-            <a href="#" className="button-meet">
+            <a href={lineupParam} className="button-meet">
               <div className="button-meet__line"></div>
               <div className="button-meet__line"></div>
               <span className="button-meet__text">LINEUP</span>
@@ -51,7 +52,7 @@ const Meetpage = () => {
             </a>
           </div>
           <div className="button-container">
-            <a href="#" className="button-meet">
+            <a href={resultParam} className="button-meet">
               <div className="button-meet__line"></div>
               <div className="button-meet__line"></div>
               <span className="button-meet__text">RESULTS</span>

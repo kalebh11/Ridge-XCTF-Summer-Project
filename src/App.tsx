@@ -11,6 +11,8 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 import Meetpage from "./Pages/Meets/Meetpage";
+import MeetLineup from "./Pages/Meets/MeetComponents/Lineup/MeetLineup";
+import MeetResults from "./Pages/Meets/MeetComponents/Results/MeetResults";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA0ao2imRtQ-hi2kc6XsugIGfc1aXTA7g0",
@@ -43,6 +45,8 @@ const App: React.FC = () => {
               <Route path="meets" element={<MeetsPage />} />
               <Route path="roster" element={<RosterPage />} />
               <Route path="meet" element={<Meetpage />} />
+              <Route path="lineup" element={<MeetLineup />} />
+              <Route path="results" element={<MeetResults />} />
             </Routes>
           </div>
         </div>
