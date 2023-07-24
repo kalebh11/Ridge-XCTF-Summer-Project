@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import { GrClose } from "react-icons/gr";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../App";
+import { MeetEvent } from "./MeetsPage";
 export interface MeetObject {
   name: string;
   location: string;
@@ -10,6 +11,7 @@ export interface MeetObject {
   date: String;
   id: string;
   note: string;
+  events: MeetEvent[];
 }
 interface PopupProps {
   isOpen: boolean;
@@ -70,6 +72,7 @@ const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
       date,
       id: generateRandomID(),
       note,
+      events: [],
     };
     setName("");
     setDate("");
