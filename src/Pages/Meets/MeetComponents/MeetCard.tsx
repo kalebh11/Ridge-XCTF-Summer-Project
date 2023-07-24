@@ -10,6 +10,15 @@ const MeetCard: React.FC<Props> = ({ object }) => {
   return (
     <div className="meet-card-container">
       <div className="card-meet">
+        <div className="close-section">
+          <div className="x-area">
+            <div className="close-container">
+              <div className="leftright"></div>
+              <div className="rightleft"></div>
+              <label className="close">delete</label>
+            </div>
+          </div>
+        </div>
         <div className="contentBx">
           <a href={something} className="meet-card-title">
             {object.name}

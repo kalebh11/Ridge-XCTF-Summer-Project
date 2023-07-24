@@ -19,7 +19,6 @@ type Props = {
 const SingleTodo = ({ todo, todos, setTodos }: Props) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [editTodo, setEditTodo] = useState<string>(todo.todo);
-  const [todoID, setTodoID] = useState<any>();
   const handleDone = (e: any, id: number) => {
     e.preventDefault();
     setTodos(
@@ -29,6 +28,7 @@ const SingleTodo = ({ todo, todos, setTodos }: Props) => {
     );
   };
   const findTodoData = async (id: number) => {
+    let todoFirestoreID;
     await getDocs(collection(db, "todos")).then((querySnapshot) => {
       const newData: any[] = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
@@ -37,14 +37,16 @@ const SingleTodo = ({ todo, todos, setTodos }: Props) => {
       console.log(newData);
       for (let i = 0; i < newData.length; i++) {
         if (newData[i].todo.id === id) {
-          setTodoID(newData[i].id);
+          todoFirestoreID = newData[i].id;
         }
       }
     });
+    return todoFirestoreID;
   };
   const deleteDocument = async (id: number) => {
-    findTodoData(id);
-    const docIdToDelete = todoID; // Replace with the actual document ID you want to delete
+    let todoTest: any = await findTodoData(id);
+    console.log(todoTest);
+    const docIdToDelete = todoTest; // Replace with the actual document ID you want to delete
     const docRef = doc(db, "todos", docIdToDelete);
 
     deleteDoc(docRef)

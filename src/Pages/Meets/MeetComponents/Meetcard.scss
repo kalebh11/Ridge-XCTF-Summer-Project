@@ -46,7 +46,17 @@
   font-style: italic;
   color: rgba(116, 163, 108, 0.1)
 }
-
+.meet-card-container .card-meet .close-section{
+  height: 50px;
+  width:100%;
+  display: flex;
+}
+.meet-card-container .card-meet .close-section .x-area{
+  height:100%;
+  width: 50px;
+  display:flex;
+  margin-left:auto;
+}
 
 .meet-card-container .card-meet .contentBx {
   position: absolute;
@@ -148,4 +158,63 @@
   transform: translateY(50px);
   transition: 0.5s;
   margin-top: 0;
+}
+
+$softorange: #ffffff;
+$tomatored: #cf2a35;
+.close-container{
+  position: relative;
+  margin: auto;
+  width: 25px;
+  height: 35px;
+  
+  cursor: pointer;
+}
+
+.leftright{
+  height: 3px;
+  width: 25px;
+  position: absolute;
+  margin-top: 15px;
+  background-color: $softorange;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  transition: all .3s ease-in;
+}
+
+.rightleft{
+  height: 3px;
+  width: 25px;
+  position: absolute;
+  margin-top: 15px;
+  background-color: $softorange;
+  border-radius: 2px;
+  transform: rotate(-45deg);
+  transition: all .3s ease-in;
+}
+
+label{
+  color: white;
+  font-family: Helvetica, Arial, sans-serif; 
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all .3s ease-in;
+  opacity: 0;
+}
+.close{
+  margin: 32px 0 0 -6px;
+  position: absolute;
+}
+
+.close-container:hover .leftright{
+  transform: rotate(-45deg);
+  background-color: $tomatored;
+}
+.close-container:hover .rightleft{
+  transform: rotate(45deg);
+  background-color: $tomatored;
+}
+.close-container:hover label{
+  opacity: 1;
 }
