@@ -61,7 +61,7 @@ const Meetpage = () => {
             </a>
           </div>
         </div>
-        <div className="meetpage-main-info-container">test 2</div>
+        <div className="meetpage-main-info-container">Webscrape Stuff?</div>
       </div>
       <div className="meetpage-order-of-events-container">
         <div className="order-of-events-header-container">

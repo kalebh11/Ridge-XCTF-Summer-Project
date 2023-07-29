@@ -13,6 +13,7 @@ import { getFirestore } from "firebase/firestore";
 import Meetpage from "./Pages/Meets/Meetpage";
 import MeetLineup from "./Pages/Meets/MeetComponents/Lineup/MeetLineup";
 import MeetResults from "./Pages/Meets/MeetComponents/Results/MeetResults";
+import AthletePage from "./Pages/Roster/Athlete/AthletePage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA0ao2imRtQ-hi2kc6XsugIGfc1aXTA7g0",
@@ -47,6 +48,7 @@ const App: React.FC = () => {
               <Route path="meet" element={<Meetpage />} />
               <Route path="lineup" element={<MeetLineup />} />
               <Route path="results" element={<MeetResults />} />
+              <Route path="athlete" element={<AthletePage />} />
             </Routes>
           </div>
         </div>
