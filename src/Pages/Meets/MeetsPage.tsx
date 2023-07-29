@@ -6,7 +6,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../App";
 import { useLocation } from "react-router-dom";
 
-export interface event {
+export interface MeetEvent {
   eventType: eventTypeEnum;
   eventId: string;
   athletes: string[];
@@ -75,7 +75,13 @@ const MeetsPage = () => {
   useEffect(() => {
     fetchPost();
   }, []);
-
+  const handleRemoveMeetObject = (meetIdToRemove: string) => {
+    // Filter out the MeetObject with the specified meetIdToRemove
+    const updatedMeetList = meetList.filter(
+      (meet) => meet.id !== meetIdToRemove
+    );
+    setMeetList(updatedMeetList);
+  };
   const openPopup = () => {
     setIsPopupOpen(true);
   };
@@ -109,7 +115,11 @@ const MeetsPage = () => {
       <div className="meets-mid-section">
         <div className="meet-cards-container">
           {meetList.map((item) => (
-            <MeetCard key={item.id} object={item} />
+            <MeetCard
+              key={item.id}
+              object={item}
+              onRemoveMeet={handleRemoveMeetObject}
+            />
           ))}
         </div>
       </div>

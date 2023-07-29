@@ -2,18 +2,63 @@ import React from "react";
 import { MeetObject } from "../MeetsPopup";
 import { useNavigate } from "react-router-dom";
 import "./Meetcard.scss";
+import { db } from "../../../App";
+import {
+  Firestore,
+  QuerySnapshot,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+} from "firebase/firestore";
 interface Props {
   object: MeetObject;
+  onRemoveMeet: any;
 }
-const MeetCard: React.FC<Props> = ({ object }) => {
+const MeetCard: React.FC<Props> = ({ object, onRemoveMeet }) => {
   let something = "/meet?meetid=" + object.id;
+  const findMeetCardData = async () => {
+    let meetFirestoreID;
+    await getDocs(collection(db, "meets")).then((querySnapshot) => {
+      const newData: any[] = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      console.log(newData);
+      for (let i = 0; i < newData.length; i++) {
+        if (newData[i].meet.id === object.id) {
+          meetFirestoreID = newData[i].id;
+        }
+      }
+    });
+    return meetFirestoreID;
+  };
+
+  const deleteDocument = async () => {
+    let meetID: any = await findMeetCardData();
+    const docIdToDelete = meetID;
+    const docRef = doc(db, "meets", docIdToDelete);
+
+    deleteDoc(docRef)
+      .then(() => {
+        console.log("Meet Card deleted");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handleDelete = () => {
+    deleteDocument();
+    onRemoveMeet(object.id);
+  };
+
   return (
     <div className="meet-card-container">
       <div className="card-meet">
         <div className="close-section">
           <div className="x-area">
             <div className="close-container">
-              <div className="leftright"></div>
+              <div className="leftright" onClick={handleDelete}></div>
               <div className="rightleft"></div>
               <label className="close">delete</label>
             </div>
