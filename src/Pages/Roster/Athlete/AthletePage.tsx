@@ -14,7 +14,7 @@ const AthletePage = () => {
     console.log(singleValue);
     setParams(singleValue);
     findAthleteData();
-  });
+  }, []);
   const findAthleteData = async () => {
     console.log("yes");
     await getDocs(collection(db, "athletes")).then((querySnapshot) => {
@@ -27,11 +27,17 @@ const AthletePage = () => {
         console.log(newData[i].id);
         if (newData[i].id === params) {
           setAthlete(newData[i]);
+          console.log(newData[i]);
         }
       }
     });
   };
-  return <div>{athlete?.name}</div>;
+  return (
+    <div>
+      {athlete?.name}
+      {athlete?.id}
+    </div>
+  );
 };
 
 export default AthletePage;

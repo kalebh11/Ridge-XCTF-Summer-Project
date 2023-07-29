@@ -14,7 +14,7 @@ const Meetpage = () => {
     const singleValue = queryParams.get("meetid");
     setParams(singleValue);
     findMeetData();
-  });
+  }, []);
   const findMeetData = async () => {
     await getDocs(collection(db, "meets")).then((querySnapshot) => {
       const newData: any[] = querySnapshot.docs.map((doc) => ({
