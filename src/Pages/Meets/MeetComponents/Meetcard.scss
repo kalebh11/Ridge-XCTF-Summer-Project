@@ -193,7 +193,10 @@ $tomatored: #cf2a35;
   transition: all .3s ease-in;
 }
 
-label{
+
+.close{
+  margin: 32px 0 0 -6px;
+  position: absolute;
   color: white;
   font-family: Helvetica, Arial, sans-serif; 
   font-size: 8px;
@@ -201,10 +204,6 @@ label{
   letter-spacing: 2px;
   transition: all .3s ease-in;
   opacity: 0;
-}
-.close{
-  margin: 32px 0 0 -6px;
-  position: absolute;
 }
 
 .close-container:hover .leftright{

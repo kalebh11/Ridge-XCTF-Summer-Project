@@ -26,7 +26,7 @@ const DistanceTable: React.FC<Props> = ({ athleteList }) => {
           <tr key={item.id}>
             <td className="table-cell group">{item.group}</td>
             <td className="table-cell name">
-              <a href="#">{item.name}</a>
+              <a href={"/athlete?athleteid=" + item.id}>{item.name}</a>
             </td>
             <td className="table-cell grade">{item.grade}</td>
             <td className="table-cell vdot">{item.vdot}</td>
