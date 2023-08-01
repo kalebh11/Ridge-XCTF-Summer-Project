@@ -2,7 +2,7 @@ import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Athlete } from "../RosterPage";
-import { db } from "../../../App";
+import { athletes } from "../../../App";
 
 const AthletePage = () => {
   const [athlete, setAthlete] = useState<Athlete>();
@@ -13,24 +13,19 @@ const AthletePage = () => {
     const singleValue = queryParams.get("athleteid");
     console.log(singleValue);
     setParams(singleValue);
+    console.log(athletes);
     findAthleteData();
   }, []);
-  const findAthleteData = async () => {
+  const findAthleteData = () => {
     console.log("yes");
-    await getDocs(collection(db, "athletes")).then((querySnapshot) => {
-      const newData: any[] = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      console.log(newData);
-      for (let i = 0; i < newData.length; i++) {
-        console.log(newData[i].id);
-        if (newData[i].id === params) {
-          setAthlete(newData[i]);
-          console.log(newData[i]);
-        }
+    console.log(athletes);
+    console.log(athletes?.length);
+    for (let i = 0; i < athletes.length; i++) {
+      if (athletes[i].id === params) {
+        console.log(athletes[i]);
+        setAthlete(athletes[i]);
       }
-    });
+    }
   };
   return (
     <div>

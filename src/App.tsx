@@ -17,8 +17,8 @@ import AthletePage from "./Pages/Roster/Athlete/AthletePage";
 import { MeetObject } from "./Pages/Meets/MeetsPopup";
 import { collection, getDocs } from "firebase/firestore";
 
-export const [athletes, setAthletes] = useState<Athlete[]>();
-export const [meets, setMeets] = useState<MeetObject[]>();
+const [athletes, setAthletes] = useState<Athlete[]>();
+const [meets, setMeets] = useState<MeetObject[]>();
 const firebaseConfig = {
   apiKey: "AIzaSyA0ao2imRtQ-hi2kc6XsugIGfc1aXTA7g0",
   authDomain: "track-app-49793.firebaseapp.com",
@@ -31,15 +31,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
-
-useEffect(() => {
-  findAthleteData();
-}, []);
-
-useEffect(() => {
-  findMeetData();
-}, []);
-
 const findAthleteData = async () => {
   await getDocs(collection(db, "athletes")).then((querySnapshot) => {
     const athleteArray: any[] = querySnapshot.docs.map((doc) => ({
@@ -57,12 +48,20 @@ const findMeetData = async () => {
       id: doc.id,
     }));
     for (let i = 0; i < meetArray.length; i++) {
-      tempArray.push(meetArray[i]);
+      tempArray?.push(meetArray[i]);
     }
     setMeets(tempArray);
   });
 };
 const App: React.FC = () => {
+  useEffect(() => {
+    findAthleteData();
+  }, []);
+
+  useEffect(() => {
+    findMeetData();
+  }, []);
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -90,5 +89,5 @@ const App: React.FC = () => {
     </BrowserRouter>
   );
 };
-
+export { athletes, meets };
 export default App;

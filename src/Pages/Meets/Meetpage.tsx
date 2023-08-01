@@ -1,6 +1,6 @@
 import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { db } from "../../App";
+import { db, meets } from "../../App";
 import { useLocation } from "react-router-dom";
 import { MeetObject } from "./MeetsPopup";
 import "./meetpage.scss";
@@ -15,19 +15,13 @@ const Meetpage = () => {
     setParams(singleValue);
     findMeetData();
   }, []);
-  const findMeetData = async () => {
-    await getDocs(collection(db, "meets")).then((querySnapshot) => {
-      const newData: any[] = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      for (let i = 0; i < newData.length; i++) {
-        console.log(newData[i].meet.id);
-        if (newData[i].meet.id === params) {
-          setMeet(newData[i].meet);
-        }
+  const findMeetData = () => {
+    for (let i = 0; i < meets.length; i++) {
+      console.log(meets[i].id);
+      if (meets[i].id === params) {
+        setMeet(meets[i]);
       }
-    });
+    }
   };
   let lineupParam = "/lineup?meetid=" + meet?.id;
   let resultParam = "/results?meetid=" + meet?.id;
