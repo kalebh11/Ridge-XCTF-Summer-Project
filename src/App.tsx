@@ -1,20 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.scss";
 import Header from "./components/Header";
 import SideList from "./components/SideList";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import MeetsPage from "./Pages/Meets/MeetsPage";
-import RosterPage from "./Pages/Roster/RosterPage";
+import RosterPage, { Athlete } from "./Pages/Roster/RosterPage";
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from "firebase/firestore";
+import { Firestore, getFirestore } from "firebase/firestore";
 import Meetpage from "./Pages/Meets/Meetpage";
 import MeetLineup from "./Pages/Meets/MeetComponents/Lineup/MeetLineup";
 import MeetResults from "./Pages/Meets/MeetComponents/Results/MeetResults";
 import AthletePage from "./Pages/Roster/Athlete/AthletePage";
+import { MeetObject } from "./Pages/Meets/MeetsPopup";
+import { collection, getDocs } from "firebase/firestore";
 
+export const [athletes, setAthletes] = useState<Athlete[]>();
+export const [meets, setMeets] = useState<MeetObject[]>();
 const firebaseConfig = {
   apiKey: "AIzaSyA0ao2imRtQ-hi2kc6XsugIGfc1aXTA7g0",
   authDomain: "track-app-49793.firebaseapp.com",
@@ -28,6 +32,36 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
+useEffect(() => {
+  findAthleteData();
+}, []);
+
+useEffect(() => {
+  findMeetData();
+}, []);
+
+const findAthleteData = async () => {
+  await getDocs(collection(db, "athletes")).then((querySnapshot) => {
+    const athleteArray: any[] = querySnapshot.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    setAthletes(athleteArray);
+  });
+};
+const findMeetData = async () => {
+  let tempArray: any[];
+  await getDocs(collection(db, "meets")).then((querySnapshot) => {
+    const meetArray: any[] = querySnapshot.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    for (let i = 0; i < meetArray.length; i++) {
+      tempArray.push(meetArray[i]);
+    }
+    setMeets(tempArray);
+  });
+};
 const App: React.FC = () => {
   return (
     <BrowserRouter>
