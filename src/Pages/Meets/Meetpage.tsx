@@ -16,10 +16,14 @@ const Meetpage = () => {
     findMeetData();
   }, []);
   const findMeetData = () => {
-    for (let i = 0; i < meets.length; i++) {
-      console.log(meets[i].id);
-      if (meets[i].id === params) {
-        setMeet(meets[i]);
+    let length: any;
+    length = meets?.length;
+    if (meets !== undefined) {
+      for (let i = 0; i < length; i++) {
+        console.log(meets[i].id);
+        if (meets[i].id === params) {
+          setMeet(meets[i]);
+        }
       }
     }
   };

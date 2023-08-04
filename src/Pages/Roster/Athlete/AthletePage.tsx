@@ -20,10 +20,14 @@ const AthletePage = () => {
     console.log("yes");
     console.log(athletes);
     console.log(athletes?.length);
-    for (let i = 0; i < athletes.length; i++) {
-      if (athletes[i].id === params) {
-        console.log(athletes[i]);
-        setAthlete(athletes[i]);
+    let length: any;
+    length = athletes?.length;
+    if (athletes !== undefined) {
+      for (let i = 0; i < length; i++) {
+        if (athletes[i].id === params) {
+          console.log(athletes[i]);
+          setAthlete(athletes[i]);
+        }
       }
     }
   };
