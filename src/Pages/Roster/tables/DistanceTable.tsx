@@ -38,7 +38,9 @@ const DistanceTable: React.FC<Props> = ({ athleteList }) => {
           <tr key={item.id}>
             <td
               className="table-cell group"
-              style={{ color: getColorCode(parseInt(item.group.slice(1))) }}
+              style={{
+                backgroundColor: getColorCode(parseInt(item.group.slice(1))),
+              }}
             >
               {item.group}
             </td>
