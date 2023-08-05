@@ -31,8 +31,8 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
 const App: React.FC = () => {
-  const [athletes, setAthletes] = useState<Athlete[]>();
-  const [meets, setMeets] = useState<MeetObject[]>();
+  const [athletes, setAthletes] = useState<Athlete[]>([]);
+  const [meets, setMeets] = useState<MeetObject[]>([]);
 
   const findAthleteData = async () => {
     await getDocs(collection(db, "athletes")).then((querySnapshot) => {
@@ -40,20 +40,24 @@ const App: React.FC = () => {
         ...doc.data(),
         id: doc.id,
       }));
+      console.log(athleteArray);
+      console.log("here");
       setAthletes(athleteArray);
+      console.log(athletes);
+      console.log("there");
     });
   };
   const findMeetData = async () => {
-    let tempArray: any[];
     await getDocs(collection(db, "meets")).then((querySnapshot) => {
       const meetArray: any[] = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
       }));
+      console.log(meetArray);
       for (let i = 0; i < meetArray.length; i++) {
-        tempArray?.push(meetArray[i]);
+        addObjectToArrayMeets(meetArray[i].meet);
+        console.log(meets);
       }
-      setMeets(tempArray);
     });
   };
   useEffect(() => {
@@ -63,7 +67,9 @@ const App: React.FC = () => {
   useEffect(() => {
     findMeetData();
   }, []);
-
+  const addObjectToArrayMeets = (object: MeetObject) => {
+    setMeets((prevList) => [...prevList, object]);
+  };
   return (
     <BrowserRouter>
       <div className="App">
@@ -80,10 +86,21 @@ const App: React.FC = () => {
               <Route path="/" element={<HomePage />} />
               <Route path="meets" element={<MeetsPage />} />
               <Route path="roster" element={<RosterPage />} />
-              <Route path="meet" element={<Meetpage />} />
+              <Route
+                path="meet"
+                element={<Meetpage meetList={meets} setMeetList={setMeets} />}
+              />
               <Route path="lineup" element={<MeetLineup />} />
               <Route path="results" element={<MeetResults />} />
-              <Route path="athlete" element={<AthletePage />} />
+              <Route
+                path="athlete"
+                element={
+                  <AthletePage
+                    athleteList={athletes}
+                    setAthleteList={setAthletes}
+                  />
+                }
+              />
             </Routes>
           </div>
         </div>

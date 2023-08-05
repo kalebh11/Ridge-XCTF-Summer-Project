@@ -2,9 +2,11 @@ import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Athlete } from "../RosterPage";
-import { athletes } from "../../../App";
-
-const AthletePage = () => {
+type Props = {
+  athleteList: Athlete[];
+  setAthleteList: React.Dispatch<React.SetStateAction<Athlete[]>>;
+};
+const AthletePage = ({ athleteList, setAthleteList }: Props) => {
   const [athlete, setAthlete] = useState<Athlete>();
   const [params, setParams] = useState<any>();
   const location = useLocation();
@@ -13,21 +15,17 @@ const AthletePage = () => {
     const singleValue = queryParams.get("athleteid");
     console.log(singleValue);
     setParams(singleValue);
-    console.log(athletes);
+    console.log(athleteList);
     findAthleteData();
   }, []);
   const findAthleteData = () => {
     console.log("yes");
-    console.log(athletes);
-    console.log(athletes?.length);
-    let length: any;
-    length = athletes?.length;
-    if (athletes !== undefined) {
-      for (let i = 0; i < length; i++) {
-        if (athletes[i].id === params) {
-          console.log(athletes[i]);
-          setAthlete(athletes[i]);
-        }
+    console.log(athleteList);
+    console.log(athleteList?.length);
+    for (let i = 0; i < athleteList.length; i++) {
+      if (athleteList[i].id === params) {
+        console.log(athleteList[i]);
+        setAthlete(athleteList[i]);
       }
     }
   };

@@ -1,11 +1,14 @@
 import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { db, meets } from "../../App";
+import { db } from "../../App";
 import { useLocation } from "react-router-dom";
 import { MeetObject } from "./MeetsPopup";
 import "./meetpage.scss";
-
-const Meetpage = () => {
+type Props = {
+  meetList: MeetObject[];
+  setMeetList: React.Dispatch<React.SetStateAction<MeetObject[]>>;
+};
+const Meetpage = ({ meetList, setMeetList }: Props) => {
   const [meet, setMeet] = useState<MeetObject>();
   const [params, setParams] = useState<any>();
   const location = useLocation();
@@ -17,12 +20,12 @@ const Meetpage = () => {
   }, []);
   const findMeetData = () => {
     let length: any;
-    length = meets?.length;
-    if (meets !== undefined) {
+    length = meetList?.length;
+    if (meetList !== undefined) {
       for (let i = 0; i < length; i++) {
-        console.log(meets[i].id);
-        if (meets[i].id === params) {
-          setMeet(meets[i]);
+        console.log(meetList[i].id);
+        if (meetList[i].id === params) {
+          setMeet(meetList[i]);
         }
       }
     }
