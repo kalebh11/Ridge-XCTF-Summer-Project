@@ -60,18 +60,31 @@ const RosterPage = () => {
   const handleFormSubmitSprints = (athlete: Athlete) => {
     setAthletesList((prevList) => [...prevList, athlete]);
     addAthlete(athlete);
+    // sortList();
   };
 
   const handleFormSubmitDistance = (athlete: Athlete) => {
     setAthletesList((prevList) => [...prevList, athlete]);
     addAthlete(athlete);
+    console.log(athleteList);
+    sortListVdot();
+    console.log(athleteList);
   };
 
   const handleFormSubmitThrows = (athlete: Athlete) => {
     setAthletesList((prevList) => [...prevList, athlete]);
     addAthlete(athlete);
+    // sortList();
   };
-
+  const sortListVdot = () => {
+    athleteList.sort((a, b) => Number(a.vdot) - Number(b.vdot));
+  };
+  const sortList = () => {
+    const sortedArray = [...athleteList].sort(
+      (a, b) => Number(a.group) - Number(b.group)
+    );
+    setAthletesList(sortedArray);
+  };
   return (
     <div className="meets-outer">
       <div className="roster-header-container">

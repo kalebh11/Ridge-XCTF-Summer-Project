@@ -40,7 +40,9 @@ const ThrowsTable: React.FC<Props> = ({ athleteList }) => {
             >
               {item.group}
             </td>
-            <td className="table-cell name">{item.name}</td>
+            <td className="table-cell name">
+              <a href={"/athlete?athleteid=" + item.id}>{item.name}</a>
+            </td>
             <td className="table-cell grade">{item.grade}</td>
           </tr>
         ))}
