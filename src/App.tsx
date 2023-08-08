@@ -36,15 +36,11 @@ const App: React.FC = () => {
 
   const findAthleteData = async () => {
     await getDocs(collection(db, "athletes")).then((querySnapshot) => {
-      const athleteArray: any[] = querySnapshot.docs.map((doc) => ({
+      let athleteArray: any[] = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
       }));
-      console.log(athleteArray);
-      console.log("here");
       setAthletes(athleteArray);
-      console.log(athletes);
-      console.log("there");
     });
   };
   const findMeetData = async () => {
@@ -56,17 +52,15 @@ const App: React.FC = () => {
       console.log(meetArray);
       for (let i = 0; i < meetArray.length; i++) {
         addObjectToArrayMeets(meetArray[i].meet);
-        console.log(meets);
       }
     });
   };
+  useEffect(() => console.log(athletes), [athletes]);
   useEffect(() => {
     findAthleteData();
-  }, []);
-
-  useEffect(() => {
     findMeetData();
   }, []);
+
   const addObjectToArrayMeets = (object: MeetObject) => {
     setMeets((prevList) => [...prevList, object]);
   };
@@ -78,14 +72,25 @@ const App: React.FC = () => {
         </div>
         <div className="main">
           <div className="side-List">
-            <SideList />
+            <SideList athleteList={athletes} setAthletesList={setAthletes} />
           </div>
 
           <div className="router-section">
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="meets" element={<MeetsPage />} />
-              <Route path="roster" element={<RosterPage />} />
+              <Route
+                path="meets"
+                element={<MeetsPage meetList={meets} setMeetList={setMeets} />}
+              />
+              <Route
+                path="roster"
+                element={
+                  <RosterPage
+                    athleteList={athletes}
+                    setAthletesList={setAthletes}
+                  />
+                }
+              />
               <Route
                 path="meet"
                 element={<Meetpage meetList={meets} setMeetList={setMeets} />}

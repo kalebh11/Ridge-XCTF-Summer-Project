@@ -4,8 +4,14 @@ import { Athlete } from "../RosterPage";
 
 interface PopupProps {
   onSubmit: (data: Athlete) => void;
+  athleteList: Athlete[];
+  setAthletesList: React.Dispatch<React.SetStateAction<Athlete[]>>;
 }
-const SprintInput: React.FC<PopupProps> = ({ onSubmit }) => {
+const SprintInput: React.FC<PopupProps> = ({
+  onSubmit,
+  athleteList,
+  setAthletesList,
+}) => {
   const [name, setName] = useState("");
   const [grade, setGrade] = useState(0);
   const [group, setGroup] = useState(0);
@@ -39,8 +45,11 @@ const SprintInput: React.FC<PopupProps> = ({ onSubmit }) => {
       id: generateRandomID(),
     };
     onSubmit(newAthlete);
-    // Reset the input values
-
+    let smth = [...athleteList, newAthlete];
+    const array = smth
+      .slice()
+      .sort((a, b) => Number(a.group) - Number(b.group));
+    setAthletesList(array);
     setName("");
     setGroup(0);
     setGrade(0);

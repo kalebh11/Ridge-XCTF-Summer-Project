@@ -17,11 +17,11 @@ const AthletePage = ({ athleteList, setAthleteList }: Props) => {
     setParams(singleValue);
     console.log(athleteList);
     findAthleteData();
-  }, []);
+  }, [athleteList]);
   const findAthleteData = () => {
     console.log("yes");
     console.log(athleteList);
-    console.log(athleteList?.length);
+    console.log(athleteList.length);
     for (let i = 0; i < athleteList.length; i++) {
       if (athleteList[i].id === params) {
         console.log(athleteList[i]);

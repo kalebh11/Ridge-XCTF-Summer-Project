@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Roster.scss";
 import { Athlete } from "../RosterPage";
 
 interface PopupProps {
   onSubmit: (data: Athlete) => void;
+  athleteList: Athlete[];
+  setAthletesList: React.Dispatch<React.SetStateAction<Athlete[]>>;
 }
 
-const DistanceInput: React.FC<PopupProps> = ({ onSubmit }) => {
+const DistanceInput: React.FC<PopupProps> = ({
+  onSubmit,
+  athleteList,
+  setAthletesList,
+}) => {
   const [name, setName] = useState("");
   const [grade, setGrade] = useState(0);
   const [group, setGroup] = useState(0);
@@ -31,7 +37,6 @@ const DistanceInput: React.FC<PopupProps> = ({ onSubmit }) => {
     crypto.getRandomValues(array);
     return array[0].toString(36);
   };
-
   const handleSubmitAthlete = (e: React.FormEvent) => {
     e.preventDefault();
     const newAthlete: Athlete = {
@@ -43,6 +48,9 @@ const DistanceInput: React.FC<PopupProps> = ({ onSubmit }) => {
       id: generateRandomID(),
     };
     onSubmit(newAthlete);
+    let smth = [...athleteList, newAthlete];
+    const array = smth.slice().sort((a, b) => Number(b.vdot) - Number(a.vdot));
+    setAthletesList(array);
     setName("");
     setGroup(0);
     setGrade(0);

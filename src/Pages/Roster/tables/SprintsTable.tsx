@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Athlete } from "../RosterPage";
 
 interface Props {
   athleteList: Athlete[];
+  setAthletesList: React.Dispatch<React.SetStateAction<Athlete[]>>;
 }
-const SprintsTable: React.FC<Props> = ({ athleteList }) => {
+const SprintsTable: React.FC<Props> = ({ athleteList, setAthletesList }) => {
+  useEffect(() => {
+    const array = athleteList
+      .slice()
+      .sort((a, b) => Number(a.group) - Number(b.group));
+    setAthletesList(array);
+  }, []);
   const getColorCode = (group: number) => {
     // Define your color code logic here based on the input value
     if (group >= 1 && group <= 3) {

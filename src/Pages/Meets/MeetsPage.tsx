@@ -47,34 +47,38 @@ export enum eventTypeEnum {
   threeXfourHundredHurdles = "3x400mH",
   shuttleHurdles = "shuttleHurdles",
 }
-const MeetsPage = () => {
+type Props = {
+  meetList: MeetObject[];
+  setMeetList: React.Dispatch<React.SetStateAction<MeetObject[]>>;
+};
+const MeetsPage = ({ meetList, setMeetList }: Props) => {
   let [isPopupOpen, setIsPopupOpen] = useState(false);
-  let [meetList, setMeetList] = useState<MeetObject[]>([]);
-  const [params, setParams] = useState<any>();
-  const location = useLocation();
-  useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const singleValue = queryParams.get("meetid");
-    setParams(singleValue);
-  }, []);
-  const fetchPost = async () => {
-    await getDocs(collection(db, "meets")).then((querySnapshot) => {
-      const newData: any[] = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
 
-      newData.map((item) => {
-        setMeetList((prevArray) => [...prevArray, item.meet]);
-      });
+  // const [params, setParams] = useState<any>();
+  // const location = useLocation();
+  // useEffect(() => {
+  //   const queryParams = new URLSearchParams(location.search);
+  //   const singleValue = queryParams.get("meetid");
+  //   setParams(singleValue);
+  // }, []);
+  // const fetchPost = async () => {
+  //   await getDocs(collection(db, "meets")).then((querySnapshot) => {
+  //     const newData: any[] = querySnapshot.docs.map((doc) => ({
+  //       ...doc.data(),
+  //       id: doc.id,
+  //     }));
 
-      console.log(meetList, newData);
-    });
-  };
+  //     newData.map((item) => {
+  //       setMeetList((prevArray) => [...prevArray, item.meet]);
+  //     });
 
-  useEffect(() => {
-    fetchPost();
-  }, []);
+  //     console.log(meetList, newData);
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   fetchPost();
+  // }, []);
   const handleRemoveMeetObject = (meetIdToRemove: string) => {
     // Filter out the MeetObject with the specified meetIdToRemove
     const updatedMeetList = meetList.filter(

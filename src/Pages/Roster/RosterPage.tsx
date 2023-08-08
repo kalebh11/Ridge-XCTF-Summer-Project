@@ -11,6 +11,11 @@ import { db } from "../../App";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { eventTypeEnum } from "../Meets/MeetsPage";
 
+type Props = {
+  athleteList: Athlete[];
+  setAthletesList: React.Dispatch<React.SetStateAction<Athlete[]>>;
+};
+
 export interface Athlete {
   name: string;
   grade: number;
@@ -35,55 +40,29 @@ const addAthlete = async (athlete: Athlete) => {
     console.error("Error adding document: ", e);
   }
 };
-const RosterPage = () => {
-  const fetchPost = async () => {
-    await getDocs(collection(db, "athletes")).then((querySnapshot) => {
-      const newData: any[] = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-
-      newData.map((item) => {
-        setAthletesList((prevArray) => [...prevArray, item]);
-      });
-
-      console.log(athleteList, newData);
-    });
-  };
-
-  useEffect(() => {
-    fetchPost();
-    console.log("sdf");
-  }, []);
-  const [athleteList, setAthletesList] = useState<Athlete[]>([]);
-
-  const handleFormSubmitSprints = (athlete: Athlete) => {
-    setAthletesList((prevList) => [...prevList, athlete]);
+const RosterPage = ({ athleteList, setAthletesList }: Props) => {
+  const handleFormSubmit = (athlete: Athlete) => {
     addAthlete(athlete);
-    // sortList();
   };
-
-  const handleFormSubmitDistance = (athlete: Athlete) => {
-    setAthletesList((prevList) => [...prevList, athlete]);
-    addAthlete(athlete);
-    console.log(athleteList);
-    sortListVdot();
-    console.log(athleteList);
+  const sort = (e: any) => {
+    e.preventDefault();
+    console.log("sort by VDOT");
+    const array = athleteList
+      .slice()
+      .sort((a, b) => Number(b.vdot) - Number(a.vdot));
+    setAthletesList(array);
   };
-
-  const handleFormSubmitThrows = (athlete: Athlete) => {
-    setAthletesList((prevList) => [...prevList, athlete]);
-    addAthlete(athlete);
-    // sortList();
-  };
-  const sortListVdot = () => {
-    athleteList.sort((a, b) => Number(a.vdot) - Number(b.vdot));
-  };
-  const sortList = () => {
-    const sortedArray = [...athleteList].sort(
-      (a, b) => Number(a.group) - Number(b.group)
-    );
-    setAthletesList(sortedArray);
+  const sortG = (e: any) => {
+    e.preventDefault();
+    console.log("sort by GROUP");
+    const array = athleteList
+      .slice()
+      .sort(
+        (a, b) =>
+          Number(parseInt(a.group.slice(1))) -
+          Number(parseInt(b.group.slice(1)))
+      );
+    setAthletesList(array);
   };
   return (
     <div className="meets-outer">
@@ -101,6 +80,7 @@ const RosterPage = () => {
               role="tab"
               aria-controls="nav-distance"
               aria-selected="true"
+              onClick={sort}
             >
               Distance
             </a>
@@ -112,6 +92,7 @@ const RosterPage = () => {
               role="tab"
               aria-controls="nav-sprints"
               aria-selected="false"
+              onClick={sortG}
             >
               Sprints
             </a>
@@ -123,6 +104,7 @@ const RosterPage = () => {
               role="tab"
               aria-controls="nav-throws"
               aria-selected="false"
+              onClick={sortG}
             >
               Throws
             </a>
@@ -141,10 +123,17 @@ const RosterPage = () => {
           >
             <div className="roster-nav-main-container">
               <div className="roster-table-container">
-                <DistanceTable athleteList={athleteList} />
+                <DistanceTable
+                  athleteList={athleteList}
+                  setAthletesList={setAthletesList}
+                />
               </div>
               <div className="roster-form-container">
-                <DistanceInput onSubmit={handleFormSubmitDistance} />
+                <DistanceInput
+                  onSubmit={handleFormSubmit}
+                  athleteList={athleteList}
+                  setAthletesList={setAthletesList}
+                />
               </div>
             </div>
           </div>
@@ -156,10 +145,17 @@ const RosterPage = () => {
           >
             <div className="roster-nav-main-container">
               <div className="roster-table-container">
-                <SprintsTable athleteList={athleteList} />
+                <SprintsTable
+                  athleteList={athleteList}
+                  setAthletesList={setAthletesList}
+                />
               </div>
               <div className="roster-form-container">
-                <SprintInput onSubmit={handleFormSubmitSprints} />
+                <SprintInput
+                  onSubmit={handleFormSubmit}
+                  athleteList={athleteList}
+                  setAthletesList={setAthletesList}
+                />
               </div>
             </div>
           </div>
@@ -171,10 +167,17 @@ const RosterPage = () => {
           >
             <div className="roster-nav-main-container">
               <div className="roster-table-container">
-                <ThrowsTable athleteList={athleteList} />
+                <ThrowsTable
+                  athleteList={athleteList}
+                  setAthletesList={setAthletesList}
+                />
               </div>
               <div className="roster-form-container">
-                <ThrowsInput onSubmit={handleFormSubmitThrows} />
+                <ThrowsInput
+                  onSubmit={handleFormSubmit}
+                  athleteList={athleteList}
+                  setAthletesList={setAthletesList}
+                />
               </div>
             </div>
           </div>

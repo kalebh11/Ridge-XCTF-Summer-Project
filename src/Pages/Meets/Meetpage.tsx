@@ -17,10 +17,10 @@ const Meetpage = ({ meetList, setMeetList }: Props) => {
     const singleValue = queryParams.get("meetid");
     setParams(singleValue);
     findMeetData();
-  }, []);
+  }, [meetList]);
   const findMeetData = () => {
     let length: any;
-    length = meetList?.length;
+    length = meetList.length;
     if (meetList !== undefined) {
       for (let i = 0; i < length; i++) {
         console.log(meetList[i].id);

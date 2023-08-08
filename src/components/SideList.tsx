@@ -1,8 +1,12 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSpring, animated } from "react-spring";
-
-const SideList: React.FC = () => {
+import { Athlete } from "../Pages/Roster/RosterPage";
+type Props = {
+  athleteList: Athlete[];
+  setAthletesList: React.Dispatch<React.SetStateAction<Athlete[]>>;
+};
+const SideList: React.FC<Props> = ({ athleteList, setAthletesList }) => {
   const navigate = useNavigate();
   const redirectToCalender = () => {
     window.open(
@@ -25,6 +29,10 @@ const SideList: React.FC = () => {
 
   const redirectToRoster = () => {
     navigate("/roster");
+    const array = athleteList
+      .slice()
+      .sort((a, b) => Number(b.vdot) - Number(a.vdot));
+    setAthletesList(array);
   };
 
   const slide = useSpring({

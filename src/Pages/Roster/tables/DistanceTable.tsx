@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Athlete } from "../RosterPage";
 import "../Roster.scss";
 
 interface Props {
   athleteList: Athlete[];
+  setAthletesList: React.Dispatch<React.SetStateAction<Athlete[]>>;
 }
-const DistanceTable: React.FC<Props> = ({ athleteList }) => {
+const DistanceTable: React.FC<Props> = ({ athleteList, setAthletesList }) => {
+  useEffect(() => {
+    const array = athleteList
+      .slice()
+      .sort((a, b) => Number(b.vdot) - Number(a.vdot));
+    setAthletesList(array);
+  }, []);
+
   const getColorCode = (group: number) => {
     // Define your color code logic here based on the input value
     if (group >= 1 && group <= 3) {
@@ -18,6 +26,7 @@ const DistanceTable: React.FC<Props> = ({ athleteList }) => {
       return "gray";
     }
   };
+
   return (
     <table>
       <thead>
