@@ -14,16 +14,21 @@ const DistanceTable: React.FC<Props> = ({ athleteList, setAthletesList }) => {
     setAthletesList(array);
   }, []);
 
-  const getColorCode = (group: number) => {
-    // Define your color code logic here based on the input value
-    if (group >= 1 && group <= 3) {
-      return "red";
-    } else if (group >= 4 && group <= 6) {
-      return "orange";
-    } else if (group >= 7 && group <= 9) {
-      return "green"; // For other values, use the default color
+  const getColorCode = (group: string) => {
+    if (group.slice(0, 1) === "D") {
+      let num = parseInt(group.slice(1));
+      // Define your color code logic here based on the input value
+      if (num >= 1 && num <= 3) {
+        return "#D0615A";
+      } else if (num >= 4 && num <= 6) {
+        return "#F2A35E";
+      } else if (num >= 7 && num <= 9) {
+        return "#A1D4A3"; // For other values, use the default color
+      } else {
+        return "#ABABAB";
+      }
     } else {
-      return "gray";
+      return "#797979";
     }
   };
 
@@ -48,7 +53,7 @@ const DistanceTable: React.FC<Props> = ({ athleteList, setAthletesList }) => {
             <td
               className="table-cell group"
               style={{
-                backgroundColor: getColorCode(parseInt(item.group.slice(1))),
+                backgroundColor: getColorCode(item.group),
               }}
             >
               {item.group}
