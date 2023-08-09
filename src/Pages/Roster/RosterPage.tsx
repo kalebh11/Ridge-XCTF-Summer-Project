@@ -47,22 +47,40 @@ const RosterPage = ({ athleteList, setAthletesList }: Props) => {
   const sort = (e: any) => {
     e.preventDefault();
     console.log("sort by VDOT");
-    const array = athleteList
-      .slice()
-      .sort((a, b) => Number(b.vdot) - Number(a.vdot));
-    setAthletesList(array);
+    setAthletesList(sortArrayToFront(athleteList, "D"));
   };
-  const sortG = (e: any) => {
+  const sortGS = (e: any) => {
     e.preventDefault();
-    console.log("sort by GROUP");
-    const array = athleteList
-      .slice()
-      .sort(
-        (a, b) =>
-          Number(parseInt(a.group.slice(1))) -
-          Number(parseInt(b.group.slice(1)))
-      );
-    setAthletesList(array);
+    console.log("sort by GROUP S");
+
+    setAthletesList(sortArrayToFront(athleteList, "S"));
+  };
+  const sortGT = (e: any) => {
+    e.preventDefault();
+    console.log("sort by GROUP T");
+
+    setAthletesList(sortArrayToFront(athleteList, "T"));
+  };
+  const sortArrayToFront = (array: Athlete[], letter: string) => {
+    let arrayS: Athlete[];
+    let arrayNoS: Athlete[];
+    let finArray: Athlete[];
+    arrayS = array.filter((obj) => {
+      return obj.group.slice(0, 1) === letter;
+    });
+    arrayNoS = array.filter((obj) => {
+      return obj.group.slice(0, 1) !== letter;
+    });
+    arrayS.sort(
+      (a, b) =>
+        Number(parseInt(a.group.slice(1))) - Number(parseInt(b.group.slice(1)))
+    );
+    arrayNoS.sort(
+      (a, b) =>
+        Number(parseInt(a.group.slice(1))) - Number(parseInt(b.group.slice(1)))
+    );
+    finArray = arrayS.concat(arrayNoS);
+    return finArray;
   };
   return (
     <div className="meets-outer">
@@ -92,7 +110,7 @@ const RosterPage = ({ athleteList, setAthletesList }: Props) => {
               role="tab"
               aria-controls="nav-sprints"
               aria-selected="false"
-              onClick={sortG}
+              onClick={sortGS}
             >
               Sprints
             </a>
@@ -104,7 +122,7 @@ const RosterPage = ({ athleteList, setAthletesList }: Props) => {
               role="tab"
               aria-controls="nav-throws"
               aria-selected="false"
-              onClick={sortG}
+              onClick={sortGT}
             >
               Throws
             </a>

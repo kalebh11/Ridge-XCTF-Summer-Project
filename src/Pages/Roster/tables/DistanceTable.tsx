@@ -18,8 +18,12 @@ const DistanceTable: React.FC<Props> = ({ athleteList, setAthletesList }) => {
     if (group.slice(0, 1) === "D") {
       let num = parseInt(group.slice(1));
       // Define your color code logic here based on the input value
-      if (num >= 1 && num <= 3) {
-        return "#D0615A";
+      if (num === 1) {
+        return "#800000";
+      } else if (num === 2) {
+        return "#e03c31";
+      } else if (num == 3) {
+        return "#cf7070";
       } else if (num >= 4 && num <= 6) {
         return "#F2A35E";
       } else if (num >= 7 && num <= 9) {

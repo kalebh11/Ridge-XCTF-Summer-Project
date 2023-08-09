@@ -32,7 +32,27 @@ const SprintInput: React.FC<PopupProps> = ({
     crypto.getRandomValues(array);
     return array[0].toString(36);
   };
-
+  const sortArrayToFront = (array: Athlete[]) => {
+    let arrayS: Athlete[];
+    let arrayNoS: Athlete[];
+    let finArray: Athlete[];
+    arrayS = array.filter((obj) => {
+      return obj.group.slice(0, 1) === "T";
+    });
+    arrayNoS = array.filter((obj) => {
+      return obj.group.slice(0, 1) !== "T";
+    });
+    arrayS.sort(
+      (a, b) =>
+        Number(parseInt(a.group.slice(1))) - Number(parseInt(b.group.slice(1)))
+    );
+    arrayNoS.sort(
+      (a, b) =>
+        Number(parseInt(a.group.slice(1))) - Number(parseInt(b.group.slice(1)))
+    );
+    finArray = arrayS.concat(arrayNoS);
+    return finArray;
+  };
   const handleSubmitAthlete = (e: React.FormEvent) => {
     e.preventDefault();
     const newAthlete: Athlete = {
@@ -45,10 +65,8 @@ const SprintInput: React.FC<PopupProps> = ({
     };
     onSubmit(newAthlete);
     let smth = [...athleteList, newAthlete];
-    const array = smth
-      .slice()
-      .sort((a, b) => Number(a.group) - Number(b.group));
-    setAthletesList(array);
+
+    setAthletesList(sortArrayToFront(smth));
     setName("");
     setGroup(0);
     setGrade(0);
