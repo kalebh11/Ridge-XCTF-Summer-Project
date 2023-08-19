@@ -95,7 +95,10 @@ const App: React.FC = () => {
                 path="meet"
                 element={<Meetpage meetList={meets} setMeetList={setMeets} />}
               />
-              <Route path="lineup" element={<MeetLineup />} />
+              <Route
+                path="lineup"
+                element={<MeetLineup meetList={meets} setMeetList={setMeets} />}
+              />
               <Route path="results" element={<MeetResults />} />
               <Route
                 path="athlete"

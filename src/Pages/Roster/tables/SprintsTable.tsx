@@ -13,16 +13,27 @@ const SprintsTable: React.FC<Props> = ({ athleteList, setAthletesList }) => {
     setAthletesList(array);
   }, []);
   const getColorCode = (group: string) => {
-    // Define your color code logic here based on the input value
     if (group.slice(0, 1) === "S") {
       let num = parseInt(group.slice(1));
       // Define your color code logic here based on the input value
-      if (num >= 1 && num <= 3) {
-        return "#D0615A";
-      } else if (num >= 4 && num <= 6) {
-        return "#F2A35E";
-      } else if (num >= 7 && num <= 9) {
-        return "#A1D4A3"; // For other values, use the default color
+      if (num === 1) {
+        return " #C0392B";
+      } else if (num === 2) {
+        return "#FF0000";
+      } else if (num === 3) {
+        return "#FA5A5A ";
+      } else if (num === 4) {
+        return "#FF8C00";
+      } else if (num === 5) {
+        return "#FFBF00";
+      } else if (num === 6) {
+        return "#FFD580";
+      } else if (num === 7) {
+        return "#009E00 ";
+      } else if (num === 8) {
+        return "#4AD84A";
+      } else if (num === 9) {
+        return "#9BDC9B ";
       } else {
         return "#ABABAB";
       }
