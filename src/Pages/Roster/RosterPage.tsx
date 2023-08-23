@@ -23,6 +23,7 @@ export interface Athlete {
   id: string;
   vdot: number;
   meets: AthleteMeet[];
+  isThrower: boolean;
 }
 
 export interface AthleteMeet {

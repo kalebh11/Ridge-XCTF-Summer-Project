@@ -62,6 +62,7 @@ const SprintInput: React.FC<PopupProps> = ({
       vdot: 0,
       meets: [],
       id: generateRandomID(),
+      isThrower: false,
     };
     onSubmit(newAthlete);
     let smth = [...athleteList, newAthlete];

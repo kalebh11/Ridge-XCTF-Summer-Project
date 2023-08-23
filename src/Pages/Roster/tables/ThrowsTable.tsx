@@ -12,7 +12,7 @@ const ThrowsTable: React.FC<Props> = ({ athleteList, setAthletesList }) => {
       .sort((a, b) => Number(a.group) - Number(b.group));
     setAthletesList(array);
   }, []);
-  const getColorCode = (group: string) => {
+  const getColorCode = (group: string, isThrower: boolean) => {
     if (group.slice(0, 1) === "T") {
       let num = parseInt(group.slice(1));
       // Define your color code logic here based on the input value
@@ -24,19 +24,11 @@ const ThrowsTable: React.FC<Props> = ({ athleteList, setAthletesList }) => {
         return "#9BDC9B ";
       } else if (num === 4) {
         return "";
-      } else if (num === 5) {
-        return "#FFBF00";
-      } else if (num === 6) {
-        return "#FFD580";
-      } else if (num === 7) {
-        return "#009E00 ";
-      } else if (num === 8) {
-        return "";
-      } else if (num === 9) {
-        return " ";
       } else {
         return "#ABABAB";
       }
+    } else if (isThrower === true) {
+      return "#ABABAB";
     } else {
       return "#797979";
     }
@@ -59,7 +51,7 @@ const ThrowsTable: React.FC<Props> = ({ athleteList, setAthletesList }) => {
             <td
               className="table-cell group"
               style={{
-                backgroundColor: getColorCode(item.group),
+                backgroundColor: getColorCode(item.group, item.isThrower),
               }}
             >
               {item.group}

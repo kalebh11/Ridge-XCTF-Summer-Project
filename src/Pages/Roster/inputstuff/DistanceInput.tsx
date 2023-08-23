@@ -67,6 +67,7 @@ const DistanceInput: React.FC<PopupProps> = ({
       vdot,
       meets: [],
       id: generateRandomID(),
+      isThrower: false,
     };
     onSubmit(newAthlete);
     let smth = [...athleteList, newAthlete];

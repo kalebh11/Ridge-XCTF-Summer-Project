@@ -15,6 +15,7 @@ const SprintInput: React.FC<PopupProps> = ({
   const [name, setName] = useState("");
   const [grade, setGrade] = useState(0);
   const [group, setGroup] = useState(0);
+  const [isThrower, setIsThrower] = useState(false);
 
   const handleNameChange = (e: {
     target: { value: React.SetStateAction<string> };
@@ -26,6 +27,9 @@ const SprintInput: React.FC<PopupProps> = ({
   };
   const handleGroupChange = (e: { target: { value: any } }) => {
     setGroup(Number(e.target.value));
+  };
+  const handleIsThrowerChange = (e: { target: { value: any } }) => {
+    setIsThrower(true);
   };
 
   const generateRandomID = (): string => {
@@ -64,6 +68,7 @@ const SprintInput: React.FC<PopupProps> = ({
       vdot: 0,
       meets: [],
       id: generateRandomID(),
+      isThrower,
     };
     onSubmit(newAthlete);
     let smth = [...athleteList, newAthlete];
@@ -127,6 +132,14 @@ const SprintInput: React.FC<PopupProps> = ({
               Athlete Group
             </label>
           </div>
+        </div>
+        <div className="roster-form-input-container">
+          <input
+            type="checkbox"
+            name="is Thrower?"
+            onChange={handleIsThrowerChange}
+          ></input>
+          <label>Is Thrower</label>
         </div>
       </div>
       <div className="roster-form-submit-container">
