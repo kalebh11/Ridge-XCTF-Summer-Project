@@ -60,7 +60,7 @@ const RosterPage = ({ athleteList, setAthletesList }: Props) => {
     e.preventDefault();
     console.log("sort by GROUP T");
 
-    setAthletesList(sortArrayToFront(athleteList, "T"));
+    setAthletesList(sortArrayToFrontT(athleteList));
   };
   const sortArrayToFront = (array: Athlete[], letter: string) => {
     let arrayS: Athlete[];
@@ -81,6 +81,33 @@ const RosterPage = ({ athleteList, setAthletesList }: Props) => {
         Number(parseInt(a.group.slice(1))) - Number(parseInt(b.group.slice(1)))
     );
     finArray = arrayS.concat(arrayNoS);
+    return finArray;
+  };
+  const sortArrayToFrontT = (array: Athlete[]) => {
+    let arrayS: Athlete[];
+    let arrayNoS: Athlete[];
+    let arrayST: Athlete[];
+    let finArray: Athlete[];
+    arrayS = array.filter((obj) => {
+      return obj.group.slice(0, 1) === "T";
+    });
+    arrayST = array.filter((obj) => {
+      return obj.isThrower === true;
+    });
+    arrayNoS = array.filter((obj) => {
+      return obj.group.slice(0, 1) !== "T";
+    });
+    arrayS.sort(
+      (a, b) =>
+        Number(parseInt(a.group.slice(1))) - Number(parseInt(b.group.slice(1)))
+    );
+
+    arrayNoS.sort(
+      (a, b) =>
+        Number(parseInt(a.group.slice(1))) - Number(parseInt(b.group.slice(1)))
+    );
+    finArray = arrayS.concat(arrayST);
+    finArray = finArray.concat(arrayNoS);
     return finArray;
   };
   return (

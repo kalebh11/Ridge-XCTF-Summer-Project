@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { MeetObject } from "../../MeetsPopup";
 import { useLocation } from "react-router-dom";
+import "bootstrap/dist/js/bootstrap";
+import "./MeetLineup.scss";
+import EventTable from "./EventTable";
+import { MeetEvent } from "../../MeetsPage";
 type Props = {
   meetList: MeetObject[];
   setMeetList: React.Dispatch<React.SetStateAction<MeetObject[]>>;
@@ -32,7 +36,39 @@ const MeetLineup = ({ meetList, setMeetList }: Props) => {
       <div className="meets-top-bar">
         <div className="meets-header">{meet?.name} Meet Lineup</div>
       </div>
-      <div className="meets-mid-section"></div>
+      <div className="meetlineup-mid-section">
+        <nav style={{ width: "100%" }}>
+          <div className="nav nav-tabs" id="nav-tab" role="tablist">
+            <a
+              className="nav-link active"
+              id="nav-distance-tab"
+              data-bs-toggle="tab"
+              href="#nav-distance"
+              role="tab"
+              aria-controls="nav-distance"
+              aria-selected="true"
+            >
+              Track Events
+            </a>
+            <a
+              className="nav-link"
+              id="nav-sprints-tab"
+              data-bs-toggle="tab"
+              href="#nav-sprints"
+              role="tab"
+              aria-controls="nav-sprints"
+              aria-selected="false"
+            >
+              Field Events
+            </a>
+          </div>
+        </nav>
+        <div className="meetlineup-content-container">
+          {meet?.events.map((item) => (
+            <EventTable key={item.eventId} event={item} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

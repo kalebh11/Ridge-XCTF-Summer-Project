@@ -35,9 +35,13 @@ const SprintInput: React.FC<PopupProps> = ({
   const sortArrayToFront = (array: Athlete[]) => {
     let arrayS: Athlete[];
     let arrayNoS: Athlete[];
+    let arrayST: Athlete[];
     let finArray: Athlete[];
     arrayS = array.filter((obj) => {
       return obj.group.slice(0, 1) === "T";
+    });
+    arrayST = array.filter((obj) => {
+      return obj.isThrower === true;
     });
     arrayNoS = array.filter((obj) => {
       return obj.group.slice(0, 1) !== "T";
@@ -46,11 +50,13 @@ const SprintInput: React.FC<PopupProps> = ({
       (a, b) =>
         Number(parseInt(a.group.slice(1))) - Number(parseInt(b.group.slice(1)))
     );
+
     arrayNoS.sort(
       (a, b) =>
         Number(parseInt(a.group.slice(1))) - Number(parseInt(b.group.slice(1)))
     );
-    finArray = arrayS.concat(arrayNoS);
+    finArray = arrayS.concat(arrayST);
+    finArray = finArray.concat(arrayNoS);
     return finArray;
   };
   const handleSubmitAthlete = (e: React.FormEvent) => {

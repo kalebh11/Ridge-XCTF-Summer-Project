@@ -1,8 +1,10 @@
 import React from "react";
 import { MeetEvent } from "../../MeetsPage";
-
-const EventTable = (event: MeetEvent) => {
-  return <div>EventTable</div>;
+type Props = {
+  event: MeetEvent;
+};
+const EventTable = ({ event }: Props) => {
+  return <div></div>;
 };
 
 export default EventTable;
