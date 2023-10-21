@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Todo } from "../../model";
+import { Todo } from "../../../model";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
-import { db } from "../../App";
+import { db } from "../../../App";
 import {
   Firestore,
   QuerySnapshot,
@@ -16,7 +16,7 @@ type Props = {
   todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 };
-const SingleTodo = ({ todo, todos, setTodos }: Props) => {
+export const SingleTodo = ({ todo, todos, setTodos }: Props) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [editTodo, setEditTodo] = useState<string>(todo.todo);
   const handleDone = (e: any, id: number) => {

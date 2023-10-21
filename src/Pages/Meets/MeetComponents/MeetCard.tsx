@@ -11,7 +11,7 @@ import {
   doc,
   getDocs,
 } from "firebase/firestore";
-import { MeetObject } from "../../../commons/meet.model";
+import { MeetObject } from "../../../common/meet.model";
 interface Props {
   object: MeetObject;
   onRemoveMeet: any;

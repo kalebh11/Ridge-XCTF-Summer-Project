@@ -4,13 +4,13 @@ import { useLocation } from "react-router-dom";
 import "bootstrap/dist/js/bootstrap";
 import "./MeetLineup.scss";
 import EventTable from "./EventTable";
-import { MeetObject } from "../../../../commons/meet.model";
+import { Meet } from "../../../../common/meet.model";
 type Props = {
-  meetList: MeetObject[];
-  setMeetList: React.Dispatch<React.SetStateAction<MeetObject[]>>;
+  meetList: Meet[];
+  setMeetList: React.Dispatch<React.SetStateAction<Meet[]>>;
 };
-const MeetLineup = ({ meetList, setMeetList }: Props) => {
-  const [meet, setMeet] = useState<MeetObject>();
+export const MeetLineup = ({ meetList, setMeetList }: Props) => {
+  const [meet, setMeet] = useState<Meet>();
   const [params, setParams] = useState<any>();
   const location = useLocation();
   useEffect(() => {
@@ -64,9 +64,9 @@ const MeetLineup = ({ meetList, setMeetList }: Props) => {
           </div>
         </nav>
         <div className="meetlineup-content-container">
-          {meet?.events?.map((item) => (
+          {/* {meet?.events?.map((item) => (
             <EventTable key={item.eventId} event={item} />
-          ))}
+          ))} */}
         </div>
       </div>
     </div>

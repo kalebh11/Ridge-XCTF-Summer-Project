@@ -1,6 +1,6 @@
 import React from "react";
 
-const MeetResults = () => {
+export const MeetResults = () => {
   return <div>MeetResults</div>;
 };
 

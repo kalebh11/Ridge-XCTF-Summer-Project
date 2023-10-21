@@ -9,8 +9,7 @@ import SprintsTable from "./tables/SprintsTable";
 import ThrowsTable from "./tables/ThrowsTable";
 import { db } from "../../App";
 import { addDoc, collection, getDocs } from "firebase/firestore";
-import { eventTypeEnum } from "../../commons/event.model";
-import { Athlete } from "../../commons/athlete.model";
+import { Athlete } from "../../common/athlete.model";
 
 type Props = {
   athleteList: Athlete[];
@@ -25,7 +24,7 @@ const addAthlete = async (athlete: Athlete) => {
     console.error("Error adding document: ", e);
   }
 };
-const RosterPage = ({ athleteList, setAthletesList }: Props) => {
+export const RosterPage = ({ athleteList, setAthletesList }: Props) => {
   const handleFormSubmit = (athlete: Athlete) => {
     addAthlete(athlete);
   };
@@ -44,7 +43,7 @@ const RosterPage = ({ athleteList, setAthletesList }: Props) => {
     e.preventDefault();
     console.log("sort by GROUP T");
 
-    setAthletesList(sortArrayToFrontT(athleteList));
+    // setAthletesList(sortArrayToFrontT(athleteList));
   };
   const sortArrayToFront = (array: Athlete[], letter: string) => {
     let arrayS: Athlete[];
@@ -65,33 +64,6 @@ const RosterPage = ({ athleteList, setAthletesList }: Props) => {
         Number(parseInt(a.group.slice(1))) - Number(parseInt(b.group.slice(1)))
     );
     finArray = arrayS.concat(arrayNoS);
-    return finArray;
-  };
-  const sortArrayToFrontT = (array: Athlete[]) => {
-    let arrayS: Athlete[];
-    let arrayNoS: Athlete[];
-    let arrayST: Athlete[];
-    let finArray: Athlete[];
-    arrayS = array.filter((obj) => {
-      return obj.group.slice(0, 1) === "T";
-    });
-    arrayST = array.filter((obj) => {
-      return obj.isThrower === true;
-    });
-    arrayNoS = array.filter((obj) => {
-      return obj.group.slice(0, 1) !== "T";
-    });
-    arrayS.sort(
-      (a, b) =>
-        Number(parseInt(a.group.slice(1))) - Number(parseInt(b.group.slice(1)))
-    );
-
-    arrayNoS.sort(
-      (a, b) =>
-        Number(parseInt(a.group.slice(1))) - Number(parseInt(b.group.slice(1)))
-    );
-    finArray = arrayS.concat(arrayST);
-    finArray = finArray.concat(arrayNoS);
     return finArray;
   };
   return (

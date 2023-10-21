@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
 
 import "../Roster.scss";
-import { Athlete } from "../../../commons/athlete.model";
+import { Athlete } from "../../../common/athlete.model";
 interface Props {
   athleteList: Athlete[];
   setAthletesList: React.Dispatch<React.SetStateAction<Athlete[]>>;
 }
-const ThrowsTable: React.FC<Props> = ({ athleteList, setAthletesList }) => {
+export const ThrowsTable: React.FC<Props> = ({ athleteList, setAthletesList }) => {
   useEffect(() => {
     const array = athleteList
       .slice()
       .sort((a, b) => Number(a.group) - Number(b.group));
     setAthletesList(array);
   }, []);
-  const getColorCode = (group: string, isThrower: boolean) => {
+  const getColorCode = (group: string) => {
     if (group.slice(0, 1) === "T") {
       let num = parseInt(group.slice(1));
       // Define your color code logic here based on the input value
@@ -28,8 +28,6 @@ const ThrowsTable: React.FC<Props> = ({ athleteList, setAthletesList }) => {
       } else {
         return "#ABABAB";
       }
-    } else if (isThrower === true) {
-      return "#ABABAB";
     } else {
       return "#797979";
     }
@@ -52,7 +50,7 @@ const ThrowsTable: React.FC<Props> = ({ athleteList, setAthletesList }) => {
             <td
               className="table-cell group"
               style={{
-                backgroundColor: getColorCode(item.group, item.isThrower),
+                backgroundColor: getColorCode(item.group),
               }}
             >
               {item.group}

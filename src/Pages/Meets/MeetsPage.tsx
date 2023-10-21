@@ -5,16 +5,16 @@ import MeetCard from "./MeetComponents/MeetCard";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../App";
 import { useLocation } from "react-router-dom";
-import { MeetObject } from "../../commons/meet.model";
+import { Meet } from "../../common/meet.model";
 
 type Props = {
-  meetList: MeetObject[];
-  setMeetList: React.Dispatch<React.SetStateAction<MeetObject[]>>;
+  meetList: Meet[];
+  setMeetList: React.Dispatch<React.SetStateAction<Meet[]>>;
 };
-const MeetsPage = ({ meetList, setMeetList }: Props) => {
+export const MeetsPage = ({ meetList, setMeetList }: Props) => {
   let [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const handleRemoveMeetObject = (meetIdToRemove: string) => {
+  const handleRemoveMeet = (meetIdToRemove: string) => {
     // Filter out the MeetObject with the specified meetIdToRemove
     const updatedMeetList = meetList.filter(
       (meet) => meet.id !== meetIdToRemove
@@ -29,7 +29,7 @@ const MeetsPage = ({ meetList, setMeetList }: Props) => {
     setIsPopupOpen(false);
   };
 
-  const handleFormSubmit = (meetObject: MeetObject) => {
+  const handleFormSubmit = (meetObject: Meet) => {
     setMeetList((prevList) => [...prevList, meetObject]);
   };
 
@@ -57,7 +57,7 @@ const MeetsPage = ({ meetList, setMeetList }: Props) => {
             <MeetCard
               key={item.id}
               object={item}
-              onRemoveMeet={handleRemoveMeetObject}
+              onRemoveMeet={handleRemoveMeet}
             />
           ))}
         </div>

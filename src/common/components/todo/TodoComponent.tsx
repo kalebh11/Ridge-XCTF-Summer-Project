@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Todo } from "../../model";
+import { useEffect, useState, FC } from "react";
+import { Todo } from "../../../model";
 import SingleTodo from "./SingleTodo";
 import { addDoc, collection, getDocs } from "firebase/firestore";
-import { db } from "../../App";
+import { db } from "../../../App";
 const addTodo = async (todo: Todo) => {
   try {
     const docRef = await addDoc(collection(db, "todos"), {
@@ -13,7 +13,7 @@ const addTodo = async (todo: Todo) => {
     console.error("Error adding document: ", e);
   }
 };
-const TodoList: React.FC = () => {
+export const TodoList: FC = () => {
   const [todo, setTodo] = useState<string>("");
   const [todos, setTodos] = useState<Todo[]>([]);
   const fetchPost = async () => {

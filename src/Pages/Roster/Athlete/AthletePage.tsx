@@ -1,13 +1,13 @@
 import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Athlete } from "../../../commons/athlete.model";
+import { Athlete } from "../../../common/athlete.model";
 
 type Props = {
   athleteList: Athlete[];
   setAthleteList: React.Dispatch<React.SetStateAction<Athlete[]>>;
 };
-const AthletePage = ({ athleteList, setAthleteList }: Props) => {
+export const AthletePage = ({ athleteList, setAthleteList }: Props) => {
   const [athlete, setAthlete] = useState<Athlete>();
   const [params, setParams] = useState<any>();
   const location = useLocation();

@@ -1,13 +1,13 @@
-import React from "react";
+import { FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSpring, animated } from "react-spring";
-import { Athlete } from "../commons/athlete.model";
+import { Athlete } from "../../athlete.model";
 
 type Props = {
   athleteList: Athlete[];
   setAthletesList: React.Dispatch<React.SetStateAction<Athlete[]>>;
 };
-const SideList: React.FC<Props> = ({ athleteList, setAthletesList }) => {
+export const SideList: FC<Props> = ({ athleteList, setAthletesList }) => {
   const navigate = useNavigate();
   const redirectToCalender = () => {
     window.open(

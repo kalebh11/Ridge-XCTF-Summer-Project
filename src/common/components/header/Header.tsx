@@ -1,6 +1,6 @@
 import React from "react";
 
-const Header = () => {
+export const Header = () => {
   return (
     // <div className="outer">
     <div className="homepage-header">Ridge XCTF</div>

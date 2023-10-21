@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import TodoComponent from "../components/TodoComponent/TodoComponent";
+import TodoComponent from "../common/components/todo/TodoComponent";
 
-const HomePage = () => {
+export const HomePage = () => {
   return (
     <div className="outer2">
       <div className="mid-section"></div>

@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import "../Roster.scss";
-import { Athlete } from "../../../commons/athlete.model";
+import { Athlete } from "../../../common/athlete.model";
 
 interface Props {
   athleteList: Athlete[];
   setAthletesList: React.Dispatch<React.SetStateAction<Athlete[]>>;
 }
-const DistanceTable: React.FC<Props> = ({ athleteList, setAthletesList }) => {
+export const DistanceTable: React.FC<Props> = ({ athleteList, setAthletesList }) => {
   useEffect(() => {
     const array = athleteList
       .slice()

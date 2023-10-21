@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { Athlete } from "../../../commons/athlete.model";
+import { Athlete } from "../../../common/athlete.model";
 
 interface Props {
   athleteList: Athlete[];
   setAthletesList: React.Dispatch<React.SetStateAction<Athlete[]>>;
 }
-const SprintsTable: React.FC<Props> = ({ athleteList, setAthletesList }) => {
+export const SprintsTable: React.FC<Props> = ({ athleteList, setAthletesList }) => {
   useEffect(() => {
     const array = athleteList
       .slice()

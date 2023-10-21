@@ -1,9 +1,9 @@
 import React from "react";
-import { MeetEvent } from "../../../../commons/event.model";
+import { Event } from "../../../../common/meet.model";
 type Props = {
-  event: MeetEvent;
+  event: Event;
 };
-const EventTable = ({ event }: Props) => {
+export const EventTable = ({ event }: Props) => {
   return (
     <table>
       <thead>

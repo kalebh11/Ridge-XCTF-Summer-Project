@@ -4,13 +4,13 @@ import { db } from "../../App";
 import { useLocation } from "react-router-dom";
 
 import "./meetpage.scss";
-import { MeetObject } from "../../commons/meet.model";
+import { Meet } from "../../common/meet.model";
 type Props = {
-  meetList: MeetObject[];
-  setMeetList: React.Dispatch<React.SetStateAction<MeetObject[]>>;
+  meetList: Meet[];
+  setMeetList: React.Dispatch<React.SetStateAction<Meet[]>>;
 };
-const Meetpage = ({ meetList, setMeetList }: Props) => {
-  const [meet, setMeet] = useState<MeetObject>();
+export const Meetpage = ({ meetList, setMeetList }: Props) => {
+  const [meet, setMeet] = useState<Meet>();
   const [params, setParams] = useState<any>();
   const location = useLocation();
   useEffect(() => {

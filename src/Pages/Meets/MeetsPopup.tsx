@@ -3,16 +3,15 @@ import Modal from "react-modal";
 import { GrClose } from "react-icons/gr";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../App";
-import { MeetEvent } from "../../commons/event.model";
-import { MeetObject } from "../../commons/meet.model";
+import { Meet } from "../../common/meet.model";
 
 interface PopupProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: MeetObject) => void;
+  onSubmit: (data: Meet) => void;
 }
 
-const addMeet = async (e: any, meet: MeetObject) => {
+const addMeet = async (e: any, meet: Meet) => {
   e.preventDefault();
 
   try {
@@ -25,7 +24,7 @@ const addMeet = async (e: any, meet: MeetObject) => {
   }
 };
 
-const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
+export const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [isStateMeet, setIsStateMeet] = useState(false);
@@ -58,7 +57,7 @@ const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
     // e.preventDefault();
     // Process the user input value here
 
-    const data: MeetObject = {
+    const data: Meet = {
       name,
       location,
       isStateMeet,

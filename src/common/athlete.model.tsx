@@ -18,7 +18,7 @@ export const groups = Object.freeze([
   "hurdles",
 ]);
 
-export const eventConverter: FirestoreDataConverter<Athlete> = {
+export const athleteConverter: FirestoreDataConverter<Athlete> = {
   toFirestore: (athlete: Athlete) => {
     return {
       name: athlete.name,
