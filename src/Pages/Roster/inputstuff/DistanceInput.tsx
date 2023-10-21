@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../Roster.scss";
-import { Athlete } from "../RosterPage";
+import { Athlete } from "../../../commons/athlete.model";
 
 interface PopupProps {
   onSubmit: (data: Athlete) => void;

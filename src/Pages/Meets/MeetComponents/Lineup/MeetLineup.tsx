@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { MeetObject } from "../../MeetsPopup";
+
 import { useLocation } from "react-router-dom";
 import "bootstrap/dist/js/bootstrap";
 import "./MeetLineup.scss";
 import EventTable from "./EventTable";
-import { MeetEvent } from "../../MeetsPage";
+import { MeetObject } from "../../../../commons/meet.model";
 type Props = {
   meetList: MeetObject[];
   setMeetList: React.Dispatch<React.SetStateAction<MeetObject[]>>;
@@ -64,7 +64,7 @@ const MeetLineup = ({ meetList, setMeetList }: Props) => {
           </div>
         </nav>
         <div className="meetlineup-content-container">
-          {meet?.events.map((item) => (
+          {meet?.events?.map((item) => (
             <EventTable key={item.eventId} event={item} />
           ))}
         </div>

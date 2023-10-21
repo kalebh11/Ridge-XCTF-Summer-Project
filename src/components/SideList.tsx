@@ -1,7 +1,8 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSpring, animated } from "react-spring";
-import { Athlete } from "../Pages/Roster/RosterPage";
+import { Athlete } from "../commons/athlete.model";
+
 type Props = {
   athleteList: Athlete[];
   setAthletesList: React.Dispatch<React.SetStateAction<Athlete[]>>;

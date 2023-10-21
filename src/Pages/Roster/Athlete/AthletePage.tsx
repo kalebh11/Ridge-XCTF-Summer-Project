@@ -1,7 +1,8 @@
 import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Athlete } from "../RosterPage";
+import { Athlete } from "../../../commons/athlete.model";
+
 type Props = {
   athleteList: Athlete[];
   setAthleteList: React.Dispatch<React.SetStateAction<Athlete[]>>;

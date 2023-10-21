@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import { Athlete } from "../RosterPage";
+
 import "../Roster.scss";
+import { Athlete } from "../../../commons/athlete.model";
 interface Props {
   athleteList: Athlete[];
   setAthletesList: React.Dispatch<React.SetStateAction<Athlete[]>>;

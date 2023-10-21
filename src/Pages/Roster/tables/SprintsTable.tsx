@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Athlete } from "../RosterPage";
+import { Athlete } from "../../../commons/athlete.model";
 
 interface Props {
   athleteList: Athlete[];

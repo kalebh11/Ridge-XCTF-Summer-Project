@@ -1,5 +1,5 @@
 import React from "react";
-import { MeetObject } from "../MeetsPopup";
+
 import { useNavigate } from "react-router-dom";
 import "./Meetcard.scss";
 import { db } from "../../../App";
@@ -11,6 +11,7 @@ import {
   doc,
   getDocs,
 } from "firebase/firestore";
+import { MeetObject } from "../../../commons/meet.model";
 interface Props {
   object: MeetObject;
   onRemoveMeet: any;

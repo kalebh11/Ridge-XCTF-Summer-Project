@@ -2,8 +2,9 @@ import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../../App";
 import { useLocation } from "react-router-dom";
-import { MeetObject } from "./MeetsPopup";
+
 import "./meetpage.scss";
+import { MeetObject } from "../../commons/meet.model";
 type Props = {
   meetList: MeetObject[];
   setMeetList: React.Dispatch<React.SetStateAction<MeetObject[]>>;

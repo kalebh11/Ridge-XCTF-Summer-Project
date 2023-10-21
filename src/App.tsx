@@ -5,7 +5,7 @@ import SideList from "./components/SideList";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import MeetsPage from "./Pages/Meets/MeetsPage";
-import RosterPage, { Athlete } from "./Pages/Roster/RosterPage";
+import RosterPage from "./Pages/Roster/RosterPage";
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -14,8 +14,10 @@ import Meetpage from "./Pages/Meets/Meetpage";
 import MeetLineup from "./Pages/Meets/MeetComponents/Lineup/MeetLineup";
 import MeetResults from "./Pages/Meets/MeetComponents/Results/MeetResults";
 import AthletePage from "./Pages/Roster/Athlete/AthletePage";
-import { MeetObject } from "./Pages/Meets/MeetsPopup";
+
 import { collection, getDocs } from "firebase/firestore";
+import { Athlete } from "./commons/athlete.model";
+import { MeetObject } from "./commons/meet.model";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA0ao2imRtQ-hi2kc6XsugIGfc1aXTA7g0",

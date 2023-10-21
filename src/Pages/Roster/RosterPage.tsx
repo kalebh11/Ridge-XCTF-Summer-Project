@@ -9,30 +9,14 @@ import SprintsTable from "./tables/SprintsTable";
 import ThrowsTable from "./tables/ThrowsTable";
 import { db } from "../../App";
 import { addDoc, collection, getDocs } from "firebase/firestore";
-import { eventTypeEnum } from "../Meets/MeetsPage";
+import { eventTypeEnum } from "../../commons/event.model";
+import { Athlete } from "../../commons/athlete.model";
 
 type Props = {
   athleteList: Athlete[];
   setAthletesList: React.Dispatch<React.SetStateAction<Athlete[]>>;
 };
 
-export interface Athlete {
-  name: string;
-  grade: number;
-  group: string;
-  id: string;
-  vdot: number;
-  meets: AthleteMeet[];
-  isThrower: boolean;
-}
-
-export interface AthleteMeet {
-  events: AthleteEvent[];
-}
-export interface AthleteEvent {
-  eventType: eventTypeEnum;
-  results: any[];
-}
 const addAthlete = async (athlete: Athlete) => {
   try {
     const docRef = await addDoc(collection(db, "athletes"), athlete);

@@ -3,16 +3,9 @@ import Modal from "react-modal";
 import { GrClose } from "react-icons/gr";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../App";
-import { MeetEvent } from "./MeetsPage";
-export interface MeetObject {
-  name: string;
-  location: string;
-  isStateMeet: boolean;
-  date: String;
-  id: string;
-  note: string;
-  events: MeetEvent[];
-}
+import { MeetEvent } from "../../commons/event.model";
+import { MeetObject } from "../../commons/meet.model";
+
 interface PopupProps {
   isOpen: boolean;
   onClose: () => void;
