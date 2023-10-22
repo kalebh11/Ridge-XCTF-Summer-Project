@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../Roster.scss";
-import { Athlete } from "../../../common/athlete.model";
+import { Athlete, groups } from "../../../common/athlete.model";
 
 interface PopupProps {
   onSubmit: (data: Athlete) => void;
@@ -37,42 +37,21 @@ const DistanceInput: React.FC<PopupProps> = ({
     crypto.getRandomValues(array);
     return array[0].toString(36);
   };
-  const sortArrayToFront = (array: Athlete[]) => {
-    let arrayS: Athlete[];
-    let arrayNoS: Athlete[];
-    let finArray: Athlete[];
-    arrayS = array.filter((obj) => {
-      return obj.group.slice(0, 1) === "D";
-    });
-    arrayNoS = array.filter((obj) => {
-      return obj.group.slice(0, 1) !== "D";
-    });
-    arrayS.sort(
-      (a, b) =>
-        Number(parseInt(a.group.slice(1))) - Number(parseInt(b.group.slice(1)))
-    );
-    arrayNoS.sort(
-      (a, b) =>
-        Number(parseInt(a.group.slice(1))) - Number(parseInt(b.group.slice(1)))
-    );
-    finArray = arrayS.concat(arrayNoS);
-    return finArray;
-  };
   const handleSubmitAthlete = (e: React.FormEvent) => {
     e.preventDefault();
-    const newAthlete: Athlete = {
-      name,
-      group: "D" + group,
-      grade,
-      vdot,
-      meets: [],
-      id: generateRandomID(),
-      isThrower: false,
-    };
+    let newAthlete: Athlete = new Athlete();
+    newAthlete.name = name;
+    newAthlete.group = {type: groups[0], index: group};
+    newAthlete.grade = grade;
+    newAthlete.vdot = 0;
+    newAthlete.meets = [];
+    newAthlete.labels = [];
+    newAthlete.email = '';
+    newAthlete.parentemail = '';
     onSubmit(newAthlete);
     let smth = [...athleteList, newAthlete];
 
-    setAthletesList(sortArrayToFront(smth));
+    setAthletesList(smth);
     setName("");
     setGroup(0);
     setGrade(0);

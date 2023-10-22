@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import { GrClose } from "react-icons/gr";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "../../App";
 import { Meet } from "../../common/meet.model";
 
 interface PopupProps {
@@ -11,32 +9,12 @@ interface PopupProps {
   onSubmit: (data: Meet) => void;
 }
 
-const addMeet = async (e: any, meet: Meet) => {
-  e.preventDefault();
-
-  try {
-    const docRef = await addDoc(collection(db, "meets"), {
-      meet: meet,
-    });
-    console.log("Document written with ID: ", docRef.id);
-  } catch (e) {
-    console.error("Error adding document: ", e);
-  }
-};
-
 export const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) => {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [isStateMeet, setIsStateMeet] = useState(false);
   const [date, setDate] = useState("");
   const [note, setNote] = useState("");
-  const id = "";
-
-  const generateRandomID = (): string => {
-    const array = new Uint32Array(1);
-    crypto.getRandomValues(array);
-    return array[0].toString(36);
-  };
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
@@ -56,28 +34,22 @@ export const MeetsPopup: React.FC<PopupProps> = ({ isOpen, onClose, onSubmit }) 
   const handleSubmit = (e: React.FormEvent) => {
     // e.preventDefault();
     // Process the user input value here
-
-    const data: Meet = {
-      name,
-      location,
-      isStateMeet,
-      date,
-      id: generateRandomID(),
-      note,
-      events: [],
-    };
+    let meet = new Meet();
+    meet.name = name;
+    meet.date = date;
+    meet.location = location;
+    meet.isStateMeet = isStateMeet;
+    meet.note = note;
+    meet.events = [];
     setName("");
     setDate("");
     setLocation("");
-    console.log("why the fuck did this run");
     setIsStateMeet(false);
-    onSubmit(data);
-    addMeet(e, data);
+    onSubmit(meet);
     onClose();
   };
 
   const handleClose = () => {
-    console.log("test");
     onClose();
   };
 

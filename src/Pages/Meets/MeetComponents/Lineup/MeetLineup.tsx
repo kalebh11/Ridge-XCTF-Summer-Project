@@ -17,20 +17,8 @@ export const MeetLineup = ({ meetList, setMeetList }: Props) => {
     const queryParams = new URLSearchParams(location.search);
     const singleValue = queryParams.get("meetid");
     setParams(singleValue);
-    findMeetData();
+    setMeet(meetList.find((meet)=>{return meet.id === params}));
   }, [meetList]);
-  const findMeetData = () => {
-    let length: any;
-    length = meetList.length;
-    if (meetList !== undefined) {
-      for (let i = 0; i < length; i++) {
-        console.log(meetList[i].id);
-        if (meetList[i].id === params) {
-          setMeet(meetList[i]);
-        }
-      }
-    }
-  };
   return (
     <div className="meets-outer">
       <div className="meets-top-bar">

@@ -68,6 +68,7 @@ export const meetConverter: FirestoreDataConverter<Meet> = {
   },
   fromFirestore: (snapshot, options) => {
     const data = snapshot.data(options);
+    console.log(data);
     let meet = new Meet();
     meet.name = data.name;
     meet.location = data.location;

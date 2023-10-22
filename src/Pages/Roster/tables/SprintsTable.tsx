@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Athlete } from "../../../common/athlete.model";
+import { Athlete, Group, groupToDisplay } from "../../../common/athlete.model";
 
 interface Props {
   athleteList: Athlete[];
@@ -12,9 +12,9 @@ export const SprintsTable: React.FC<Props> = ({ athleteList, setAthletesList }) 
       .sort((a, b) => Number(a.group) - Number(b.group));
     setAthletesList(array);
   }, []);
-  const getColorCode = (group: string) => {
-    if (group.slice(0, 1) === "S") {
-      let num = parseInt(group.slice(1));
+  const getColorCode = (group: Group) => {
+    if (group.type === "sprints") {
+      let num = group.index;
       // Define your color code logic here based on the input value
       if (num === 1) {
         return " #C0392B";
@@ -65,7 +65,7 @@ export const SprintsTable: React.FC<Props> = ({ athleteList, setAthletesList }) 
                 backgroundColor: getColorCode(item.group),
               }}
             >
-              {item.group}
+              {groupToDisplay(item.group)}
             </td>
             <td className="table-cell name">
               <a href={"/athlete?athleteid=" + item.id}>{item.name}</a>

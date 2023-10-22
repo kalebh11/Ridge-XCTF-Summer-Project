@@ -45,25 +45,18 @@ export const RosterPage = ({ athleteList, setAthletesList }: Props) => {
 
     // setAthletesList(sortArrayToFrontT(athleteList));
   };
-  const sortArrayToFront = (array: Athlete[], letter: string) => {
+  const sortArrayToFront = (array: Athlete[], groupType: string) => {
     let arrayS: Athlete[];
     let arrayNoS: Athlete[];
-    let finArray: Athlete[];
     arrayS = array.filter((obj) => {
-      return obj.group.slice(0, 1) === letter;
+      return obj.group.type === groupType;
     });
     arrayNoS = array.filter((obj) => {
-      return obj.group.slice(0, 1) !== letter;
+      return obj.group.type !== groupType;
     });
-    arrayS.sort(
-      (a, b) =>
-        Number(parseInt(a.group.slice(1))) - Number(parseInt(b.group.slice(1)))
-    );
-    arrayNoS.sort(
-      (a, b) =>
-        Number(parseInt(a.group.slice(1))) - Number(parseInt(b.group.slice(1)))
-    );
-    finArray = arrayS.concat(arrayNoS);
+    arrayS.sort((a, b) => a.group.index - b.group.index);
+    arrayNoS.sort((a, b) => a.group.index - b.group.index);
+    let finArray = arrayS.concat(arrayNoS);
     return finArray;
   };
   return (

@@ -1,55 +1,13 @@
-import React from "react";
-
-import { useNavigate } from "react-router-dom";
+import { FC } from "react";
 import "./Meetcard.scss";
-import { db } from "../../../App";
-import {
-  Firestore,
-  QuerySnapshot,
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-} from "firebase/firestore";
-import { MeetObject } from "../../../common/meet.model";
+import { Meet } from "../../../common/meet.model";
 interface Props {
-  object: MeetObject;
+  object: Meet;
   onRemoveMeet: any;
 }
-const MeetCard: React.FC<Props> = ({ object, onRemoveMeet }) => {
+const MeetCard: FC<Props> = ({ object, onRemoveMeet }) => {
   let something = "/meet?meetid=" + object.id;
-  const findMeetCardData = async () => {
-    let meetFirestoreID;
-    await getDocs(collection(db, "meets")).then((querySnapshot) => {
-      const newData: any[] = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      console.log(newData);
-      for (let i = 0; i < newData.length; i++) {
-        if (newData[i].meet.id === object.id) {
-          meetFirestoreID = newData[i].id;
-        }
-      }
-    });
-    return meetFirestoreID;
-  };
-
-  const deleteDocument = async () => {
-    let meetID: any = await findMeetCardData();
-    const docIdToDelete = meetID;
-    const docRef = doc(db, "meets", docIdToDelete);
-
-    deleteDoc(docRef)
-      .then(() => {
-        console.log("Meet Card deleted");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
   const handleDelete = () => {
-    deleteDocument();
     onRemoveMeet(object.id);
   };
 
