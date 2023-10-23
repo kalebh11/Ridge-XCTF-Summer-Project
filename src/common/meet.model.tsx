@@ -54,7 +54,24 @@ export enum eventTypeEnum {
   dmr = "Distance Medley Relay",
   threeXfourHundredHurdles = "3x400mH",
   shuttleHurdles = "shuttleHurdles",
-}
+};
+const meetInitial = {
+  meets: []
+};
+export function meetReducer(state = meetInitial, action) {
+  // The reducer normally looks at the action type field to decide what happens
+  switch (action.type) {
+    // Do something here based on the different types of actions
+    case 'meet/set':
+      return {...state, meets: action.payload};
+    case 'meet/add':
+      return {...state, meets: [...state.meets, action.payload]};
+    case 'meet/delete':
+      return {...state, meets: state.meets.filter(meet => meet.id !== action.payload)};
+    default:
+      return state;
+  }
+};
 export const meetConverter: FirestoreDataConverter<Meet> = {
   toFirestore: (meet: Meet) => {
     return {

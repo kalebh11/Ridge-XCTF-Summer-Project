@@ -15,8 +15,9 @@ import { MeetResults } from "./Pages/Meets/MeetComponents/Results/MeetResults";
 import { AthletePage } from "./Pages/Roster/Athlete/AthletePage";
 
 import { collection, getDocs } from "firebase/firestore";
-import { Athlete, athleteConverter } from "./common/athlete.model";
-import { Meet, meetConverter } from "./common/meet.model";
+import { Athlete, athleteConverter, athleteReducer } from "./common/athlete.model";
+import { Meet, meetConverter, meetReducer } from "./common/meet.model";
+import { configureStore } from "@reduxjs/toolkit";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA0ao2imRtQ-hi2kc6XsugIGfc1aXTA7g0",
@@ -30,14 +31,13 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
-
 const App: FC = () => {
   const [athletes, setAthletes] = useState<Athlete[]>([]);
   const [meets, setMeets] = useState<Meet[]>([]);
   const athleteCollection = collection(db, "athletes").withConverter(athleteConverter);
   const meetCollection = collection(db, "meets").withConverter(meetConverter);
   const findAthleteData = async () => {
-    await getDocs(athleteCollection).then((querySnapshot) => {
+    let snapshop = await getDocs(athleteCollection).then((querySnapshot) => {
       let athleteArray: Athlete[] = [];
       querySnapshot.docs.forEach((doc)=> {
         athleteArray.push(doc.data());
@@ -46,7 +46,7 @@ const App: FC = () => {
     });
   };
   const findMeetData = async () => {
-    await getDocs(meetCollection).then((querySnapshot) => {
+    let snapshot = await getDocs(meetCollection).then((querySnapshot) => {
       let meets: Meet[] = [];
       querySnapshot.docs.forEach((doc)=> {
         meets.push(doc.data());
