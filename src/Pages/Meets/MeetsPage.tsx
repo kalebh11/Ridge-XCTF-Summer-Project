@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { VscAdd } from "react-icons/vsc";
 import MeetsPopup from "./MeetsPopup";
 import MeetCard from "./MeetComponents/MeetCard";
-import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
-import { db } from "../../App";
-import { Meet, meetConverter } from "../../common/meet.model";
+import { Meet, deleteMeet, saveMeet } from "../../common/meet.model";
 
 type Props = {
   meetList: Meet[];
@@ -12,20 +10,12 @@ type Props = {
 };
 export const MeetsPage = ({ meetList, setMeetList }: Props) => {
   let [isPopupOpen, setIsPopupOpen] = useState(false);
-  let meetsCollection = collection(db, "meets").withConverter(meetConverter);
   const handleRemoveMeet = (meetIdToRemove: string) => {
     // Filter out the MeetObject with the specified meetIdToRemove
-    deleteDoc(doc(meetsCollection, meetIdToRemove)).then(() => {
-      console.log("Meet Card deleted");
-      const updatedMeetList = meetList.filter(
-        (meet) => meet.id !== meetIdToRemove
-      );
+    deleteMeet(meetIdToRemove).then(()=>{
+      const updatedMeetList = meetList.filter((meet) => meet.id !== meetIdToRemove);
       setMeetList(updatedMeetList);
-    })
-    .catch((error) => {
-      console.log(error);
     });
-    
   };
   const openPopup = () => {
     setIsPopupOpen(true);
@@ -36,14 +26,8 @@ export const MeetsPage = ({ meetList, setMeetList }: Props) => {
   };
 
   const handleFormSubmit = async (meet: Meet) => {
-    try {
-      const docRef = await addDoc(meetsCollection, meet);
-      console.log("Document written with ID: ", docRef.id);
-      meet.id = docRef.id;
-      setMeetList((prevList) => [...prevList, meet]);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
+    let result = await saveMeet(meet);
+    setMeetList((prevList) => [...prevList, result]);
   };
   
 

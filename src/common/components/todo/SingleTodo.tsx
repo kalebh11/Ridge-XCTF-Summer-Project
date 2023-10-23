@@ -1,16 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Todo } from "../../../model";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
-import { db } from "../../../App";
-import {
-  Firestore,
-  QuerySnapshot,
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-} from "firebase/firestore";
+import { Todo, deleteTodo } from "../../todo.modal";
 type Props = {
   todo: Todo;
   todos: Todo[];
@@ -19,7 +10,7 @@ type Props = {
 export const SingleTodo = ({ todo, todos, setTodos }: Props) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [editTodo, setEditTodo] = useState<string>(todo.todo);
-  const handleDone = (e: any, id: number) => {
+  const handleDone = (e: any, id: string) => {
     e.preventDefault();
     setTodos(
       todos.map((todo) =>
@@ -27,42 +18,12 @@ export const SingleTodo = ({ todo, todos, setTodos }: Props) => {
       )
     );
   };
-  const findTodoData = async (id: number) => {
-    let todoFirestoreID;
-    await getDocs(collection(db, "todos")).then((querySnapshot) => {
-      const newData: any[] = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      console.log(newData);
-      for (let i = 0; i < newData.length; i++) {
-        if (newData[i].todo.id === id) {
-          todoFirestoreID = newData[i].id;
-        }
-      }
-    });
-    return todoFirestoreID;
+  const handleDelete = (id: string) => {
+    const filteredTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(filteredTodos);
+    deleteTodo(id);
   };
-  const deleteDocument = async (id: number) => {
-    let todoTest: any = await findTodoData(id);
-    console.log(todoTest);
-    const docIdToDelete = todoTest; // Replace with the actual document ID you want to delete
-    const docRef = doc(db, "todos", docIdToDelete);
-
-    deleteDoc(docRef)
-      .then(() => {
-        console.log("Doc deleted");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  const handleDelete = (id: number) => {
-    const deleteTodo = todos.filter((todo) => todo.id !== id);
-    setTodos(deleteTodo);
-    deleteDocument(id);
-  };
-  const handleEdit = (e: React.FormEvent, id: number) => {
+  const handleEdit = (e: React.FormEvent, id: string) => {
     e.preventDefault();
     setTodos(
       todos.map((todo) => (todo.id === id ? { ...todo, todo: editTodo } : todo))

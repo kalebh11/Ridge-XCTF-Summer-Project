@@ -7,26 +7,15 @@ import ThrowsInput from "./inputstuff/ThrowsInput";
 import DistanceTable from "./tables/DistanceTable";
 import SprintsTable from "./tables/SprintsTable";
 import ThrowsTable from "./tables/ThrowsTable";
-import { db } from "../../App";
-import { addDoc, collection, getDocs } from "firebase/firestore";
-import { Athlete } from "../../common/athlete.model";
+import { Athlete, saveAthlete } from "../../common/athlete.model";
 
 type Props = {
   athleteList: Athlete[];
   setAthletesList: React.Dispatch<React.SetStateAction<Athlete[]>>;
 };
-
-const addAthlete = async (athlete: Athlete) => {
-  try {
-    const docRef = await addDoc(collection(db, "athletes"), athlete);
-    console.log("Document written with ID: ", docRef.id);
-  } catch (e) {
-    console.error("Error adding document: ", e);
-  }
-};
 export const RosterPage = ({ athleteList, setAthletesList }: Props) => {
   const handleFormSubmit = (athlete: Athlete) => {
-    addAthlete(athlete);
+    saveAthlete(athlete);
   };
   const sort = (e: any) => {
     e.preventDefault();

@@ -6,60 +6,25 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HomePage } from "./Pages/HomePage";
 import { MeetsPage } from "./Pages/Meets/MeetsPage";
 import { RosterPage } from "./Pages/Roster/RosterPage";
-
-import { initializeApp } from "firebase/app";
-import { Firestore, getFirestore, query } from "firebase/firestore";
 import { Meetpage } from "./Pages/Meets/Meetpage";
 import { MeetLineup } from "./Pages/Meets/MeetComponents/Lineup/MeetLineup";
 import { MeetResults } from "./Pages/Meets/MeetComponents/Results/MeetResults";
 import { AthletePage } from "./Pages/Roster/Athlete/AthletePage";
+import { Athlete, fetchAllAthletes } from "./common/athlete.model";
+import { Meet, fetchAllMeets } from "./common/meet.model";
 
-import { collection, getDocs } from "firebase/firestore";
-import { Athlete, athleteConverter } from "./common/athlete.model";
-import { Meet, meetConverter } from "./common/meet.model";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyA0ao2imRtQ-hi2kc6XsugIGfc1aXTA7g0",
-  authDomain: "track-app-49793.firebaseapp.com",
-  projectId: "track-app-49793",
-  storageBucket: "track-app-49793.appspot.com",
-  messagingSenderId: "713239875011",
-  appId: "1:713239875011:web:04f51cf11b3b2eafff4176",
-  measurementId: "G-YT820FDWF5",
-};
-
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
 
 const App: FC = () => {
   const [athletes, setAthletes] = useState<Athlete[]>([]);
   const [meets, setMeets] = useState<Meet[]>([]);
-  const athleteCollection = collection(db, "athletes").withConverter(athleteConverter);
-  const meetCollection = collection(db, "meets").withConverter(meetConverter);
-  const findAthleteData = async () => {
-    await getDocs(athleteCollection).then((querySnapshot) => {
-      let athleteArray: Athlete[] = [];
-      querySnapshot.docs.forEach((doc)=> {
-        athleteArray.push(doc.data());
-      });
-      setAthletes(athleteArray);
+  useEffect(() => {
+    fetchAllAthletes().then((athletes)=>{
+      setAthletes(athletes);
     });
-  };
-  const findMeetData = async () => {
-    await getDocs(meetCollection).then((querySnapshot) => {
-      let meets: Meet[] = [];
-      querySnapshot.docs.forEach((doc)=> {
-        meets.push(doc.data());
-      });
-      console.log(meets);
+    fetchAllMeets().then((meets)=>{
       setMeets(meets);
     });
-  };
-  useEffect(() => console.log('Athletes Updated: ',athletes), [athletes]);
-  useEffect(() => console.log('Meets Updated: ',meets), [meets]);
-  useEffect(() => {
-    findAthleteData();
-    findMeetData();
   }, []);
   return (
     <BrowserRouter>

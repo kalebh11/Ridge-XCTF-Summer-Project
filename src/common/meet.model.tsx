@@ -1,4 +1,5 @@
-import { FirestoreDataConverter } from "firebase/firestore";
+import { FirestoreDataConverter, addDoc, collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { db } from "./firebase";
 
 export class Meet {
   name: string;
@@ -81,3 +82,30 @@ export const meetConverter: FirestoreDataConverter<Meet> = {
     return meet;
   },
 };
+const meetCollection = collection(db, "meets").withConverter(meetConverter);
+export const fetchAllMeets = async () => {
+  let querySnapshot = await getDocs(meetCollection);
+  let meets: Meet[] = [];
+  querySnapshot.docs.forEach((doc)=> {
+    meets.push(doc.data());
+  });
+  return meets;
+};
+export const saveMeet = async (meet: Meet) => {
+  try {
+    const docRef = await addDoc(meetCollection, meet);
+    console.log("Document written with ID: ", docRef.id);
+    meet.id = docRef.id;
+    return meet;
+  } catch (error) {
+    console.error("Error adding document: ", error);
+  }
+  return undefined;
+};
+export const deleteMeet = async (meetId: string) => {
+  try {
+    await deleteDoc(doc(meetCollection, meetId));
+  } catch (error) {
+    console.error("Error removing document: ", error);
+  }
+}
