@@ -16,7 +16,6 @@ const DistanceInput: React.FC<PopupProps> = ({
   const [name, setName] = useState("");
   const [grade, setGrade] = useState(0);
   const [group, setGroup] = useState(0);
-  const [vdot, setVdot] = useState(0);
 
   const handleNameChange = (e: {
     target: { value: React.SetStateAction<string> };
@@ -29,25 +28,18 @@ const DistanceInput: React.FC<PopupProps> = ({
   const handleGroupChange = (e: { target: { value: any } }) => {
     setGroup(Number(e.target.value));
   };
-  const handleVdotChange = (e: { target: { value: any } }) => {
-    setVdot(Number(e.target.value));
-  };
-  const generateRandomID = (): string => {
-    const array = new Uint32Array(1);
-    crypto.getRandomValues(array);
-    return array[0].toString(36);
-  };
+
   const handleSubmitAthlete = (e: React.FormEvent) => {
     e.preventDefault();
     let newAthlete: Athlete = new Athlete();
     newAthlete.name = name;
-    newAthlete.group = {type: groups[0], index: group};
+    newAthlete.group = { type: groups[0], index: group };
     newAthlete.grade = grade;
     newAthlete.vdot = 0;
     newAthlete.meets = [];
     newAthlete.labels = [];
-    newAthlete.email = '';
-    newAthlete.parentemail = '';
+    newAthlete.email = "";
+    newAthlete.parentemail = "";
     onSubmit(newAthlete);
     let smth = [...athleteList, newAthlete];
 
@@ -55,7 +47,6 @@ const DistanceInput: React.FC<PopupProps> = ({
     setName("");
     setGroup(0);
     setGrade(0);
-    setVdot(0);
   };
   return (
     <div className="input-component-container">
@@ -108,23 +99,6 @@ const DistanceInput: React.FC<PopupProps> = ({
             />
             <label htmlFor="group" className="form__label">
               Athlete Group
-            </label>
-          </div>
-        </div>
-        <div className="roster-form-input-container">
-          <div className="form__group field">
-            <input
-              type="number"
-              className="form__field"
-              placeholder="Vdot"
-              name="vdot"
-              id="vdot"
-              value={vdot}
-              required
-              onChange={handleVdotChange}
-            />
-            <label htmlFor="vdot" className="form__label">
-              Athlete VDOT
             </label>
           </div>
         </div>

@@ -28,22 +28,18 @@ const SprintInput: React.FC<PopupProps> = ({
   const handleGroupChange = (e: { target: { value: any } }) => {
     setGroup(Number(e.target.value));
   };
-  const handleIsThrowerChange = (e: { target: { value: any } }) => {
-    setIsThrower(true);
-  };
-
 
   const handleSubmitAthlete = (e: React.FormEvent) => {
     e.preventDefault();
     let newAthlete: Athlete = new Athlete();
     newAthlete.name = name;
-    newAthlete.group = {type: groups[1], index: group};
+    newAthlete.group = { type: groups[1], index: group };
     newAthlete.grade = grade;
     newAthlete.vdot = 0;
     newAthlete.meets = [];
     newAthlete.labels = [];
-    newAthlete.email = '';
-    newAthlete.parentemail = '';
+    newAthlete.email = "";
+    newAthlete.parentemail = "";
     onSubmit(newAthlete);
     let smth = [...athleteList, newAthlete];
 
@@ -106,14 +102,6 @@ const SprintInput: React.FC<PopupProps> = ({
               Athlete Group
             </label>
           </div>
-        </div>
-        <div className="roster-form-input-container">
-          <input
-            type="checkbox"
-            name="is Thrower?"
-            onChange={handleIsThrowerChange}
-          ></input>
-          <label>Is Thrower</label>
         </div>
       </div>
       <div className="roster-form-submit-container">
