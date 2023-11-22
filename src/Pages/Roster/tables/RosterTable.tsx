@@ -1,6 +1,10 @@
 import React, {useState} from "react";
-
-const RosterTable = () => {
+import { Athlete } from "../../../common/athlete.model";
+interface Props {
+  athleteList: Athlete[];
+  setAthletesList: React.Dispatch<React.SetStateAction<Athlete[]>>;
+}
+const RosterTable = ({ athleteList, setAthletesList }) => {
   const [filterDistance, setFilterDistance] = useState(false);
   const [filterSprints, setFilterSprints] = useState(false);
   const [filterThrows, setFilterThrows] = useState(false);
@@ -74,52 +78,29 @@ const RosterTable = () => {
   return (
     <div>
       <div className="dropdown">
-        <button
-          className="btn btn-secondary dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton"
-          data-bs-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false">
+        <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Select Option
         </button>
         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <div>
-            <input
-              type="checkbox"
-              checked={filterDistance}
-              onChange={() => setFilterDistance(!filterDistance)}></input>
-            <label>Distance</label>
+          <div className="m-1">
+            <input className="m-1" type="checkbox" checked={filterDistance} id="filterDistanceCheckBox" onChange={() => setFilterDistance(!filterDistance)}></input>
+            <label htmlFor="filterDistanceCheckBox">Distance</label>
           </div>
-          <div>
-            {" "}
-            <input
-              type="checkbox"
-              checked={filterSprints}
-              onChange={() => setFilterSprints(!filterSprints)}></input>
-            <label>Sprints</label>
+          <div className="m-1">
+            <input className="m-1" type="checkbox" checked={filterSprints} id="filterSprints" onChange={() => setFilterSprints(!filterSprints)}></input>
+            <label htmlFor="filterSprints">Sprints</label>
           </div>
-          <div>
-            {" "}
-            <input
-              type="checkbox"
-              checked={filterThrows}
-              onChange={() => setFilterThrows(!filterThrows)}></input>
-            <label>Throws</label>
+          <div className="m-1">
+            <input className="m-1" type="checkbox" checked={filterThrows} id="filterThrows" onChange={() => setFilterThrows(!filterThrows)}></input>
+            <label htmlFor="filterThrows">Throws</label>
           </div>
-          <div>
-            <input
-              type="checkbox"
-              checked={filterJumps}
-              onChange={() => setFilterJumps(!filterJumps)}></input>
-            <label>Jumps</label>
+          <div className="m-1">
+            <input className="m-1" type="checkbox" checked={filterJumps} id="filterJumps" onChange={() => setFilterJumps(!filterJumps)}></input>
+            <label htmlFor="filterJumps">Jumps</label>
           </div>
-          <div>
-            <input
-              type="checkbox"
-              checked={filterHurdles}
-              onChange={() => setFilterHurdles(!filterHurdles)}></input>
-            <label>Hurdles</label>
+          <div className="m-1">
+            <input className="m-1" type="checkbox" checked={filterHurdles} id="filterHurdles" onChange={() => setFilterHurdles(!filterHurdles)}></input>
+            <label htmlFor="filterHurdles">Hurdles</label>
           </div>
         </div>
       </div>
@@ -133,8 +114,21 @@ const RosterTable = () => {
             {setTableHeaders()}
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+        {athleteList.map((item) => (
+          <tr key={item.id}>
+            <td className="table-cell group">test</td>
+            <td className="table-cell name">
+              <a href={"/athlete?athleteid=" + item.id}>{item.name}</a>
+            </td>
+            <td className="table-cell grade">{item.grade}</td>
+          </tr>
+        ))}
+        </tbody>
       </table>
+      <div>
+        
+      </div>
     </div>
   );
 };

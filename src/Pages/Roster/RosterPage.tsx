@@ -55,7 +55,7 @@ export const RosterPage = ({ athleteList, setAthletesList }: Props) => {
         <div className="meets-header">Roster</div>
       </div>
       <div className="roster-main-container">
-        <RosterTable />
+        <RosterTable  athleteList={athleteList} setAthletesList={setAthletesList}/>
       </div>
     </div>
   );
