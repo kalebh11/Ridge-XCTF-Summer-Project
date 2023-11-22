@@ -10,73 +10,65 @@ const RosterTable = () => {
   const [filter10, setFilter10] = useState(false);
   const [filter11, setFilter11] = useState(false);
   const [filter12, setFilter12] = useState(false);
-
-  const setDistance = () => {
-    if (filterDistance) {
-      return (
+  const setTableHeaders = () => {
+    let headerDom = <></>;
+    if(filterDistance) {
+      headerDom = <>{headerDom}<th className="table-cell vdot">VDOT</th></>;
+    }
+    if(filterSprints) {
+      headerDom = 
+      <>
+        {headerDom}
+        <th className="table-cell sprint-events">100</th>
+        <th className="table-cell sprint-events">200</th>
+      </>;
+      if(!filterDistance) {
+        headerDom = 
         <>
-          <th className="table-cell vdot">VDOT</th>
+          {headerDom}
+          <th className="table-cell distance-events">400</th>
+          <th className="table-cell distance-events">800</th>
+        </>;
+      }
+    }
+    if(filterDistance) {
+      headerDom = 
+      <>
+        {headerDom}
           <th className="table-cell distance-events">400</th>
           <th className="table-cell distance-events">800</th>
           <th className="table-cell distance-events">1200</th>
           <th className="table-cell distance-events">1600</th>
           <th className="table-cell distance-events">3200</th>
-        </>
-      );
+      </>;
     }
-  };
-  const setSprints = () => {
-    if (filterSprints) {
-      if (filterDistance) {
-        return (
-          <>
-            <th className="table-cell sprint-events">100</th>
-            <th className="table-cell sprint-events">200</th>
-          </>
-        );
-      } else {
-        return (
-          <>
-            <th className="table-cell sprint-events">100</th>
-            <th className="table-cell sprint-events">200</th>
-            <th className="table-cell distance-events">400</th>
-            <th className="table-cell distance-events">800</th>
-          </>
-        );
-      }
+    if(filterHurdles) {
+      headerDom = 
+      <>
+        {headerDom}
+        <th className="table-cell throws-event">400mH</th>
+        <th className="table-cell throws-event">110mH</th>
+      </>;
     }
-  };
-  const setThrows = () => {
-    if (filterThrows) {
-      return (
-        <>
-          <th className="table-cell throws-event">Javelin</th>
-          <th className="table-cell throws-event">Discus</th>
-          <th className="table-cell throws-event">Shot Put</th>
-        </>
-      );
+    if(filterJumps) {
+      headerDom = 
+      <>
+        {headerDom}
+        <th className="table-cell throws-event">Triple Jump</th>
+        <th className="table-cell throws-event">Long Jump</th>
+        <th className="table-cell throws-event">Pole Vault</th>
+      </>;
     }
-  };
-  const setJumps = () => {
-    if (filterJumps) {
-      return (
-        <>
-          <th className="table-cell throws-event">Triple Jump</th>
-          <th className="table-cell throws-event">Long Jump</th>
-          <th className="table-cell throws-event">Pole Vault</th>
-        </>
-      );
+    if(filterThrows) {
+      headerDom = 
+      <>
+        {headerDom}
+        <th className="table-cell throws-event">Javelin</th>
+        <th className="table-cell throws-event">Discus</th>
+        <th className="table-cell throws-event">Shot Put</th>
+      </>;
     }
-  };
-  const setHurdles = () => {
-    if (filterHurdles) {
-      return (
-        <>
-          <th className="table-cell throws-event">400mH</th>
-          <th className="table-cell throws-event">110mH</th>
-        </>
-      );
-    }
+    return (headerDom);
   };
 
   return (
@@ -138,11 +130,7 @@ const RosterTable = () => {
             <th className="table-cell group">Group</th>
             <th className="table-cell name">Name</th>
             <th className="table-cell grade">Grade</th>
-            {setDistance()}
-            {setSprints()}
-            {setThrows()}
-            {setJumps()}
-            {setHurdles()}
+            {setTableHeaders()}
           </tr>
         </thead>
         <tbody></tbody>
