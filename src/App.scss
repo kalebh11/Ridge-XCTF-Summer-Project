@@ -285,6 +285,24 @@
   }
 }
 
+.flex-container {
+  display:flex;
+  &.center-all {
+    align-items: center;
+    justify-content: center;
+  }
+  &.column {
+    flex-direction: column;
+  }
+}
+.flex-item {
+  flex: 3 0 0;
+}
+
+.roster-input {
+  flex: 1 0 0;
+  // min-width: 100px;
+}
 
 .icon {
   margin-left: 10px;

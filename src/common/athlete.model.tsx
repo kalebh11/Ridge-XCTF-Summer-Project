@@ -41,10 +41,15 @@ export const groupToIndicator = (groupType) => {
     case groups[3]:
       return 'H';
   }
+  return '';
 };
 
 export const groupToDisplay = (group) => {
-  return groupToIndicator(group) + group.index;
+  if(group) {
+    return groupToIndicator(group.type) + group.index;
+  } else {
+    return '';
+  }
 };
 
 export const convertmilestokilometers = ($dist) => {
@@ -127,7 +132,7 @@ export const fetchAllAthletes = async () => {
 };
 export const saveAthlete = async (athlete: Athlete) => {
   try {
-    const docRef = await addDoc(collection(db, "athletes"), athlete);
+    const docRef = await addDoc(athleteCollection, athlete);
     console.log("Document written with ID: ", docRef.id);
     athlete.id = docRef.id;
     return athlete;
