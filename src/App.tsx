@@ -11,21 +11,53 @@ import { MeetLineup } from "./Pages/Meets/MeetComponents/Lineup/MeetLineup";
 import { MeetResults } from "./Pages/Meets/MeetComponents/Results/MeetResults";
 import { AthletePage } from "./Pages/Roster/Athlete/AthletePage";
 import { Athlete, fetchAllAthletes } from "./common/athlete.model";
-import { Meet, fetchAllMeets } from "./common/meet.model";
+import { EventResult, Meet, eventComparetor, fetchAllMeets } from "./common/meet.model";
 
 
 
 const App: FC = () => {
   const [athletes, setAthletes] = useState<Athlete[]>([]);
   const [meets, setMeets] = useState<Meet[]>([]);
+  const [bestTimes, setBestTimes] = useState({});
   useEffect(() => {
-    fetchAllAthletes().then((athletes)=>{
+    Promise.all([fetchAllAthletes(),fetchAllMeets()]).then((results) => {
+      let athletes = results[0];
+      let meets = results[1];
       setAthletes(athletes);
-    });
-    fetchAllMeets().then((meets)=>{
       setMeets(meets);
+      for(let athlete of athletes) {
+        setBestTimes((prevState => ({
+          ...prevState,
+          [athlete.id]: getBestTimesForAthlete(athlete)
+        })))
+      }
     });
   }, []);
+  const getBestTimesForAthlete = (athlete) => {
+    //scroll through every meet
+    let bestTimes = {};
+    for(let meet of meets) {
+      for(let event of meet.events) {
+        let eventResult: EventResult;
+        for(let result of event.results) {
+          if(result.athleteid === athlete.id) {
+            eventResult = result;
+            break;
+          }
+        }
+        if(eventResult) {
+          if(bestTimes[event.eventType]) {
+            if(eventComparetor(event.eventType,bestTimes[event.eventType],eventResult.result) >= 1) {
+              bestTimes[event.eventType] = eventResult.result;
+            }
+          } else {
+            bestTimes[event.eventType] = eventResult.result;
+          }
+        }
+      }
+    }
+    return bestTimes;
+  };
   return (
     <BrowserRouter>
       <div className="App">
@@ -50,6 +82,7 @@ const App: FC = () => {
                   <RosterPage
                     athleteList={athletes}
                     setAthletesList={setAthletes}
+                    meetList={meets}
                   />
                 }
               />

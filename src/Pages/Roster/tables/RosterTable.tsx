@@ -4,7 +4,7 @@ interface Props {
   athleteList: Athlete[];
   setAthletesList: React.Dispatch<React.SetStateAction<Athlete[]>>;
 }
-const RosterTable = ({ athleteList, setAthletesList }) => {
+const RosterTable = ({ athleteList, setAthletesList, meetList }) => {
   const [filterDistance, setFilterDistance] = useState(false);
   const [filterSprints, setFilterSprints] = useState(false);
   const [filterThrows, setFilterThrows] = useState(false);
@@ -19,85 +19,74 @@ const RosterTable = ({ athleteList, setAthletesList }) => {
   const groupRef = useRef(null);
   const groupSelectorRef = useRef(null);
   const setTableHeaders = () => {
-    let headerDom = <></>;
+    let headerCells = [];
     if(filterDistance) {
-      headerDom = <>{headerDom}<th className="table-cell vdot">VDOT</th></>;
+      headerCells.push(<th className="table-cell"></th>);
     }
     if(filterSprints) {
-      headerDom = 
-      <>
-        {headerDom}
-        <th className="table-cell sprint-events">100</th>
-        <th className="table-cell sprint-events">200</th>
-      </>;
+      headerCells.push(<th className="table-cell">100</th>);
+      headerCells.push(<th className="table-cell">200</th>);
       if(!filterDistance) {
-        headerDom = 
-        <>
-          {headerDom}
-          <th className="table-cell distance-events">400</th>
-          <th className="table-cell distance-events">800</th>
-        </>;
+        headerCells.push(<th className="table-cell">400</th>);
+        headerCells.push(<th className="table-cell">800</th>);
       }
     }
     if(filterDistance) {
-      headerDom = 
-      <>
-        {headerDom}
-          <th className="table-cell distance-events">400</th>
-          <th className="table-cell distance-events">800</th>
-          <th className="table-cell distance-events">1200</th>
-          <th className="table-cell distance-events">1600</th>
-          <th className="table-cell distance-events">3200</th>
-      </>;
+      headerCells.push(<th className="table-cell">400</th>);
+      headerCells.push(<th className="table-cell">800</th>);
+      headerCells.push(<th className="table-cell">1200</th>);
+      headerCells.push(<th className="table-cell">1600</th>);
+      headerCells.push(<th className="table-cell">3200</th>);
     }
     if(filterHurdles) {
-      headerDom = 
-      <>
-        {headerDom}
-        <th className="table-cell throws-event">400mH</th>
-        <th className="table-cell throws-event">110mH</th>
-      </>;
+      headerCells.push(<th className="table-cell">400mH</th>);
+      headerCells.push(<th className="table-cell">110mH</th>);
     }
     if(filterJumps) {
-      headerDom = 
-      <>
-        {headerDom}
-        <th className="table-cell throws-event">Triple Jump</th>
-        <th className="table-cell throws-event">Long Jump</th>
-        <th className="table-cell throws-event">Pole Vault</th>
-      </>;
+      headerCells.push(<th className="table-cell">Triple Jump</th>);
+      headerCells.push(<th className="table-cell">Long Jump</th>);
+      headerCells.push(<th className="table-cell">Pole Vault</th>);
     }
     if(filterThrows) {
-      headerDom = 
-      <>
-        {headerDom}
-        <th className="table-cell throws-event">Javelin</th>
-        <th className="table-cell throws-event">Discus</th>
-        <th className="table-cell throws-event">Shot Put</th>
-      </>;
+      headerCells.push(<th className="table-cell">Javelin</th>);
+      headerCells.push(<th className="table-cell throws-event">Discus</th>);
+      headerCells.push(<th className="table-cell throws-event">Shot Put</th>);
     }
-    return (headerDom);
+    return (headerCells);
   };
   const setTableRows = (athlete) => {
-    let rows = <></>;
+    let rows = [];
     if(filterDistance) {
-      rows = <>{rows}<td>{athlete.vdot}</td></>;
+      rows.push(<td className="table-cell">{athlete.vdot}</td>);
     }
     if(filterSprints) {
-      rows = 
-      <>
-        {rows}
-        <td>{getBestEventTime('100', athlete)}</td>
-        <td>{getBestEventTime('200', athlete)}</td>
-      </>;
+      rows.push(<td className="table-cell">{getBestEventTime('100', athlete)}</td>);
+      rows.push(<td className="table-cell">{getBestEventTime('200', athlete)}</td>);
       if(!filterDistance) {
-        rows = 
-        <>
-          {rows}
-          <td>{getBestEventTime('400', athlete)}</td>
-          <td>{getBestEventTime('800', athlete)}</td>
-        </>;
+        rows.push(<td className="table-cell">{getBestEventTime('400', athlete)}</td>);
+        rows.push(<td className="table-cell">{getBestEventTime('800', athlete)}</td>);
       }
+    }
+    if(filterDistance) {
+      rows.push(<td className="table-cell">{getBestEventTime('400', athlete)}</td>);
+      rows.push(<td className="table-cell">{getBestEventTime('800', athlete)}</td>);
+      rows.push(<td className="table-cell">{getBestEventTime('1200', athlete)}</td>);
+      rows.push(<td className="table-cell">{getBestEventTime('1600', athlete)}</td>);
+      rows.push(<td className="table-cell">{getBestEventTime('3200', athlete)}</td>);
+    }
+    if(filterHurdles) {
+      rows.push(<td className="table-cell">{getBestEventTime('400mH', athlete)}</td>);
+      rows.push(<td className="table-cell">{getBestEventTime('110mH', athlete)}</td>);
+    }
+    if(filterJumps) {
+      rows.push(<td className="table-cell">{getBestEventTime('tripleJump', athlete)}</td>);
+      rows.push(<td className="table-cell">{getBestEventTime('longJump', athlete)}</td>);
+      rows.push(<td className="table-cell">{getBestEventTime('poleVault', athlete)}</td>);
+    }
+    if(filterThrows) {
+      rows.push(<td className="table-cell">{getBestEventTime('javelin', athlete)}</td>);
+      rows.push(<td className="table-cell">{getBestEventTime('discus', athlete)}</td>);
+      rows.push(<td className="table-cell">{getBestEventTime('shotPut', athlete)}</td>);
     }
     return (rows);
   }

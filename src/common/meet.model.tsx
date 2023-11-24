@@ -9,12 +9,11 @@ export class Meet {
   id: string;
   note: string;
   events: Event[];
+  url: string;
 }
 
 export class Event {
   eventType: string;
-  id: string;
-  athletes: string[];
   results: EventResult[];
 }
 export class EventResult {
@@ -56,6 +55,13 @@ export enum eventTypeEnum {
   threeXfourHundredHurdles = "3x400mH",
   shuttleHurdles = "shuttleHurdles",
 }
+export const eventComparetor = (eventType, result1, result2) => {
+  switch(eventType) {
+    case eventTypeEnum.sixteen:
+    case eventTypeEnum.mile:
+      return 0;
+  }
+};
 export const meetConverter: FirestoreDataConverter<Meet> = {
   toFirestore: (meet: Meet) => {
     return {

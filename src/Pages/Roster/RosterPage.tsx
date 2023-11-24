@@ -9,12 +9,14 @@ import SprintsTable from "./tables/SprintsTable";
 import ThrowsTable from "./tables/ThrowsTable";
 import { Athlete, saveAthlete } from "../../common/athlete.model";
 import RosterTable from "./tables/RosterTable";
+import { Meet } from "../../common/meet.model";
 
 type Props = {
   athleteList: Athlete[];
   setAthletesList: React.Dispatch<React.SetStateAction<Athlete[]>>;
+  meetList: Meet[];
 };
-export const RosterPage = ({ athleteList, setAthletesList }: Props) => {
+export const RosterPage = ({ athleteList, setAthletesList, meetList }: Props) => {
   const handleFormSubmit = (athlete: Athlete) => {
     saveAthlete(athlete);
   };
@@ -57,7 +59,7 @@ export const RosterPage = ({ athleteList, setAthletesList }: Props) => {
       <div className="roster-main-container">
         <div className="flex-container">
           <div className="flex-item">
-            <RosterTable athleteList={athleteList} setAthletesList={setAthletesList}/>
+            <RosterTable athleteList={athleteList} setAthletesList={setAthletesList} meetList={meetList}/>
           </div>
         </div>
       </div>
