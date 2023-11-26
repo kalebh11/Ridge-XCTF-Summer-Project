@@ -57,13 +57,13 @@ export const RosterPage = ({ athleteList, setAthletesList, meetList }: Props) =>
         <div className="meets-header">Roster</div>
       </div>
       <div className="roster-main-container">
-        <div className="flex-container">
-          <div className="flex-item">
+        {/* <div className="flex-container">
+          <div className="flex-item"> */}
             <RosterTable athleteList={athleteList} setAthletesList={setAthletesList} meetList={meetList}/>
           </div>
         </div>
-      </div>
-    </div>
+    //   </div>
+    // </div>
   );
 };
 

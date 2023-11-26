@@ -107,10 +107,10 @@ const RosterTable = ({ athleteList, setAthletesList, meetList }) => {
     saveAthlete(newAthlete);
   };
   return (
-    <div className="flex-container column">
-      <div className="dropdown">
+    <div className="roster-main-container">
+      <div className="roster-dropdown">
         <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Select Option
+          Group
         </button>
         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <div className="m-1">
@@ -135,7 +135,7 @@ const RosterTable = ({ athleteList, setAthletesList, meetList }) => {
           </div>
         </div>
       </div>
-      <div className="flex-container">
+      <div className="roster-nav-main-container">
         <table className="flex-item">
           <thead>
             <tr>
@@ -158,19 +158,19 @@ const RosterTable = ({ athleteList, setAthletesList, meetList }) => {
             ))}
           </tbody>
         </table>
-        <div className="roster-input">
-          <div>Roster Input</div>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
+        <div className="roster-form-container">
+          <div className = "roster-header-container">Roster Input</div>
+          <form className = "roster-form-main-container" onSubmit={handleSubmit}>
+            <div className="roster-form-input-container">
               <label htmlFor="rosterNameInput">Name</label>
               <input className="form-control" id="rosterNameInput" type="text" ref={nameRef} placeholder="Name"/>
             </div>
-            <div className="form-group">
+            <div className="roster-form-input-container">
               <label htmlFor="rosterAgeInput">Grade</label>
               <input className="form-control" id="rosterAgeInput" type="number" min="9" max="12" ref={gradeRef} placeholder="Grade"></input>
             </div>
-            <div className="form-group">
-              <label htmlFor="rosterGroupSelector">Group Indicator</label>
+            <div className="roster-form-input-container">
+              <label htmlFor="rosterGroupSelector">Group</label>
               <select ref={groupSelectorRef} className="form-control" id="rosterGroupSelector">
               {groups.map((option, index) => (
                 <option key={index} value={option}>
@@ -179,7 +179,7 @@ const RosterTable = ({ athleteList, setAthletesList, meetList }) => {
               ))}
               </select>
             </div>
-            <div className="form-group">
+            <div className="roster-form-input-containerr">
               <label htmlFor="rosterGroupInput">Group #</label>
               <input className="form-control" id="rosterGroupInput" type="text" ref={groupRef} placeholder="Group"></input>
             </div>
